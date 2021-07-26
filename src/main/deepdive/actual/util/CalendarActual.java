@@ -70,6 +70,7 @@ public class CalendarActual<T extends Calendar,BACK,IMPL extends CalendarActual<
 	}
 
 
+	@SuppressWarnings("boxing")
 	public IMPL displayName(int field, int style, Locale locale, String expected)
 	{
 		expectEqual(expected, value().getDisplayName(field, style, locale), Context.call("displayName", field, style, locale));
@@ -98,6 +99,7 @@ public class CalendarActual<T extends Calendar,BACK,IMPL extends CalendarActual<
 	}
 
 
+	@SuppressWarnings("boxing")
 	public IMPL isSet(int field)
 	{
 		return expectTo(value().isSet(field), "isSet", field);
