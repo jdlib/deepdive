@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="deepdive" basedir="." default="help">
+
+	<description>Ant build file for Deep Dive</description>
+	
+
+	<property name="lib"                   value="${basedir}/lib"/>
+	<property name="src"                   value="${basedir}/src"/>
+	<property name="src.main"              value="${src}/main"/>
+	<property name="src.main.package"      value="${src.main}/deepdive"/>
+	<property name="src.examples"          value="${src}/examples"/>
+	<property name="src.templates"         value="${src}/templates"/>
+	<property name="src.test"              value="${src}/test"/>
+	<property name="src.test"              value="${src}/test"/>
+	<property name="build"                 value="${basedir}/tmp"/>
+	<property name="build.bin"             value="${build}/bin"/>
+	<property name="build.bin.main"        value="${build.bin}/main"/>
+	<property name="build.bin.test"        value="${build.bin}/test"/>
+	<property name="build.bin.examples"    value="${build.bin}/examples"/>
+	<property name="build.javadoc"         value="${build}/javadoc"/>
+	<property name="reports.dir"           value="${build}/reports"/>
+	<property name="reports.xml.dir"       value="${reports.dir}/junit-xml"/>
+	<property name="reports.html.dir"      value="${reports.dir}/junit-html"/>
+	
+	
+	<!-- paths -->
+	
+	
+	<path id="path.run">
+		<pathelement location="${build.bin.main}"/>
+	</path>
+	
+	
+	<path id="path.main">
+		<path refid="path.run"/>
+		<fileset dir="${lib}">
+			<include name="jsr305*.jar" />
+		</fileset>
+	</path>
+	
+	
+	<path id="path.examples">
+		<path refid="path.run"/>
+		<pathelement location="${build.bin.examples}"/>
+	</path>
+
+	
+	<path id="path.test">
+		<path refid="path.examples"/>
+		<pathelement location="${build.bin.test}"/>
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	
+	<!-- targets -->
+		
+	<target name="help" description="help">
+    	<echo>Ant targets: clear | generate | compile | javadoc | test | jar | dist</echo>
+    </target>
+	
+	
+	<target name="clear" description="clears the build directory">
+    	<delete dir="${build}"/>	
+    </target>
+	
+	
+	<target name="generate" description="generates the asserting classes from AssertingTemplate.txt">
+		<loadfile property="expectTemplate" srcFile="${src.templates}/ExpectTemplate.txt" failonerror="true"/>
+		<generate-assert className="ExpectStatic" methodDecl="public static" object="null" not="Not.OFF"/>
+		<generate-assert className="ExpectProtected" methodDecl="protected" object="this" not="getNotAndClear()"/>
+		<generate-assert className="ExpectInterface" methodDecl="public default" object="this" not="getNotAndClear()"/>
+		<generate-numberactual class="Byte" primitive="byte" cast="(byte)"/>
+		<generate-numberactual class="Double" primitive="double" deltaDecl=", double delta" delta=", delta" deltaComment="@param delta the delta"/>
+		<generate-numberactual class="Float" primitive="float" deltaDecl=", float delta" delta=", delta" deltaComment="@param delta the delta"/>
+		<generate-numberactual class="Integer" primitive="int"/>
+		<generate-numberactual class="Long" primitive="long"/>
+		<generate-numberactual class="Short" primitive="short" cast="(short)"/>
+		<generate-primitivearrayactual primitive="boolean" class="Boolean"   sort="Value.arraySort"/>
+		<generate-primitivearrayactual primitive="byte"    class="Byte"/>
+		<generate-primitivearrayactual primitive="char"    class="Character" actualprefix="Char"/>
+		<generate-primitivearrayactual primitive="double"  class="Double"    deltaDecl=", double delta" delta=", delta" deltaComment="@param delta the delta"/>
+		<generate-primitivearrayactual primitive="float"   class="Float"     deltaDecl=", float delta" delta=", delta" deltaComment="@param delta the delta"/>
+		<generate-primitivearrayactual primitive="int"     class="Integer"   actualprefix="Int"/>
+		<generate-primitivearrayactual primitive="long"    class="Long"/>
+		<generate-primitivearrayactual primitive="short"   class="Short"/>
+    </target>
+	
+	
+	<macrodef name="generate-assert">
+		<attribute name="className"/> 	
+		<attribute name="methodDecl"/> 	
+		<attribute name="object"/> 	
+		<attribute name="not"/> 	
+		<sequential>
+			<local name="classfile"/>
+			<property name="classfile" value="${src.main.package}/@{className}.java"/>
+			<echo>generating ${classfile}</echo>
+	    	<copy file="${src.templates}/@{className}.txt" tofile="${classfile}" overwrite="true"/>
+	    	<replace file="${classfile}">
+	    		<replacefilter token="@expectTemplate@" value="${expectTemplate}"/>
+	    		<replacefilter token="@className@" value="@{className}"/>
+	    		<replacefilter token="@classDecl@" value="@{classDecl}"/>
+	    		<replacefilter token="@methodDecl@" value="@{methodDecl}"/>
+	    		<replacefilter token="@object@" value="@{object}"/>
+	    		<replacefilter token="@not@" value="@{not}"/>
+	    	</replace>	
+		</sequential>	
+	</macrodef>
+	
+
+	<macrodef name="generate-numberactual">
+		<attribute name="class"/> 	
+		<attribute name="primitive"/> 	
+		<attribute name="cast" default=""/> 	
+		<attribute name="deltaDecl" default=""/> 	
+		<attribute name="delta" default=""/> 	
+		<attribute name="deltaComment" default=""/>
+		<sequential>
+			<local name="classfile"/>
+			<property name="classfile" value="${src.main.package}/actual/lang/@{class}Actual.java"/>
+			<local name="additional"/>
+			<loadfile property="additional" srcFile="${src.templates}/@{class}Actual.txt" failonerror="false"/>
+			<property name="additional" value=""/>
+			<echo>generating ${classfile}</echo>
+	    	<copy file="${src.templates}/NumberActual.txt" tofile="${classfile}" overwrite="true"/>
+	    	<replace file="${classfile}">
+	    		<replacefilter token="@class@" value="@{class}"/>
+	    		<replacefilter token="@primitive@" value="@{primitive}"/>
+	    		<replacefilter token="@cast@" value="@{cast}"/>
+	    		<replacefilter token="@deltaDecl@" value="@{deltaDecl}"/>
+				<replacefilter token="@delta@" value="@{delta}"/>
+				<replacefilter token="@deltaComment@" value="@{deltaComment}"/>
+	    		<replacefilter token="@additional@" value="${additional}"/>
+	    	</replace>	
+		</sequential>	
+	</macrodef>
+
+	    			
+	<macrodef name="generate-primitivearrayactual">
+		<attribute name="primitive"/> 	
+		<attribute name="class"/> 	
+		<attribute name="actualprefix" default="@{class}"/> 	
+		<attribute name="sort" default="java.util.Arrays.sort"/> 	
+		<attribute name="deltaDecl" default=""/> 	
+		<attribute name="delta" default=""/> 	
+		<attribute name="deltaComment" default=""/>
+		<sequential>
+			<local name="actualclass"/>
+			<property name="actualclass" value="@{actualprefix}ArrayActual"/>
+			<local name="classfile"/>
+			<property name="classfile" value="${src.main.package}/actual/lang/${actualclass}.java"/>
+			<echo>generating ${classfile}</echo>
+	    	<copy file="${src.templates}/PrimitiveArrayActual.txt" tofile="${classfile}" overwrite="true"/>
+	    	<replace file="${classfile}">
+	    		<replacefilter token="@primitive@" value="@{primitive}"/>
+	    		<replacefilter token="@class@" value="@{class}"/>
+	    		<replacefilter token="@actualclass@" value="${actualclass}"/>
+	    		<replacefilter token="@deltaDecl@" value="@{deltaDecl}"/>
+				<replacefilter token="@deltaComment@" value="@{deltaComment}"/>
+				<replacefilter token="@delta@" value="@{delta}"/>
+				<replacefilter token="@sort@" value="@{sort}"/>
+	    	</replace>	
+		</sequential>	
+	</macrodef>
+
+	
+	<target name="compile" description="compiles all java classes" 
+ 		depends="compile.main, compile.test, compile.examples">
+	</target>
+	
+	
+	<presetdef name="deepdive.javac">
+	   <javac debug="true" includeantruntime="false" encoding="UTF-8" excludes="**/package-info.java"/>
+	</presetdef>
+		
+		
+	<!-- depends="generate" -->
+ 	<target name="compile.main" description="compiles src/main" >
+    	<mkdir dir="${build.bin.main}"/>
+		<deepdive.javac srcdir="${src.main}" destdir="${build.bin.main}" classpathref="path.main"/>
+	</target>
+
+		
+ 	<target name="compile.examples" description="compiles src/examples" depends="compile.main">
+    	<mkdir dir="${build.bin.examples}"/>
+		<deepdive.javac srcdir="${src.examples}" destdir="${build.bin.examples}" classpathref="path.test"/>
+	</target>
+
+		
+ 	<target name="compile.test" description="compiles src/test" depends="compile.main">
+    	<mkdir dir="${build.bin.test}"/>
+		<deepdive.javac srcdir="${src.test}" destdir="${build.bin.test}" classpathref="path.test"/>
+ 		<copy todir="${build.bin.test}">
+ 			<fileset dir="${src.test}" includes="**/*.gen"/>
+ 		</copy>
+	</target>
+
+	
+	<target name="javadoc" description="build javadoc" depends="compile">
+		<mkdir dir="${build.javadoc}"/>
+	    <javadoc 
+	    	access="protected"
+			classpathref="path.main"
+	    	destdir="${build.javadoc}" 
+	    	doctitle="DeepDive Javadoc" 
+	    	packagenames="deepdive.*" 
+	    	source="1.8" 
+	    	stylesheetfile="${src}/res/stylesheet.css"
+	    	sourcepath="${src.main}"
+	    	splitindex="true" 
+	    	use="true"/>
+	</target>
+
+
+	<target name="jar" description="builds the digdeep jar file" depends="version, javadoc">
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd"/>
+		</tstamp>
+		<jar destfile="${build}/deepdive-${version}.jar">
+			<fileset dir="${build.bin.main}"/>
+			<manifest>
+				<attribute name="Created-At" value="${TODAY}"/>	
+				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
+				<attribute name="DeepDive-Version" value="${version}"/>
+				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
+				<attribute name="Main-Class" value="deepdive.tool.ActualGenerator"/>
+			</manifest>
+		</jar>
+		<jar destfile="${build}/deepdive-${version}-sources.jar">
+			<fileset dir="${src.main}"/>
+			<manifest>
+				<attribute name="Created-At" value="${TODAY}"/>	
+				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
+				<attribute name="DeepDive-Version" value="${version}"/>
+				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
+			</manifest>
+		</jar>
+		<jar destfile="${build}/deepdive-${version}-javadoc.jar">
+			<fileset dir="${build.javadoc}"/>
+			<manifest>
+				<attribute name="Created-At" value="${TODAY}"/>	
+				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
+				<attribute name="DeepDive-Version" value="${version}"/>
+				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	
+	<target name="test" depends="compile">
+		<mkdir dir="${reports.xml.dir}"/>
+		
+		<junit fork="true" forkmode="once">
+			<classpath refid="path.test"/>
+			<formatter type="xml" />
+			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
+			<batchtest todir="${reports.xml.dir}" unless="testcase">
+				<fileset dir="${src.test}">
+					<include name="**/*Test.java" />
+				</fileset>
+				<fileset dir="${src.examples}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+		
+		<junitreport todir="${reports.xml.dir}">
+			<fileset dir="${reports.xml.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${reports.html.dir}" />
+		</junitreport>
+
+	</target>
+
+	
+ 	<target name="dist" description="creates distribution zip" depends="generate,jar,test">
+ 		<property name="deepdive.zip" value="deepdive-${version}.zip"/>
+		<zip destfile="${build}/${deepdive.zip}">
+			<fileset dir="${build}" includes="*.jar"/>
+		</zip>
+	</target>
+
+
+    <target name="version" description="set version property" depends="compile.main">
+		<java classpathref="path.run" classname="deepdive.impl.Version" outputproperty="version"/>
+		<echo>Version ${version}</echo>
+	</target>
+	
+	
+</project>

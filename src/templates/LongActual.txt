@@ -1,0 +1,16 @@
+
+	
+	/**
+	 * Asserts that the actual value modulo the given value
+	 * equals the expected value.
+	 * @param mod the module operand
+	 * @param expected the expected value
+	 * @return this
+     */
+	@SuppressWarnings("boxing")
+	public IMPL mod(long mod, long expected)
+	{
+		long actual =  longValue() % mod;
+		expectEqual(expected, actual, deepdive.Context.call("mod", expected));
+		return self();
+	}

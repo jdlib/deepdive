@@ -1,0 +1,15 @@
+
+	
+	/**
+	 * Asserts that the actual value modulo the given value
+	 * equals the expected value.
+	 * @param mod the module operand
+	 * @param expected the expected value
+	 * @return this
+     */
+	public IMPL mod(int mod, int expected)
+	{
+		int actual =  intValue() % mod;
+		expectEqual(expected, actual, deepdive.Context.call("mod", expected));
+		return self();
+	}

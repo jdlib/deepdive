@@ -1,0 +1,20 @@
+package deepdive.tool;
+
+
+import deepdive.actual.Actual;
+
+
+public class Pojo2Actual<BACK> extends Actual<Pojo2,BACK,Pojo2Actual<BACK>>
+{
+	public Pojo2Actual(Pojo2 value, BACK back)
+	{
+		super(value, back);
+	}
+
+
+	public Pojo2Actual<BACK> name(String expected)
+	{
+		expectEqual(expected, value().name, "name");
+		return self();
+	}
+}

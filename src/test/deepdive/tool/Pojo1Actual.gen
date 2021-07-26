@@ -1,0 +1,63 @@
+package deepdive.tool;
+
+
+import deepdive.Context;
+import deepdive.actual.Actual;
+import java.net.URL;
+
+
+public class Pojo1Actual<T extends Pojo1,BACK,IMPL extends Pojo1Actual<T,BACK,IMPL>> extends Actual<T,BACK,IMPL>
+{
+	public Pojo1Actual(T value, BACK back)
+	{
+		super(value, back);
+	}
+
+
+	public IMPL hasFormat()
+	{
+		expectTrue(value().hasFormat(), "hasFormat");
+		return self();
+	}
+
+
+	public IMPL name(String expected)
+	{
+		expectEqual(expected, value().getName(), "name");
+		return self();
+	}
+
+
+	public IMPL nameEndwWith(String arg0, String arg1)
+	{
+		expectTrue(value().nameEndwWith(arg0, arg1), "nameEndwWith");
+		return self();
+	}
+
+
+	public IMPL nameStartsWith(String arg0)
+	{
+		return expectTo(value().nameStartsWith(arg0), "nameStartsWith", arg0);
+	}
+
+
+	public IMPL qualifiedName(String arg0, String expected)
+	{
+		expectEqual(expected, value().getQualifiedName(arg0), Context.call("qualifiedName", arg0));
+		return self();
+	}
+
+
+	public IMPL type(Type expected)
+	{
+		expectSame(expected, value().getType(), "type");
+		return self();
+	}
+
+
+	public IMPL url(URL expected)
+	{
+		expectEqual(expected, value().url, "url");
+		return self();
+	}
+}

@@ -1,0 +1,33 @@
+
+
+	/**
+	 * Asserts that the NaN flag equals the expected value.
+	 * @return this
+	 */
+	public IMPL isNaN()
+	{
+		expectTrue(value().isNaN(), "isNaN");
+		return self();
+	}
+
+
+	/**
+	 * Asserts that the Infinite flag equals the expected value.
+	 * @return this
+	 */
+	public IMPL isInfinite()
+	{
+		expectTrue(value().isInfinite(), "isInfinite");
+		return self();
+	}
+
+
+	/**
+	 * Asserts that the Finite flag equals the expected value.
+	 * @return this
+	 */
+	public IMPL isFinite()
+	{
+		expectTrue(Float.isFinite(floatValue()), "isFinite");
+		return self();
+	}

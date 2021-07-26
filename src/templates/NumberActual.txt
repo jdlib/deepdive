@@ -1,0 +1,134 @@
+/*
+ * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// Generated from NumberActualTemplate.txt, see build.xml/target[name="generate"]. 
+// Do not modify directly.
+package deepdive.actual.lang;
+
+
+/**
+ * @class@Actual is a NumberActual implementation for actual @class@ or @primitive@ values.
+ */
+public class @class@Actual<BACK,IMPL extends @class@Actual<BACK,IMPL>> extends NumberActual<@class@,BACK,IMPL> 
+	implements ComparableActual<@class@,IMPL>
+{
+	/**
+	 * Creates a @class@Actual for the given primitive value and owner.
+	 * @param value the primitive value
+	 * @param back the owner
+	 */
+	public @class@Actual(@primitive@ value, BACK back)
+	{
+		this(@class@.valueOf(value), back);
+	}
+
+
+	/**
+	 * Creates a @class@Actual for the given value and owner.
+	 * @param value the value
+	 * @param back the owner
+	 */
+	public @class@Actual(@class@ value, BACK back)
+	{
+		super(value, back);
+	}
+
+	
+	/**
+	 * Returns the primitive actual value.
+	 * @return the primitive value
+	 */
+	public @primitive@ @primitive@Value()
+	{
+		return value().@primitive@Value();
+	}
+
+	
+	/**
+	 * Asserts that the actual @primitive@ value is equal to the expected value.
+	 * @param expected the expected value
+	 * @deltaComment@
+	 * @return this
+	 */
+	public IMPL equal(@primitive@ expected@deltaDecl@)
+	{
+		expectEqual(expected, @primitive@Value()@delta@);
+		return self();
+	}
+
+	
+	/**
+	 * Asserts that the actual @primitive@ value is greater than the expected value.
+	 * @param expected the expected value
+	 * @return this
+	 */
+	public IMPL greater(@primitive@ expected)
+	{
+		return greater(@class@.valueOf(expected));
+	}
+	
+
+	/**
+	 * Asserts that the actual @primitive@ value is greater or equal than the expected value.
+	 * @param expected the expected value
+	 * @return this
+	 */
+	public IMPL greaterEq(@primitive@ expected)
+	{
+		return greaterEq(@class@.valueOf(expected));
+	}
+
+	
+	/**
+	 * Asserts that the actual @primitive@ value is positive (i.e. greater zero).
+	 * @return this
+	 */
+	public IMPL positive()
+	{
+		return greater(@cast@0);
+	}
+
+	
+	/**
+	 * Asserts that the actual @primitive@ value is less than the expected value.
+	 * @param expected the expected value
+	 * @return this
+	 */
+	public IMPL less(@primitive@ expected)
+	{
+		return less(@class@.valueOf(expected));
+	}
+
+	
+	/**
+	 * Asserts that the actual @primitive@ value is less than the expected value.
+	 * @param expected the expected value
+	 * @return this
+	 */
+	public IMPL lessEq(@primitive@ expected)
+	{
+		return lessEq(@class@.valueOf(expected));
+	}
+	
+	
+	/**
+	 * Asserts that the actual @primitive@ value is negative (i.e. less zero).
+	 * @return this
+	 */
+	public IMPL negative()
+	{
+		return less(@cast@0);
+	}
+@additional@}

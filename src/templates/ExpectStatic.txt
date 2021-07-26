@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// Generated from ExpectStatic.txt, see build.xml/target[name="generate"]. 
+// Do not modify directly.
+package deepdive;
+
+
+import javax.annotation.CheckReturnValue;
+import deepdive.function.CheckedConsumer;
+import deepdive.function.CheckedRunnable;
+import deepdive.impl.ExpectResult;
+import deepdive.impl.Not;
+import deepdive.impl.Value;
+
+
+/**
+ * ExpectStatic provides assert methods to test expectations on actual values.
+ * All assert methods are static (like in org.junit.Assert) therefore in order
+ * to use them you can import them statically (or derive your test class
+ * from ExpectStatic).
+ */
+public class ExpectStatic
+{
+@expectTemplate@
+
+
+	/**
+	 * Returns a new ExpecttInterface object with not-mode turned on.
+	 * @return the object
+	 */
+	@CheckReturnValue
+	public static ExpectInterface not()
+	{
+		return new ExpectPublic(null, null).not();
+	}
+}
