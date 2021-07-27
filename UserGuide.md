@@ -174,7 +174,7 @@ public class Actual<T,BACK,IMPL> extends ExpectProtected {
 <a name="msg"></a>
 ## Error messages
 
-Here is the challenge: Suppose an assertion of an unit test fails - can you find and fix the error using only the error message
+Here is the challenge: Suppose an assertion of a unit test fails - can you find and fix the error using only the error message
 and the failure stacktrace? Or do you need to debug the test to diagnose the error?
 
 Informative error messages are key to good unit tests, last but not least for their psychological impact: Does
