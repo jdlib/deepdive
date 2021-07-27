@@ -178,25 +178,24 @@ Here is the challenge: Suppose an assertion of a unit test fails - can you find 
 and the failure stacktrace? Or do you need to debug the test to diagnose the error?
 
 Informative error messages are key to good unit tests, last but not least for their psychological impact: Does
-the test code (judged by its failuzre messages) feel obscure or clear to you?
-
-Deep Dive error messages try to bring as much information as possible TODO
+the test code (judged by its failure messages) feel obscure or clear to you? Therefore Deep Dive error messages 
+try to bring as much usefull information as possible into error messages.
 
 #### It adopts the style of Google Truth error messages:
 - messages can span multiple lines
 - values are reported as `<title>: <value>`
 - subsequent value lines are nicely aligned.
 
-#### Details why an equality assertion fails
+#### Details why an equality assertion fails are included:
 If arrays, sets, lists or maps are tested on equality to an expected value, the difference between actual
-  and expected value is described in great detail
+  and expected value is described in great detail.
 
-#### Rich context when diving deep
-diving deep into `Actual` objects will provide the full context of the starting actual value down to failing sub property
+#### Rich context when diving deep:
+Diving deep into `Actual` objects will provide the full context of the starting actual value down to failing sub assertion.
 
 #### Specify context in basic assertions
 Many basic assertion methods have an overloaded form with an additional `context` parameter (think JUnit `message` parameter)
-which is included in the error message when the assertion fails).
+which is included in the error message when the assertion fails.
 The type of the context parameter is `CharSequence`. Of course you can pass a `String` object but additionally
 any CharSequence will do. To avoid heavy construction of error contexts which are not used if the assertion succeeds
 this allows for relative cheap, lazily built error contexts as demonstrated by `deepdive.Context`. 
