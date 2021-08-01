@@ -1,4 +1,4 @@
-# Deep Dive
+# Deep Dive Assertions
 
 Deep Dive is an assertion library for Java.
 It offers a fluent API which allows you to *dive deep*, 
