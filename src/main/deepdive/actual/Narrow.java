@@ -21,7 +21,7 @@ import deepdive.impl.Check;
 
 
 /**
- * Narow allows to Narrow from an Actual to a more 
+ * Narow allows to narrow from an Actual to a more 
  * specific one.
  * @see Actual#narrow(Narrow)
  */
