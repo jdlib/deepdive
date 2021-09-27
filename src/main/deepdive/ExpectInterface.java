@@ -340,15 +340,14 @@ public interface ExpectInterface extends ExpectBase
 	/**
 	 * Runs a runnable which is expected to fail, i.e. to throw an Exception or Error.
 	 * If the runnable does <i>not</i> fail then an assertion error is thrown.
-	 * @param expected the expected type of the thrown Throwable. If not null and the thrown 
-	 *      Throwable is not an instance of the expected type an assertion error is also thrown.
+	 * @param expectedType if not null and the thrown Throwable is not an instance of the expected type an assertion error is also thrown.
 	 * @param runnable a runnable
 	 * @return the Throwable thrown by the runnable
 	 * @param<T> the type of the expected Throwable
 	 */
-	public default <T extends Throwable> T expectThrows(Class<T> expected, CheckedRunnable<?> runnable)
+	public default <T extends Throwable> T expectThrows(Class<T> expectedType, CheckedRunnable<?> runnable)
 	{
-		return ExpectCommon.expectThrows(runnable, expected, getNotAndClear(), this);
+		return ExpectCommon.expectThrows(runnable, expectedType, getNotAndClear(), this);
 	}
 
 	

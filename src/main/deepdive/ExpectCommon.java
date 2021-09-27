@@ -125,7 +125,7 @@ class ExpectCommon
 
     
 	@SuppressWarnings("unchecked")
-	static <T extends Throwable> T expectThrows(CheckedRunnable<?> runnable, Class<T> expected, Not not, ExpectBase base)
+	static <T extends Throwable> T expectThrows(CheckedRunnable<?> runnable, Class<T> expectedType, Not not, ExpectBase base)
 	{
 		if (runnable == null)
 			return failure(base, null).addStmt("runnable is null").throwError();
@@ -147,15 +147,15 @@ class ExpectCommon
 		{
 			Failure f  = failure(base, null);
 			String msg = "expected exception"; 
-			if (expected == null)
+			if (expectedType == null)
 				f.addStmt(msg);
 			else
-				f.addStmt(msg, expected);
+				f.addStmt(msg, expectedType);
 			f.addStmt("but runnable did not throw any exception");
 			f.throwError();
 		}
-		if (expected != null)
-			expectInstance(expected, thrown, Not.OFF, base);
+		if (expectedType != null)
+			expectInstance(expectedType, thrown, Not.OFF, base);
 		return (T)thrown;
 	}
 
