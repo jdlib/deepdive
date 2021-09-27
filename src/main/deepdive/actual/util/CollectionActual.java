@@ -53,7 +53,7 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 	
 	
 	/**
-	 * Adds the element to the set.
+	 * Adds the element to the collection.
 	 * @param elem the new element 
 	 * @return this
 	 */
