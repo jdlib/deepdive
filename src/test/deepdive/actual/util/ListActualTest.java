@@ -45,6 +45,7 @@ public class ListActualTest extends AbstractActualTest
 				.back()
 			.elems("a", "bc", "def")
 			.not().elems("x")
+			.not().empty()
 			.map(String::length)
 				.elems(1, 2, 3)
 				.back()
@@ -64,7 +65,6 @@ public class ListActualTest extends AbstractActualTest
 				.map(s -> s.toUpperCase())
 				.filter(s -> s.startsWith("A"))
 				.elems$("A");
-		
 		
 		new StringListActual<>(list, null)
 			.elem(0).startsWith("a").back();
@@ -89,6 +89,11 @@ public class ListActualTest extends AbstractActualTest
 			"- expected size : 1",
 			"- but was  size : 2",
 			"- unexpected [1]: b");
+		
+		failAssert(() -> expectThat(list).empty()).msgLines(
+			"ArrayList=<[a, b]>.size",
+			"expected: 0",
+			"but was : 2");
 		
 		failAssert(() -> expectThat(list).not().elems("a", "b")).msgLines(
 			"ArrayList=<[a, b]>.elems",
