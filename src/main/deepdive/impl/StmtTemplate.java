@@ -49,7 +49,7 @@ public abstract class StmtTemplate
 
 	/**
 	 * A StmtTemplate to build failure messages for 
-	 * test if an actual value is blank, i.e. is either null or has size/length 0.
+	 * tests if an actual value is blank, i.e. is either null or empty.
 	 * Uses {@link Input#actual}, {@link Input#not}.
 	 */
 	public static final StmtTemplate ASSERT_BLANK = multi(
