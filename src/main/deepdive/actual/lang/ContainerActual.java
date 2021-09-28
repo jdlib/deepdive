@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import deepdive.Context;
 import deepdive.actual.Actual;
 import deepdive.actual.util.stream.StreamActual;
 import deepdive.impl.Not;
@@ -85,9 +86,10 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		
 		
 		/**
-		 * Asserts that the container contains at least all the given elements
+		 * Asserts that the container contains at least all the given elements.
+		 * But it may contain more elements. 
 		 * @param elems the elements
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		@SafeVarargs
 		public final ContainsActual allOf(ELEM... elems)
@@ -96,6 +98,12 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		}
 		
 		
+		/**
+		 * Asserts that the container contains at least all the given elements
+		 * But it may contain more elements. 
+		 * @param elems an iterable over the elems 
+		 * @return this ContainsActual object
+		 */
 		public final ContainsActual allOf(Iterable<ELEM> elems)
 		{
 			List<ELEM> failing = null;
@@ -117,7 +125,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		 * Asserts that the container exactly consists of the expected elements
 		 * (ignoring order and duplicates).
 		 * @param elems the elements
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		@SafeVarargs
 		public final ContainsActual exactly(ELEM... elems)
@@ -131,7 +139,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		 * Asserts that the container consists exactly of the expected elements
 		 * (ignoring order and duplicates).
 		 * @param expected the expected elements
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		public ContainsActual exactly(Set<ELEM> expected)
 		{
@@ -140,6 +148,12 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		}
 		
 		
+		/**
+		 * Asserts that the container contains an element that matches
+		 * the predicate.
+		 * @param test the predicate
+		 * @return this ContainsActual object
+		 */
 		public ContainsActual match(Predicate<ELEM> test)
 		{
 			expectTrue(getStream().anyMatch(test), "match");
@@ -150,7 +164,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		/**
 		 * Asserts that the container does not contain the given elements.
 		 * @param elems the elements
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		@SafeVarargs
 		public final ContainsActual noneOf(ELEM... elems)
@@ -174,7 +188,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		
 		/**
 		 * Toggles not mode.
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		public final ContainsActual not()
 		{
@@ -186,7 +200,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 		/**
 		 * Asserts that the container contains at least one of the given elements.
 		 * @param elems the elements
-		 * @return this Contains object
+		 * @return this ContainsActual object
 		 */
 		@SafeVarargs
 		public final ContainsActual someOf(ELEM... elems)
@@ -218,7 +232,21 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	
 	
 	/**
-	 * Returns a StreamActual for the element stream of this container.
+	 * Returns a IntegerActual for the elements of this container
+	 * which match the predicate
+	 * @return the new actual
+	 */
+	public IntegerActual<IMPL,?> count(Predicate<ELEM> test)
+	{
+		notMustBeOff();
+		rejectNull(test, "test");
+		int count = (int)getStream().filter(test).count();
+		return new IntegerActual<>(count, self()).as(Context.call("count", test));
+	}
+
+	
+	/**
+	 * Returns a StreamActual for the elements of this container.
 	 * @return the new actual
 	 */
 	public StreamActual<ELEM,IMPL,?> stream()
