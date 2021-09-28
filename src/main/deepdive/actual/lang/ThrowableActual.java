@@ -16,9 +16,7 @@
 package deepdive.actual.lang;
 
 
-import deepdive.ExpectStatic;
 import deepdive.actual.Actual;
-import deepdive.function.CheckedRunnable;
 
 
 /**
@@ -29,18 +27,6 @@ import deepdive.function.CheckedRunnable;
  */
 public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActual<T,BACK,IMPL>> extends Actual<T,BACK,IMPL>
 {
-	/**
-	 * Runs a runnable which is expected to throw an error 
-	 * and returns a ThrowableActual for that error.
-	 * @param runnable the runnable
-	 * @return the new actual
-	 */
-	public static ThrowableActual<Throwable,Void,?> of(CheckedRunnable<?> runnable)
-	{
-		return new ThrowableActual<>(ExpectStatic.expectThrows(Throwable.class, runnable), null);
-	}
-
-	
 	/**
 	 * Creates a new ThrowableActual. 
 	 * @param value a Throwable

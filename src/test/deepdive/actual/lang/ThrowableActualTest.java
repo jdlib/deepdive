@@ -16,6 +16,7 @@
 package deepdive.actual.lang;
 
 
+import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.lang.ThrowableActual;
@@ -28,7 +29,7 @@ public class ThrowableActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
-		ThrowableActual.of(() -> { throw new IllegalArgumentException("test"); })
+		expectError(() -> { throw new IllegalArgumentException("test"); })
 			.isA(IllegalArgumentException.class)
 			.message("test")
 			.message().contains("es").back()

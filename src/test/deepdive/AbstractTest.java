@@ -16,6 +16,7 @@
 package deepdive;
 
 
+import static deepdive.ExpectThat.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -23,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Ignore;
 import org.opentest4j.MultipleFailuresError;
 import deepdive.ExpectStatic;
-import deepdive.actual.lang.ThrowableActual;
 import deepdive.function.CheckedConsumer;
 import deepdive.function.CheckedRunnable;
 
@@ -39,11 +39,11 @@ public abstract class AbstractTest extends ExpectStatic
 
 	protected void failSoftAssert(CheckedRunnable<?> test, String... lines)
 	{
-		ThrowableActual.of(test)
+		expectError(test)
 			.isA(MultipleFailuresError.class)
 			.message()
-			.split().by("\r?\n")
-			.elems(lines);
+				.split().by("\r?\n")
+				.elems(lines);
 	}
 
 

@@ -47,10 +47,11 @@ import deepdive.actual.time.*;
 import deepdive.actual.util.*;
 import deepdive.actual.util.regex.*;
 import deepdive.actual.util.stream.StreamActual;
+import deepdive.function.CheckedRunnable;
 
 
 /**
- * ExpectThat provdes factory methody to construct Actual implementations for various JDK core classes. 
+ * ExpectThat provides factory methods to construct Actual implementations for various JDK core classes. 
  */
 public class ExpectThat 
 {
@@ -393,5 +394,17 @@ public class ExpectThat
 	public static <T> Actual<T,?,?> expectThatObject(T actual)
 	{
 		return new Actual<>(actual, null);
+	}
+
+
+	/**
+	 * Runs a runnable which is expected to throw an exception or error 
+	 * and returns a ThrowableActual for that error.
+	 * @param runnable the runnable
+	 * @return the ThrowableActual
+	 */
+	public static ThrowableActual<?,?,?> expectError(CheckedRunnable<?> runnable)
+	{
+		return new ThrowableActual<>(ExpectStatic.expectThrows(null, runnable), null);
 	}
 }
