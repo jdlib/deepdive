@@ -52,6 +52,10 @@ public class ListActualTest extends AbstractActualTest
 			.size()
 				.less(4)
 				.back();
+
+		expectThat(list)
+			.count(s -> s.length() == 2)
+			.equal(1);	
 		
 		list = Arrays.asList("a", "b", "c");
 		expectThat(list)
