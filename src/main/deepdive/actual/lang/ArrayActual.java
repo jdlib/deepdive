@@ -20,6 +20,7 @@ import deepdive.function.CheckedBiFunction;
 import deepdive.impl.ActualChange;
 import deepdive.impl.ExpectResult;
 import deepdive.impl.NotAgnostic;
+import deepdive.impl.StmtTemplate;
 import deepdive.impl.Value;
 
 
@@ -42,6 +43,17 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	public ArrayActual(ELEM[] actual, BACK back)
 	{
 		super(actual, back);
+	}
+	
+	
+	/**
+	 * Asserts that the Array is null or empty.
+	 * @return this
+	 */
+	@Override public IMPL blank()
+	{
+		ELEM[] array = valueOrNull();
+		return expectTrue((array == null) || (array.length == 0), StmtTemplate.ASSERT_BLANK, null, null); 
 	}
 	
 	
@@ -110,6 +122,17 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), Value.arraysEqual(expected, value(), false));
 		if (!result.ok)
 			failure().addContext("elems").equalness(expected, value(), null, result.not).throwError();
+		return self();
+	}
+	
+	
+	/**
+	 * Asserts that the array is empty.
+	 * @return this
+	 */
+	@Override public IMPL empty()
+	{
+		expectEqual(0, value().length, "length");
 		return self();
 	}
 
@@ -263,18 +286,6 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	}
 
 
-	@Override protected int getSize()
-	{
-		return value().length;
-	}
-
-
-	@Override protected String getSizeName()
-	{
-		return "length";
-	}
-
-	
 	/**
 	 * Returns the element at the given index.
 	 * This method should throw an assertion error if the index is not valid. 

@@ -39,10 +39,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	 * Asserts that the Container is null or empty.
 	 * @return this
 	 */
-	public IMPL blank()
-	{
-		return expectTrue((valueOrNull() == null) || (getSize() == 0), StmtTemplate.ASSERT_BLANK, null, null); 
-	}
+	public abstract IMPL blank();
 	
 	
 	/**
@@ -224,11 +221,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	 * Asserts that the container is empty.
 	 * @return this
 	 */
-	public IMPL empty()
-	{
-		expectEqual(0, getSize(), getSizeName());
-		return self();
-	}
+	public abstract IMPL empty();
 	
 	
 	/**
@@ -258,19 +251,6 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	//----------------------------------
 	// implementation
 	//----------------------------------
-	
-	
-	/**
-	 * Returns the size/length of the container.
-	 * @return the size
-	 */
-	protected abstract int getSize();
-
-	/**
-	 * Returns the name of the size/length property.
-	 * @return the name
-	 */
-	protected abstract String getSizeName();
 
 	
 	/**
