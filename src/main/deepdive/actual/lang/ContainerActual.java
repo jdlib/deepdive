@@ -18,8 +18,7 @@ import deepdive.impl.NotMustBeOff;
 
 
 /**
- * A common abstract Actual base class for CollectionActual and ArrayActual to test if 
- * the container (collection or array) contains specific values. 
+ * A common abstract Actual base class for IterableActual, CollectionActual, ArrayActual. 
  */
 public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<ELEM,T,BACK,IMPL>> 
 	extends Actual<T,BACK,IMPL>
@@ -41,6 +40,17 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	 */
 	public abstract IMPL blank();
 	
+	
+	/**
+	 * Helper method to implement {@link #blank()}.
+	 * @param isBlank is the container blank?
+	 * @return this
+	 */
+	protected IMPL blank(boolean isBlank)
+	{
+		return expectTrue(isBlank, StmtTemplate.ASSERT_BLANK, null, null); 
+	}
+
 	
 	/**
 	 * Asserts that the container contains the expected element.

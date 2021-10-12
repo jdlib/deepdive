@@ -28,7 +28,6 @@ import deepdive.actual.lang.ContainerActual;
 import deepdive.actual.lang.IntegerActual;
 import deepdive.actual.util.stream.StreamActual;
 import deepdive.impl.ActualChange;
-import deepdive.impl.StmtTemplate;
 import deepdive.impl.Value;
 
 
@@ -50,17 +49,6 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 	public CollectionActual(T value, BACK back)
 	{
 		super(value, back);
-	}
-	
-	
-	/**
-	 * Asserts that the Collection is null or empty.
-	 * @return this
-	 */
-	@Override public IMPL blank()
-	{
-		T col = valueOrNull();
-		return expectTrue((col == null) || (col.size() == 0), StmtTemplate.ASSERT_BLANK, null, null); 
 	}
 
 	
@@ -89,6 +77,17 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 	{
 		expectEqual(expected, value().add(elem), Context.call("add", elem));
 		return self();
+	}
+	
+	
+	/**
+	 * Asserts that the Collection is null or empty.
+	 * @return this
+	 */
+	@Override public IMPL blank()
+	{
+		T col = valueOrNull();
+		return blank((col == null) || (col.size() == 0)); 
 	}
 
 	

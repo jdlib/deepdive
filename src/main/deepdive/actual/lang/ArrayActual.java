@@ -20,7 +20,6 @@ import deepdive.function.CheckedBiFunction;
 import deepdive.impl.ActualChange;
 import deepdive.impl.ExpectResult;
 import deepdive.impl.NotAgnostic;
-import deepdive.impl.StmtTemplate;
 import deepdive.impl.Value;
 
 
@@ -52,8 +51,8 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	 */
 	@Override public IMPL blank()
 	{
-		ELEM[] array = valueOrNull();
-		return expectTrue((array == null) || (array.length == 0), StmtTemplate.ASSERT_BLANK, null, null); 
+		ELEM[] value = valueOrNull();
+		return blank((value == null) || (value.length == 0)); 
 	}
 	
 	
