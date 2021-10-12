@@ -172,6 +172,12 @@ public class ExpectThat
 	}
 
 	
+	public static <ELEM> IterableActual<ELEM,?,?,?> expectThat(Iterable<ELEM> actual)
+	{
+		return new IterableActual<>(actual, null);
+	}
+
+	
 	public static <ELEM,LIST extends List<ELEM>> ListActual<ELEM,LIST,?,?> expectThat(LIST actual)
 	{
 		return new ListActual<>(actual, null);

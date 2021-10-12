@@ -56,7 +56,15 @@ public abstract class StmtTemplate
 		wildcard("expected $not to be null or empty", StmtValue.NONE),
 		constant("but was", StmtValue.ACTUAL));
 	
-	
+	/**
+	 * A StmtTemplate to build failure messages for 
+	 * tests if an actual value is empty.
+	 * Uses {@link Input#actual}, {@link Input#not}.
+	 */
+	public static final StmtTemplate ASSERT_EMPTY = multi(
+		wildcard("expected $not to be empty", StmtValue.NONE),
+		constant("but was", StmtValue.ACTUAL));
+
 	/**
 	 * A StmtTemplate to build failure messages for 
 	 * {@link ExpectStatic#expectSame(Object, Object) assertSame} and 

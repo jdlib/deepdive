@@ -24,8 +24,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckReturnValue;
 import deepdive.Context;
-import deepdive.actual.lang.ContainerActual;
-import deepdive.actual.lang.IntegerActual;
+import deepdive.actual.lang.IterableActual;
 import deepdive.actual.util.stream.StreamActual;
 import deepdive.impl.ActualChange;
 import deepdive.impl.Value;
@@ -39,7 +38,7 @@ import deepdive.impl.Value;
  * @param <IMPL> the type of the concrete CollectionActual implementation 
  */
 public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends CollectionActual<ELEM,T,BACK,IMPL>> 
-	extends ContainerActual<ELEM,T,BACK,IMPL>
+	extends IterableActual<ELEM,T,BACK,IMPL>
 {
 	/**
 	 * Creates a new CollectionActual.
@@ -112,16 +111,6 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 		expectEqual(0, value().size(), "size");
 		return self();
 	}
-
-	
-	/**
-	 * Returns an IteratorActual for an iterator of the collection. 
-	 * @return the new actual
-	 */
-	public IteratorActual<ELEM,IMPL,?> iterator()
-	{
-		return new IteratorActual<>(value().iterator(), self());
-	}
 	
 	
 	/**
@@ -152,28 +141,6 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 	}
 
 	
-	/**
-	 * Asserts that the collections size equals the expected value.
-	 * @param expected the expected value
-	 * @return this
-	 */
-	public IMPL size(int expected)
-	{
-		expectEqual(expected, value().size(), "size");
-		return self();
-	}
-
-	
-	/**
-	 * Returns an IntegerActual for the collection size.
-	 * @return the new actual
-	 */
-	public IntegerActual<IMPL,?> size()
-	{
-		return new IntegerActual<>(value().size(), self()).as("size");
-	}
-
-
 	/**
 	 * Returns a builder to replace this CollectionActual with a more 
 	 * specific one.
@@ -248,5 +215,11 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 			set.addAll(value());
 			return set;
 		}
+	}
+	
+	
+	@Override protected int getSize()
+	{
+		return value().size();
 	}
 }
