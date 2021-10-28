@@ -39,12 +39,13 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 
 	
 	/**
-	 * Asserts that the actual can be casted to the given class.
-	 * @param type a class
-	 * @return a new ThrowableActual whose type reflects the successful cast.
+	 * Asserts that the actual can be casted to the given Throwable class.
+	 * @param type a Throwable class
+	 * @return a new ThrowableActual whose type parameter reflects the successful cast.
+	 * 		Its back object is the same as the back object of this actual
 	 * @param <S> the type of the casted Throwable 
 	 */
-	public <S extends T> ThrowableActual<S,BACK,?> cast(Class<S> type)
+	public <S extends Throwable> ThrowableActual<S,BACK,?> cast(Class<S> type)
 	{
 		return new ThrowableActual<>(expectInstance(type, value()), backOrNull());
 	}

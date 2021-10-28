@@ -17,6 +17,7 @@ package deepdive.actual.lang;
 
 
 import static deepdive.ExpectThat.*;
+import java.sql.SQLException;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.lang.ThrowableActual;
@@ -37,5 +38,11 @@ public class ThrowableActualTest extends AbstractActualTest
 			.stackTrace()
 				.contains().match(elem -> ThrowableActualTest.class.getName().equals(elem.getClassName()))
 				.back();
+		
+		Throwable t = new SQLException("X", "S100"); 
+		expectThat(t)
+			.message("X")
+			.cast(SQLException.class)
+			.prop(SQLException::getSQLState).as("SQLState").equal("S100");
 	}
 }
