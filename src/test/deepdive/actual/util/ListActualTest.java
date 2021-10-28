@@ -23,6 +23,7 @@ import java.util.List;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.Actual;
+import deepdive.actual.Narrows;
 import deepdive.actual.util.ListActual;
 import deepdive.actual.util.StringListActual;
 
@@ -52,6 +53,12 @@ public class ListActualTest extends AbstractActualTest
 			.size(3)
 			.size()
 				.less(4)
+				.back();
+		
+		expectThat(list)
+			.narrow(Narrows.stringList())
+			.elem(0)
+				.toUpperCase("A")
 				.back();
 
 		expectThat(list)
