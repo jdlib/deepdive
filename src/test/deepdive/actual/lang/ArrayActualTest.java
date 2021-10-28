@@ -19,6 +19,7 @@ package deepdive.actual.lang;
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
+import deepdive.actual.Narrows;
 import deepdive.actual.lang.ArrayActual;
 import deepdive.actual.lang.StringActual;
 
@@ -63,7 +64,9 @@ public class ArrayActualTest extends AbstractActualTest
 				.next("a")
 				.hasNext()
 				.back()
-			.stream().count$(4);
+			.stream().count$(4)
+			.narrow(Narrows.stringArray())
+				.elem(0).toUpperCase("A").back();
 		
 		a.switchTo().stream().count$(4);
 		a.switchTo().iterator().next("a");
