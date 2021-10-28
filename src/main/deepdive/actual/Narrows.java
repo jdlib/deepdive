@@ -33,6 +33,7 @@ import deepdive.actual.lang.StringArrayActual;
 import deepdive.actual.util.ListActual;
 import deepdive.actual.util.MapActual;
 import deepdive.actual.util.SetActual;
+import deepdive.actual.util.StringListActual;
 
 
 /**
@@ -59,6 +60,8 @@ public class Narrows
 	private static final Narrow					SET 			= new Narrow<>(Set.class, SetActual::new);
 	private static final Narrow<String,?,?> 	STRING 			= new Narrow<>(String.class, StringActual::new);
 	private static final Narrow<String[],?,?> 	STRING_ARRAY 	= new Narrow<>(String[].class, StringArrayActual::new);
+	@SuppressWarnings("rawtypes")
+	private static final Narrow					STRING_LIST 	= new Narrow<>(List.class, StringListActual::new);
 
 
 	public static <BACK> Narrow<Object[],BACK,ArrayActual<Object,BACK,?>> array()
@@ -148,6 +151,13 @@ public class Narrows
 	}
 
 
+	@SuppressWarnings("unchecked")
+	public static <BACK> Narrow<List<String>,BACK,StringListActual<?,BACK,?>> stringList()
+	{
+		return cast(STRING_LIST); 
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	private static <T,BACK,R> Narrow<T,BACK,R> cast(Narrow<T,?,?> narrow)
 	{
