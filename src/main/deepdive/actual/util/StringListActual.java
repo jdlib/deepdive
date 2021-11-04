@@ -50,7 +50,7 @@ public class StringListActual<T extends List<String>,BACK,IMPL extends StringLis
 
 
 	/**
-	 * Returns a StringIteratorActual an iterator of the list.
+	 * Returns a StringIteratorActual for an iterator of the list.
 	 * @return the new actual
 	 */
 	@Override public StringIteratorActual<IMPL,?> iterator()
