@@ -16,11 +16,11 @@ assertion objects.
 A unit test computes values and asserts that these actual values meet the expectations,
 else the test fails (usually by throwing `AssertionErrors`).
 
-`org.junit.Assert` and `òrg.testng.Assert` offer a basic set of assert methods to test expectations, 
+`org.junit.Assert` and `òrg.testng.Assert` offer a basic set of static assert methods to test expectations, 
 e.g. to test if an actual value equals the expected value. Deep Dive offers an [own version of basic assert methods](#basic-assertions) 
 to replace JUnit or TestNG assertions.
 
-A fluent assertion API goes beyond basic assert methods: Given an actual computed value
+A fluent assertion API goes beyond static assert methods: Given an actual computed value
 such an API provides a type specific assertion object which allows you to test properties of the actual value.
 Deep Dive offers a [fluent assertion API](#fluent-api) like AssertJ or Google Truth but additionally allows you to
 dive deep, i.e. going back and forth between different assertion objects. This results in a small library and API
@@ -53,7 +53,7 @@ expectThat(map)
 ```
 
 These two calls of `expectThat` return a `deepdive.actual.lang.StringActual` and a `deepdive.actual.util.MapActual`
-which provide type specific assertion methods. Both are derived from `deepdive.actual.Actual`. 
+object which provide type specific assertion methods. Both are derived from `deepdive.actual.Actual`. 
 But given the factory methods in `ExpectThat` you will rarely need to create an `Actual` object by yourself.
 
 
@@ -71,7 +71,7 @@ expectThat(map)            // returns a new MapActual to test the map value
         .less(10)          
         .back()            // going back to the MapActual
     .keySet()              // returns a new SetActual for the keyset of the map
-    	.contains()        // returns a new ContainsActual to test elements of a Collection
+    	.contains()        // returns a new ContainsActual to test elements of the keyset
             .someOf(3, 5) 
     	    .noneOf(2, 4, 6)
     	    .back()        // going back to the SetActual
@@ -91,7 +91,7 @@ expectThat("abc")
 #### Soft Assertions
 Usually if an assertion method fails it will throw an `AssertionError` therefore immediately terminate the test method.
 Deep Dive allows you to bundle assertion calls and run them all even if some assertions fail.
-At the end eventually an AssertionError containing information about all failed assertions is thrown.  
+At the end eventually an `AssertionError` containing information about all failed assertions is thrown.  
 
 ```java
 String s = ... 
@@ -103,7 +103,7 @@ expectThat(s)                   // returns a deepdive.actual.lang.StringActual
 ```
 
 ## Basic Assertions
-`org.junit.Assert` or `org.testng.Assert` give you a basic API to test expectations:
+`org.junit.Assert` or `org.testng.Assert` provide a basic set of static assert methods to test expectations:
 
 ```java		
 import static org.junit.Assert.assertEquals;
@@ -113,7 +113,7 @@ assertEquals("abc", actual); // throws an AssertionError if actual does not equa
 ```
     
 If you test expectations using the Deep Dive fluent API based on `Actual` classes you don't need any basic assertion methods.
-But still basic assertions are usefull from time to time - and the Actual classes itself implement their assertions using 
+But still basic assertions are usefull from time to time - and the `Actual` classes itself implement their assertions using 
 basic assertion methods.
    
 Deep Dive provides a basic assertions API similar to JUnit and TestNG which comes in three flavors with respect how to 
@@ -154,7 +154,7 @@ public class CalculatorTest extends TestBase {
 Derive from `deepdive.ExpectProtected` to inherit basic assertion methods with a `protected` modifier:
 Here we want to use assertion methods within derived classes but not include them in their public API.
 The prototypical use case for this flavor are `Actual` classes which offer type specific public assertion methods for their 
-actual value and internally implement these methods using basic assertions:
+actual value and internally can implement these methods using basic assertions inherited from `ExpectProtected`:
 	 
 ```java
 import deepdive.ExpectProtected;
@@ -191,15 +191,23 @@ If arrays, sets, lists or maps are tested on equality to an expected value, the 
   and expected value is described in great detail.
 
 #### Rich context when diving deep:
-Diving deep into `Actual` objects will provide the full context of the starting actual value down to failing sub assertion.
+Diving deep into `Actual` objects will provide the full context of the starting actual value down to failing detail assertion.
 
 #### Specify context in basic assertions
-Many basic assertion methods have an overloaded form with an additional `context` parameter (think JUnit `message` parameter)
+Many basic assertion methods in Deep Dive have an overloaded form with an additional `context` parameter (in JUnit it is called `message`)
 which is included in the error message when the assertion fails.
-The type of the context parameter is `CharSequence`. Of course you can pass a `String` object but additionally
+The type of that context parameter is `CharSequence`. Of course you can pass a `String` object but additionally
 any CharSequence will do. To avoid heavy construction of error contexts which are not used if the assertion succeeds
 this allows for relative cheap, lazily built error contexts as demonstrated by `deepdive.Context`. 
-  
+
+```java
+import deepdive.Context;
+import static deepdive.ExpectStatic.*;
+...
+String[] s = ...  
+// use a lightweight context parameter which would resolve to "[2]"
+expectEqual("a", s[2], Context.indexed(2)); 
+```
   
 ## AssertionErrors
   
@@ -218,20 +226,20 @@ If you want to use other `AssertionErrors` you can implement and set an own `dee
 Deep Dive provides `Actual` implementations for core JDK classes, but you might want to develop
 `Actual` implementations for classes in your code base, especially for classes with a lot
 of test cases: In this case it really pays off to base tests on `Actuals` since you get 
-clean, readable test code and at the same time cover a lot of assertions.
+clean, readable test code.
 
-To create an own `Actual` implementation for a class you can use `deepdive.tool.ActualGenerator` as a starting point. Just 
+To create an own `Actual` implementation for an own class you can use `deepdive.tool.ActualGenerator` as a starting point. Just 
 - include your own code and the deepdive jar into the classpath,
 - call `ActualGenerator`, 
 - pass as argument the fully qualified name of your class,
-- copy or redirect the output to a new java source file for the `Actual` implementation,
-- and finally tweak the generated class to your needs
+- copy or redirect the output to a new java source file for your new `Actual` implementation,
+- and finally tweak the generated class to your needs:
 
 ```
 java -cp <classpath> deepdive.tool.ActualGenerator org.example.CalculationResult >CalculationResultActual.java  
 ```
 
-#### Notes about the type parameters of `Actual` and derived implementations
+#### About the type parameters of `Actual` and derived implementations
 The `Actual` base class has three type parameters:
 
 | Type Param | Description |

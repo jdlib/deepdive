@@ -10,8 +10,8 @@ with good IDE support and integration into automated builds.
 Besides their runtime engines they also provide basic assertion methods 
 defined in `org.junit.Assert` and `org.testng.Assert` to test expectations on computed values. 
 But only relying on these basic assertions will easily lead to test code which is a quagmire of
-assertion statements, with impaired readability and maintainability.
-Additionally error messages of these basic assertions all too often are not very helpful to spot the error
+assertion statements, with poor readability and maintainability.
+Besides, error messages of these basic assertions all too often are not very helpful to spot the error
 and in the extreme require to debug the test code for further diagnosis.
 
 And let's admit it: Writing JUnit or TestNG assertions requires heavy typing and isn't exactly fun.
@@ -78,12 +78,13 @@ expectThat(s)         // returns a deepdive.actual.lang.StringActual
 > - `hasSizeGreaterThan(int)`
 > - `hasSizeGreaterThanOrEqualTo(int)` 
 >
-> to test String lengths.
+> to test String lengths: The consequence is that the API of the assert class for Strings gets crowded, duplicates
+> functionality of the assert class for Integer values without covering all possible assertions on the string length.    
 > 
-> Deep Dive's `StringActual` defines `length(int)` for a simple equality assertion and `length()` (returning a IntegerActual) for
+> Deep Dive's `StringActual` defines `length(int)` for a simple equality assertion and `length()` (returning a `IntegerActual`) for
 > complex assertion on the String length.
 >
-> The result: A trimmed down API while on the same time providing more assertion flexibility.
+> The result: A trimmed down API which has greater assertion power than AssertJ.
 
 #### 4. Not-Mode: Negate any assertion
 Every Deep Dive assertion can be turned into its negated form by a preceding call to `not()` therefore doubling available 
@@ -105,5 +106,5 @@ expectThat(s)  // returns deepdive.actual.lang.StringActual
 #### 5. Coverage of JDK core classes 
 Deep Dive offers Actual implementations for JDK core classes which can be used out of the box. 
 
-#### 6. Jumpstart Actual implementations for your own classes under test
-Additionally it makes it easy to [create](UserGuide.md#own-actual-implementations) Actual implementations for your own domain classes. 
+#### 6. Generate Actual implementations for your domain classes
+Deep Dive makes it easy to [create](UserGuide.md#own-actual-implementations) Actual implementations for your own domain classes. 

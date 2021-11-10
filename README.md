@@ -57,8 +57,8 @@ Like other Java assertions libraries (e.g. [FEST Assert](https://github.com/alex
 provides a fluent API to state assertions.
 But it goes beyond those libraries 
 - by allowing to *dive deep*, i.e. going back and forth between different assertion objects, 
-- providing *not*-mode to easily negate any assertion provided by the API
-- therefore resulting in a small library (~250K) with great assertion power .
+- providing *not*-mode to easily negate any assertion provided by the API,
+- therefore resulting in a small library (~250K) with great assertion power.
 
 For further details please dive into [Motivation.md](Motivation.md).  
  
