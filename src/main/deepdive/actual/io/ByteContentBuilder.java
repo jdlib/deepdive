@@ -78,7 +78,7 @@ public class ByteContentBuilder<BACK,E extends Exception>
 	 * @return the CharContentBuilder
 	 */
 	@CheckReturnValue
-	public CharContentBuilderImpl<BACK,E> chars(Charset charset)
+	public CharContentBuilder<BACK,E> chars(Charset charset)
 	{
 		Check.notNull(charset, "charset");
 		CheckedSupplier<InputStream,E> in 	= inSupplier_;
