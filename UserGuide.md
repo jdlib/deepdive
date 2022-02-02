@@ -191,7 +191,7 @@ If arrays, sets, lists or maps are tested on equality to an expected value, the 
   and expected value is described in great detail.
 
 #### Rich context when diving deep:
-Diving deep into `Actual` objects will provide the full context of the starting actual value down to failing detail assertion.
+Diving deep into `Actual` objects will provide the full context of the starting actual value down to the failing detail assertion.
 
 #### Specify context in basic assertions
 Many basic assertion methods in Deep Dive have an overloaded form with an additional `context` parameter (in JUnit it is called `message`)

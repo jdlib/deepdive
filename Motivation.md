@@ -79,7 +79,7 @@ expectThat(s)         // returns a deepdive.actual.lang.StringActual
 > - `hasSizeGreaterThanOrEqualTo(int)` 
 >
 > to test String lengths: The consequence is that the API of the assert class for Strings gets crowded, duplicates
-> functionality of the assert class for Integer values without covering all possible assertions on the string length.    
+> functionality of the assert class for Integers without covering all possible assertions on the string length.
 > 
 > Deep Dive's `StringActual` defines `length(int)` for a simple equality assertion and `length()` (returning a `IntegerActual`) for
 > complex assertion on the String length.
