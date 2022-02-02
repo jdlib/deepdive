@@ -38,7 +38,7 @@ import deepdive.impl.Value;
 
 
 /**
- * CharContent is a builder to access the character content provided by a Reader.
+ * CharContentBuilder is a builder to access the character content provided by a Reader.
  * @param<BACK> the type of the back object which owns the resulting actual
  */
 public abstract class CharContentBuilder<BACK,E extends Exception>
@@ -184,7 +184,7 @@ class CharContentBuilderImpl<BACK,E extends Exception> extends CharContentBuilde
 	
 	@Override public StringActual<BACK,?> string() throws E, IOException
 	{
-		return new StringActual<>(read(), back_).as("text");
+		return new StringActual<>(read(), back_).as("string");
 	}
 	
 	
