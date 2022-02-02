@@ -253,7 +253,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	 */
 	public IMPL name(String expected)
 	{
-		expectEqual(expected, value().getName());
+		expectEqual(expected, value().getName(), "name");
 		return self();
 	}
 
