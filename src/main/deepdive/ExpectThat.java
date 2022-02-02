@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import java.util.zip.ZipFile;
 import deepdive.actual.Actual;
 import deepdive.actual.io.*;
 import deepdive.actual.lang.*;
@@ -47,6 +48,7 @@ import deepdive.actual.time.*;
 import deepdive.actual.util.*;
 import deepdive.actual.util.regex.*;
 import deepdive.actual.util.stream.StreamActual;
+import deepdive.actual.util.zip.ZipFileActual;
 import deepdive.function.CheckedRunnable;
 
 
@@ -385,6 +387,12 @@ public class ExpectThat
 	public static StringArrayActual<?,?> expectThat(String... actuals)
 	{
 		return new StringArrayActual<>(actuals, null);
+	}
+
+	
+	public static ZipFileActual<?,?> expectThat(ZipFile actual)
+	{
+		return new ZipFileActual<>(actual, null);
 	}
 
 	
