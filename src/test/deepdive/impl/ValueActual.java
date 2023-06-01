@@ -20,7 +20,6 @@ import deepdive.ExpectProtected;
 import deepdive.actual.lang.ThrowableActual;
 import deepdive.actual.util.SetActual;
 import deepdive.function.CheckedRunnable;
-import deepdive.impl.Value;
 
 
 public class ValueActual extends ExpectProtected

@@ -20,7 +20,6 @@ import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.anno.TestResource;
-import deepdive.actual.reflect.FieldActual;
 
 
 /**

@@ -20,8 +20,6 @@ import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.Narrows;
-import deepdive.actual.lang.ArrayActual;
-import deepdive.actual.lang.StringActual;
 
 
 /**

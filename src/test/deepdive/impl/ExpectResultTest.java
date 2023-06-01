@@ -18,8 +18,6 @@ package deepdive.impl;
 
 import org.junit.Test;
 import deepdive.AbstractTest;
-import deepdive.impl.ExpectResult;
-import deepdive.impl.Not;
 
 
 public class ExpectResultTest extends AbstractTest

@@ -19,7 +19,6 @@ package deepdive.actual.anno;
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.anno.AnnotationActual;
 
 
 /**

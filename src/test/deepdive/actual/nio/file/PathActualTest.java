@@ -21,7 +21,6 @@ import java.io.File;
 import java.nio.file.Path;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.nio.file.PathActual;
 
 
 /**

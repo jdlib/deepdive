@@ -18,7 +18,6 @@ package deepdive.impl;
 
 import org.junit.Test;
 import deepdive.AbstractTest;
-import deepdive.impl.Not;
 
 
 public class NotTest extends AbstractTest

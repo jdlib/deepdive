@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.util.CollectionActual;
 
 
 /**

@@ -22,7 +22,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.util.MapActual;
 
 
 /**

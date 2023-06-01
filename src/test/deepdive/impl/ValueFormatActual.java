@@ -18,7 +18,6 @@ package deepdive.impl;
 
 import deepdive.Context;
 import deepdive.actual.Actual;
-import deepdive.impl.ValueFormat;
 
 
 public class ValueFormatActual<BACK,IMPL extends ValueFormatActual<BACK,IMPL>> extends Actual<ValueFormat,BACK,IMPL>

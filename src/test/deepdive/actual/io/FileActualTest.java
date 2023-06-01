@@ -22,7 +22,6 @@ import java.io.FilenameFilter;
 import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.io.FileActual;
 
 
 /**

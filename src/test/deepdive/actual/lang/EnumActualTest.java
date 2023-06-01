@@ -18,7 +18,6 @@ package deepdive.actual.lang;
 
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
-import deepdive.actual.lang.EnumActual;
 import deepdive.impl.Not;
 
 

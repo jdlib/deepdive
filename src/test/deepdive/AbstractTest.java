@@ -23,7 +23,6 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import org.junit.Ignore;
 import org.opentest4j.MultipleFailuresError;
-import deepdive.ExpectStatic;
 import deepdive.function.CheckedConsumer;
 import deepdive.function.CheckedRunnable;
 

@@ -20,7 +20,6 @@ import static deepdive.ExpectThat.*;
 import java.time.LocalDateTime;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.time.LocalDateTimeActual;
 
 
 /**
