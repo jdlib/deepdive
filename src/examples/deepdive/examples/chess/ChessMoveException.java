@@ -18,6 +18,9 @@ package deepdive.examples.chess;
 
 public class ChessMoveException extends Exception
 {
+	private static final long serialVersionUID = 1L;
+
+	
 	public ChessMoveException(String message, ChessField src, ChessField target, ChessPiece srcPiece)
 	{
 		super(message);
