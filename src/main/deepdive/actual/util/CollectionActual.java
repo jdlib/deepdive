@@ -203,6 +203,7 @@ public class CollectionActual<ELEM,T extends Collection<ELEM>,BACK,IMPL extends 
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override protected Set<ELEM> actualAsSet() 
 	{
 		T actual = value();
