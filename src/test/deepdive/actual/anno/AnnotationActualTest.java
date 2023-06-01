@@ -17,7 +17,6 @@ package deepdive.actual.anno;
 
 
 import static deepdive.ExpectThat.*;
-import javax.annotation.Resource;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.anno.AnnotationActual;
@@ -26,15 +25,15 @@ import deepdive.actual.anno.AnnotationActual;
 /**
  * Tests {@link AnnotationActual}.
  */
-@Resource(shareable=false, name="Test")
+@TestResource(shareable=false, name="Test")
 public class AnnotationActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
 		expectThat(getClass())
-			.annotation(Resource.class)
-				.attr("name", Resource::name, "Test")
-				.attr("shareable", Resource::shareable)
+			.annotation(TestResource.class)
+				.attr("name", TestResource::name, "Test")
+				.attr("shareable", TestResource::shareable)
 					.isA(Boolean.class)
 					.equal(Boolean.FALSE)
 					.back()

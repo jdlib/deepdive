@@ -17,9 +17,9 @@ package deepdive.actual.reflect;
 
 
 import static deepdive.ExpectThat.*;
-import javax.annotation.Resource;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
+import deepdive.actual.anno.TestResource;
 import deepdive.actual.reflect.FieldActual;
 
 
@@ -31,13 +31,13 @@ public class FieldActualTest extends AbstractActualTest
 	@Test public void test() throws Exception
 	{
 		expectThat(getClass()).fieldDeclared("field")
-			.annotation(Resource.class)
+			.annotation(TestResource.class)
 				.attr("name", "alpha")
 				.attr("description", "d")
 				.back()
 			.modifiers()
 				.isFinal()
-				.isPrivate()
+				.isPrivate( )
 				.not().isStatic()
 				.back()
 			.name("field")
@@ -49,6 +49,6 @@ public class FieldActualTest extends AbstractActualTest
 	}
 	
 	
-	@Resource(description="d", name="alpha")
+	@TestResource(description="d", name="alpha")
 	private final String field = "abc";
 }
