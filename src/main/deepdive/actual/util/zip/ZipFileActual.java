@@ -42,6 +42,7 @@ public class ZipFileActual<BACK,IMPL extends ZipFileActual<BACK,IMPL>> extends A
 	
 	/**
 	 * Returns a StringActual for the name.
+	 * @param name the name
 	 * @return the new actual
 	 */
 	public ZipEntryActual<IMPL,?> entry(String name)

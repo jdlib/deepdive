@@ -176,7 +176,9 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 
 	/**
 	 * Returns the actual value casted to the given type.
+	 * @param type the class of the given type
 	 * @return the casted value
+	 * @param<S> the given type
 	 */
 	@SuppressWarnings("unchecked")
 	@Nullable public <S> S valueCast(Class<S> type)

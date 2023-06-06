@@ -237,6 +237,7 @@ public abstract class ContainerActual<ELEM,T,BACK,IMPL extends ContainerActual<E
 	/**
 	 * Returns a IntegerActual for the elements of this container
 	 * which match the predicate
+	 * @param test the predicate
 	 * @return the new actual
 	 */
 	public IntegerActual<IMPL,?> count(Predicate<ELEM> test)

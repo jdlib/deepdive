@@ -100,7 +100,6 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	 * @param <E> the type of exception thrown by the function
 	 * @param <R> the function return type
 	 * @return the function result
-	 * @param <E> the exception thrown by the function
 	 */
 	public <R,E extends Exception> R elem(int index, CheckedBiFunction<ELEM,IMPL,R,E> function) throws E
 	{
