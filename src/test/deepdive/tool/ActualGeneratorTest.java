@@ -23,7 +23,6 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 import deepdive.AbstractTest;
 import deepdive.actual.io.CharContentBuilder;
-import deepdive.tool.ActualGenerator;
 
 
 public class ActualGeneratorTest extends AbstractTest

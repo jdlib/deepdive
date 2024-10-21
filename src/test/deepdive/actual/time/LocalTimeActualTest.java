@@ -21,7 +21,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.time.LocalTimeActual;
 
 
 /**

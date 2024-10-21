@@ -20,8 +20,6 @@ import static deepdive.ExpectThat.*;
 import java.util.regex.Pattern;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.util.regex.MatcherActual;
-import deepdive.actual.util.regex.PatternActual;
 
 
 /**

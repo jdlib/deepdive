@@ -19,7 +19,6 @@ package deepdive.impl;
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
 import deepdive.AbstractTest;
-import deepdive.impl.Config;
 
 
 public class ConfigTest extends AbstractTest

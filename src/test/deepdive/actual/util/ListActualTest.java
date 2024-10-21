@@ -24,8 +24,6 @@ import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
 import deepdive.actual.Actual;
 import deepdive.actual.Narrows;
-import deepdive.actual.util.ListActual;
-import deepdive.actual.util.StringListActual;
 
 
 /**

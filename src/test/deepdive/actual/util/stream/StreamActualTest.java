@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.util.stream.StreamActual;
 
 
 public class StreamActualTest extends AbstractActualTest

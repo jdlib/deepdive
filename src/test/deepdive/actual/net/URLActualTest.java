@@ -19,7 +19,6 @@ package deepdive.actual.net;
 import static deepdive.ExpectThat.*;
 import java.net.URL;
 import org.junit.Test;
-import deepdive.actual.net.URLActual;
 
 
 /**

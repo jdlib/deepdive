@@ -18,7 +18,6 @@ package deepdive;
 
 import org.opentest4j.AssertionFailedError;
 import org.opentest4j.ValueWrapper;
-import deepdive.ExpectStatic;
 import deepdive.actual.lang.StringActual;
 import deepdive.actual.lang.StringArrayActual;
 import deepdive.actual.lang.ThrowableActual;

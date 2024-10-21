@@ -21,7 +21,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.util.SetActual;
 
 
 /**

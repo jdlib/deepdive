@@ -18,7 +18,6 @@ package deepdive;
 
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
-import deepdive.ExpectInterface;
 import deepdive.actual.lang.StringActual;
 
 

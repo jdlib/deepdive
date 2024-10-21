@@ -20,7 +20,6 @@ import static deepdive.ExpectThat.*;
 import java.net.URI;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.net.URIActual;
 
 
 /**

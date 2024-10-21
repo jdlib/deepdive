@@ -19,8 +19,6 @@ package deepdive.actual;
 import static deepdive.ExpectThat.*;
 import java.util.Arrays;
 import org.junit.Test;
-import deepdive.actual.Actual;
-import deepdive.actual.Narrows;
 import deepdive.actual.lang.StringActual;
 
 
