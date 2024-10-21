@@ -17,27 +17,30 @@ package deepdive.actual.anno;
 
 
 import static deepdive.ExpectThat.*;
-import javax.annotation.Resource;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.anno.AnnotationActual;
 
 
 /**
  * Tests {@link AnnotationActual}.
  */
-@Resource(shareable=false, name="Test")
 public class AnnotationActualTest extends AbstractActualTest
 {
+	@Deprecated(since = "now", forRemoval = false)
+	private static class Annotated
+	{
+	}
+	
+	
 	@Test public void test()
 	{
-		expectThat(getClass())
-			.annotation(Resource.class)
-				.attr("name", Resource::name, "Test")
-				.attr("shareable", Resource::shareable)
+		expectThat(Annotated.class)
+			.annotation(Deprecated.class)
+				.attr("since", Deprecated::since, "now")
+				.attr("forRemoval", Deprecated::forRemoval)
 					.isA(Boolean.class)
 					.equal(Boolean.FALSE)
 					.back()
-				.not().attr("shareable", Boolean.TRUE);
+				.not().attr("forRemoval", Boolean.TRUE);
 	}
 }

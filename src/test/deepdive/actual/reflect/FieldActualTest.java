@@ -17,10 +17,8 @@ package deepdive.actual.reflect;
 
 
 import static deepdive.ExpectThat.*;
-import javax.annotation.Resource;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
-import deepdive.actual.reflect.FieldActual;
 
 
 /**
@@ -31,9 +29,9 @@ public class FieldActualTest extends AbstractActualTest
 	@Test public void test() throws Exception
 	{
 		expectThat(getClass()).fieldDeclared("field")
-			.annotation(Resource.class)
-				.attr("name", "alpha")
-				.attr("description", "d")
+			.annotation(Deprecated.class)
+				.attr("since", "1.1")
+				.attr("forRemoval", Boolean.TRUE)
 				.back()
 			.modifiers()
 				.isFinal()
@@ -49,6 +47,6 @@ public class FieldActualTest extends AbstractActualTest
 	}
 	
 	
-	@Resource(description="d", name="alpha")
+	@Deprecated(since = "1.1", forRemoval = true)
 	private final String field = "abc";
 }
