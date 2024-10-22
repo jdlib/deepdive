@@ -88,6 +88,7 @@ public class IterableActual<ELEM,T extends Iterable<ELEM>,BACK,IMPL extends Iter
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override protected Set<ELEM> actualAsSet()
 	{
 		T actual = value();
