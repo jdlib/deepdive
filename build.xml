@@ -4,6 +4,7 @@
 	<description>Ant build file for Deep Dive</description>
 	
 
+	<property file="${basedir}/build.properties"/>
 	<property name="lib"                   value="${basedir}/lib"/>
 	<property name="src"                   value="${basedir}/src"/>
 	<property name="src.main"              value="${src}/main"/>
@@ -214,7 +215,7 @@
 	</target>
 
 
-	<target name="jar" description="builds the digdeep jar file" depends="version, javadoc">
+	<target name="jar" description="builds the deepdive jar file" depends="javadoc">
 		<tstamp>
 			<format property="TODAY" pattern="yyyy-MM-dd"/>
 		</tstamp>
@@ -283,11 +284,4 @@
 		</zip>
 	</target>
 
-
-    <target name="version" description="set version property" depends="compile.main">
-		<java classpathref="path.run" classname="deepdive.impl.Version" outputproperty="version"/>
-		<echo>Version ${version}</echo>
-	</target>
-	
-	
 </project>
