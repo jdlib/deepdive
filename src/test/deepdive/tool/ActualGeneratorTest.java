@@ -37,7 +37,7 @@ public class ActualGeneratorTest extends AbstractTest
 	private void test(Class<?> pojoClass) throws Exception
 	{
 		StringWriter s = new StringWriter();
-		new ActualGenerator(pojoClass, s);
+		new ActualGenerator(pojoClass).print(s);
 		
 		expectEqual(readActualFile(pojoClass), s.toString(), pojoClass.getSimpleName());
 	}

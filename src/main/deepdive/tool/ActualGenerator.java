@@ -42,22 +42,9 @@ import deepdive.tool.ActualPrinter.Sep;
  */
 public class ActualGenerator
 {
-	public ActualGenerator(Class<?> type, OutputStream out) throws IOException
-	{
-		this(type, new OutputStreamWriter(out, StandardCharsets.UTF_8));
-	}
-	
-	
-	public ActualGenerator(Class<?> type, Writer out) throws IOException
-	{
-		this(type, new ActualPrinter(out));
-	}
-
-	
-	public ActualGenerator(Class<?> type, ActualPrinter out) throws IOException
+	public ActualGenerator(Class<?> type)
 	{
 		type_ 		= type;
-		out_  		= out;
 		simpleName_ = type.getSimpleName();
 		package_ 	= getPackage(type);
 		actualName_	= simpleName_ + "Actual";
@@ -85,7 +72,6 @@ public class ActualGenerator
 			}
 		}
 		entries_.sort(null);
-		print();
 	}
 	
 	
@@ -120,19 +106,31 @@ public class ActualGenerator
 	}
 	
 	
-	private void print() throws IOException
+	public void print(OutputStream out) throws IOException
 	{
-		out_.p("package %s;", package_).ln();
-		out_.ln(2);
+		print(new OutputStreamWriter(out, StandardCharsets.UTF_8));
+	}
+	
+	
+	public void print(Writer out) throws IOException
+	{
+		print(new ActualPrinter(out));
+	}
+
+	
+	private void print(ActualPrinter out) throws IOException
+	{
+		out.p("package %s;", package_).ln();
+		out.ln(2);
 		if (!imports_.isEmpty())
 		{
 			for (String imp : imports_)
-				out_.p("import %s;", imp).ln();
-			out_.ln(2);
+				out.p("import %s;", imp).ln();
+			out.ln(2);
 		}
 		
 		// class-decl
-		out_.p("public class ").p(actualName_).p("<");
+		out.p("public class ").p(actualName_).p("<");
 		String typeParam;
 		String implName;
 		boolean isFinalType = Modifier.isFinal(type_.getModifiers()); 
@@ -142,99 +140,99 @@ public class ActualGenerator
 		else
 		{
 			typeParam = "T";
-			out_.p(typeParam).p(" extends ").p(simpleName_).p(',');
+			out.p(typeParam).p(" extends ").p(simpleName_).p(',');
 		}
 		// <BACK>
-		out_.p("BACK");
+		out.p("BACK");
 		
 		if (isFinalType)
 			implName = actualName_ + "<BACK>";
 		else
 		{
 			implName = "IMPL";
-			out_.p(",%s extends %s<%s,BACK,%s>", implName, actualName_, typeParam, implName);
+			out.p(",%s extends %s<%s,BACK,%s>", implName, actualName_, typeParam, implName);
 		}
-		out_.p("> extends Actual<%s,BACK,%s>", typeParam, implName).ln();
-		out_.startBlock();
+		out.p("> extends Actual<%s,BACK,%s>", typeParam, implName).ln();
+		out.startBlock();
 		// ctor
-		out_.p("public %s(%s value, BACK back)", actualName_, typeParam).ln();
-		out_.startBlock();
-		out_.p("super(value, back);").ln();
-		out_.endBlock();
+		out.p("public %s(%s value, BACK back)", actualName_, typeParam).ln();
+		out.startBlock();
+		out.p("super(value, back);").ln();
+		out.endBlock();
 		for (Entry entry : entries_)
 		{
-			out_.ln(2);
-			printEntry(implName, entry);
+			out.ln(2);
+			printEntry(out, implName, entry);
 		}
-		out_.endBlock();
-		out_.flush();
+		out.endBlock();
+		out.flush();
 	}
 	
 	
-	private void printEntry(String implName, Entry entry) throws IOException
+	private void printEntry(ActualPrinter out, String implName, Entry entry) throws IOException
 	{
 		if (entry.field != null)
 		{
 			Field f = entry.field;
-			printAssertionMethod(implName, entry.name, f.getType(), f.getName(), null);
+			printAssertionMethod(out, implName, entry.name, f.getType(), f.getName(), null);
 		}
 		else
 		{
 			Method m = entry.method;
-			printAssertionMethod(implName, entry.name, m.getReturnType(), m.getName(), m.getParameters());
+			printAssertionMethod(out, implName, entry.name, m.getReturnType(), m.getName(), m.getParameters());
 		}
 	}
 	
 	
-	private void printAssertionMethod(String implName, String propName, Class<?> propType, String memberName, Parameter[] params) throws IOException
+	private void printAssertionMethod(ActualPrinter out, String implName, String propName, Class<?> propType, String memberName, Parameter[] params) throws IOException
 	{
 		boolean isBoolean = propType == Boolean.TYPE;
 		boolean isDecimal = (propType == Double.TYPE) || (propType == Float.TYPE);
 		boolean hasExpectedValue = !isBoolean;
 		boolean hasParams = (params != null) && (params.length > 0); 
 		
-		out_.p("public %s %s(", implName, propName);
+		out.p("public %s %s(", implName, propName);
 		Sep sep = new Sep(", ");
 		if (hasParams)
 		{
 			for (Parameter param : params)
-				out_.p(sep).p("%s %s", param.getType().getSimpleName(), param.getName());
+				out.p(sep).p("%s %s", param.getType().getSimpleName(), param.getName());
 		}
 		if (hasExpectedValue)
 		{
-			out_.p(sep).p(propType.getSimpleName()).p(" expected");
+			out.p(sep).p(propType.getSimpleName()).p(" expected");
 			if (isDecimal)
-				out_.p(sep).p(propType.getSimpleName()).p(" delta");
+				out.p(sep).p(propType.getSimpleName()).p(" delta");
 		}
-		out_.p(')').ln();
-		out_.startBlock();
+		out.p(')').ln();
+		out.startBlock();
 		
 		if (isBoolean)
 		{
 			if (hasParams && params.length == 1)
 			{
-				out_.p("return expectTo(").pvalue(memberName, params);
-				out_.pcontext(propName, null /*drop*/);
-				out_.p(", ").p(params[0].getName()).p(");").ln();
+				out.p("return expectTo(").pvalue(memberName, params);
+				out.pcontext(propName, null /*drop*/);
+				out.p(", ").p(params[0].getName()).p(");").ln();
 			}
 			else
 			{
-				out_.p("expectTrue(").pvalue(memberName, params);
-				out_.pcontext(propName, null /*drop*/).p(");").ln();
-				out_.p("return self();").ln();
+				out.p("expectTrue(").pvalue(memberName, params);
+				out.pcontext(propName, null /*drop*/).p(");").ln();
+				out.p("return self();").ln();
 			}
 		}
 		else
 		{
-			out_.p("expect").p(propType.isEnum() ? "Same" : "Equal").p("(expected, ").pvalue(memberName, params);
+			out.p("expect").p(propType.isEnum() ? "Same" : "Equal").p("(expected, ").pvalue(memberName, params);
 			if (isDecimal)
-				out_.p(", delta");
-			out_.pcontext(propName, params).p(");").ln();
-			out_.p("return self();").ln();
+				out.p(", delta");
+			out.pcontext(propName, params).p(");").ln();
+			out.p("return self();").ln();
 		}
 		
-		out_.endBlock();
-		out_.flush();
+		out.endBlock();
+		out.flush();
 	}
 	
 	
@@ -304,6 +302,7 @@ public class ActualGenerator
 			this.name = name;
 		}
 		
+		
 		@Override public int compareTo(Entry o)
 		{
 			return name.compareTo(o.name);
@@ -318,11 +317,7 @@ public class ActualGenerator
 	
 	private static void printHelp()
 	{
-		System.out.println("Usage: java " + ActualGenerator.class.getName() + " <options> <class-name>");
-		// System.out.println("Options:");
-		// -protected			also generate test methods for methods with package access
-		// -packageaccess		also generate test methods for methods with package access
-		// <class>
+		System.out.println("Usage: java " + ActualGenerator.class.getName() + " <class-name>");
 	}
 	
 	
@@ -334,12 +329,11 @@ public class ActualGenerator
 			return;
 		}
 		
-		new ActualGenerator(Class.forName(args[0]), System.out);
+		new ActualGenerator(Class.forName(args[0])).print(System.out);
 	}
 	
 	
 	private final Class<?> type_;
-	private final ActualPrinter out_;
 	private final String package_;
 	private final String simpleName_;
 	private final String actualName_;
