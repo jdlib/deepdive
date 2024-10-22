@@ -18,11 +18,8 @@ package deepdive.tool;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.Parameter;
-import java.nio.charset.StandardCharsets;
 
 
 class ActualPrinter implements Closeable 
@@ -32,12 +29,6 @@ class ActualPrinter implements Closeable
 		writer_ = writer;
 	}
 	
-	
-	public ActualPrinter(OutputStream out)
-	{
-		this(new OutputStreamWriter(out, StandardCharsets.UTF_8));
-	}
-
 	
 	public ActualPrinter p(String s) throws IOException
 	{
@@ -66,7 +57,6 @@ class ActualPrinter implements Closeable
 	
 	public ActualPrinter p(Sep sep) throws IOException
 	{
-		
 		if (sep.apply)
 			p(sep.text);
 		else
