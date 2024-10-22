@@ -17,6 +17,7 @@ package deepdive.actual;
 
 
 import static deepdive.ExpectThat.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import org.junit.Test;
 import deepdive.actual.lang.StringActual;
@@ -101,6 +102,13 @@ public class ActualTest extends AbstractActualTest
 			.equal("B");
 	}
 	
+	
+	@Test public void testValueCast() throws Exception
+	{
+		Serializable s = expectThat("a").valueCast(Serializable.class);
+		expectSame("a", s); 
+	}
+
 	
 	@Test public void testNarrow() throws Exception
 	{

@@ -13,42 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package deepdive.examples.chess;
+package deepdive.actual.anno;
 
 
-public class ChessMoveException extends Exception
-{
-	private static final long serialVersionUID = 1L;
+import static java.lang.annotation.ElementType.*;
 
-	
-	public ChessMoveException(String message, ChessField src, ChessField target, ChessPiece srcPiece)
-	{
-		super(message);
-		src_		= src;
-		target_ 	= target;
-		srcPiece_	= srcPiece;
-	}
-	
-	
-	public ChessField getSource()
-	{
-		return src_;
-	}
-	
-	
-	public ChessField getTarget()
-	{
-		return target_;
-	}
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
 
-	
-	public ChessPiece getSrcPiece()
-	{
-		return srcPiece_;
-	}
 
-	
-	private final ChessField src_;
-	private final ChessField target_;
-	private final ChessPiece srcPiece_;
+/**
+ * A annotation used in deepdive self tests. 
+ */
+@Target({TYPE, FIELD, METHOD})
+@Retention(RUNTIME)
+public @interface TestResource {
+    String name() default "";
+
+    
+    boolean shareable() default true;
+
+    
+    String description() default "";
 }

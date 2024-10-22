@@ -27,6 +27,9 @@ import deepdive.actual.AbstractActualTest;
  */
 public class ClassActualTest extends AbstractActualTest implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
+
 	@Test public void test() throws Exception
 	{
 		expectThat(ClassActualTest.class)

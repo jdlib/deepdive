@@ -24,23 +24,18 @@ import deepdive.actual.AbstractActualTest;
 /**
  * Tests {@link AnnotationActual}.
  */
+@TestResource(shareable=false, name="Test")
 public class AnnotationActualTest extends AbstractActualTest
 {
-	@Deprecated(since = "now", forRemoval = false)
-	private static class Annotated
-	{
-	}
-	
-	
 	@Test public void test()
 	{
-		expectThat(Annotated.class)
-			.annotation(Deprecated.class)
-				.attr("since", Deprecated::since, "now")
-				.attr("forRemoval", Deprecated::forRemoval)
+		expectThat(getClass())
+			.annotation(TestResource.class)
+				.attr("name", TestResource::name, "Test")
+				.attr("shareable", TestResource::shareable)
 					.isA(Boolean.class)
 					.equal(Boolean.FALSE)
 					.back()
-				.not().attr("forRemoval", Boolean.TRUE);
+				.not().attr("shareable", Boolean.TRUE);
 	}
 }
