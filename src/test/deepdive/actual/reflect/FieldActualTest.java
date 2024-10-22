@@ -47,6 +47,7 @@ public class FieldActualTest extends AbstractActualTest
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@Deprecated(since = "1.1", forRemoval = true)
 	private final String field = "abc";
 }
