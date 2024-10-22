@@ -212,7 +212,7 @@ public abstract class ErrorFactory
 	{
 		try
 		{
-			return type.newInstance();
+			return type.getConstructor().newInstance();
 		}
 		catch (Exception e)
 		{
