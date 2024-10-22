@@ -54,8 +54,12 @@ public class Difference
 	
 	
 	/**
-	 * Logs the difference of exected and actual object.
+	 * Logs the difference of expected and actual object.
 	 * The default implementation recognizes and logs arrays, lists, sets and maps.
+	 * Any other values are not logged.
+	 * @param log receives messages
+	 * @param expected the expected value
+	 * @param actual the actual value
 	 */
 	public void log(Log log, Object expected, Object actual)
 	{
