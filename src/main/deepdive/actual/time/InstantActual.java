@@ -91,4 +91,10 @@ public class InstantActual<BACK,IMPL extends InstantActual<BACK,IMPL>> extends T
     	expectEqual(expected, value().getNano(), "nano");
         return self();
     }
+
+
+    public IntegerActual<IMPL,?> nano()
+    {
+    	return new IntegerActual<>(value().getNano(), self()).as("nano");
+    }
 }
