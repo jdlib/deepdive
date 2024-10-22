@@ -23,7 +23,7 @@ import java.util.AbstractList;
 /**
  * GenericArrayList presents an Object or primitive array as List.  
  */
-public class GenericArrayList extends AbstractList<Object>
+class GenericArrayList extends AbstractList<Object>
 {
 	public GenericArrayList(Object array)
 	{

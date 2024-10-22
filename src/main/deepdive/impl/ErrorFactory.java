@@ -78,14 +78,13 @@ public abstract class ErrorFactory
 	}
 	
 	
-	
 	@Override public abstract String toString();
 
 
 	/**
-	 * Fallback implementation of ErrorFactory.
+	 * Default implementation of ErrorFactory.
 	 */
-	public static class Fallback extends ErrorFactory
+	public static class Default extends ErrorFactory
 	{
 		@Override public AssertionError create(String message, Throwable cause, boolean hasValues, Object expected, Object actual)
 		{
@@ -229,7 +228,7 @@ public abstract class ErrorFactory
 		{
 			f = tryCreate(ErrorFactory.JUnit4.class);
 			if (f == null)
-				f = new ErrorFactory.Fallback();
+				f = new ErrorFactory.Default();
 		}
 		current_ = f;
 	}

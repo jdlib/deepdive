@@ -53,6 +53,10 @@ public class Difference
 	}
 	
 	
+	/**
+	 * Logs the difference of exected and actual object.
+	 * The default implementation recognizes and logs arrays, lists, sets and maps.
+	 */
 	public void log(Log log, Object expected, Object actual)
 	{
 		if (Value.isArray(expected) && Value.isArray(actual))
