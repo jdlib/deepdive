@@ -148,7 +148,7 @@ public abstract class ErrorFactory
 		
 		@Override public String toString()
 		{
-			return "Junit4";
+			return "JUnit4";
 		}
 		
 		
