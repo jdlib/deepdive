@@ -30,18 +30,17 @@ import deepdive.impl.Value;
 /**
  * Contains common implementations for methods in 
  * ExpectInterface, ExpectProtected and ExpectStatic.
- * We could have moved all these methods into AssertTemplate.txt 
+ * We could have moved all these methods into ExpectTemplate.txt 
  * but this would have triplicated the code. 
  */
 class ExpectCommon 
 {
 	/**
-	 * This method is called by
-	 * ExpectStatic|Interface|Protected.assertAll() and Actual.all()
+	 * This method is called by ExpectStatic|Interface|Protected.expectAll().
 	 * @param test a consumer which receives a ExpectInterface to make its assertions
 	 * 		All failures are not thrown until the consumer call returns.
 	 * 		Important: Actual passes a Consumer which does not use the ExpectInterface, instead
-	 * 		it passes itself to the consumer it received.,
+	 * 		it passes itself to the consumer it received.
 	 * @param a base. Null if invoked by ExpectStatic, this otherwise. 
 	 */
 	static void expectAll(CheckedConsumer<ExpectInterface,?> test, ExpectBase base)

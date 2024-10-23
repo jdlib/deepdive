@@ -32,7 +32,7 @@ import deepdive.impl.Value;
  * class from ExpectProtected in order to access them.
  * The main use is Actual which provides a public fluent assertion API
  * for a domain class and internally can implement those methods using
- * the assertions inherited from ExpectProtected.
+ * the assertion methods inherited from ExpectProtected.
  */
 public class ExpectProtected extends Checkpoint
 {
