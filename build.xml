@@ -67,11 +67,11 @@
     </target>
 	
 	
-	<target name="generate" description="generates the asserting classes from AssertingTemplate.txt">
+	<target name="generate" description="generates the expect classes from ExpectTemplate.txt">
 		<loadfile property="expectTemplate" srcFile="${src.templates}/ExpectTemplate.txt" failonerror="true"/>
-		<generate-assert className="ExpectStatic" methodDecl="public static" object="null" not="Not.OFF"/>
-		<generate-assert className="ExpectProtected" methodDecl="protected" object="this" not="getNotAndClear()"/>
-		<generate-assert className="ExpectInterface" methodDecl="public default" object="this" not="getNotAndClear()"/>
+		<generate-expect className="ExpectStatic" methodDecl="public static" object="null" not="Not.OFF"/>
+		<generate-expect className="ExpectProtected" methodDecl="protected" object="this" not="getNotAndClear()"/>
+		<generate-expect className="ExpectInterface" methodDecl="public default" object="this" not="getNotAndClear()"/>
 		<generate-numberactual class="Byte" primitive="byte" cast="(byte)"/>
 		<generate-numberactual class="Double" primitive="double" deltaDecl=", double delta" delta=", delta" deltaComment="@param delta the delta"/>
 		<generate-numberactual class="Float" primitive="float" deltaDecl=", float delta" delta=", delta" deltaComment="@param delta the delta"/>
@@ -89,7 +89,7 @@
     </target>
 	
 	
-	<macrodef name="generate-assert">
+	<macrodef name="generate-expect">
 		<attribute name="className"/> 	
 		<attribute name="methodDecl"/> 	
 		<attribute name="object"/> 	
@@ -194,7 +194,10 @@
     	<mkdir dir="${build.bin.test}"/>
 		<deepdive.javac srcdir="${src.test}" destdir="${build.bin.test}" classpathref="path.test"/>
  		<copy todir="${build.bin.test}">
- 			<fileset dir="${src.test}" includes="**/*.gen"/>
+ 			<fileset dir="${src.test}">
+ 				<include name="**/*.gen"/>
+ 				<include name="**/test.zip"/>
+ 			</fileset>
  		</copy>
 	</target>
 
@@ -253,7 +256,7 @@
 	<target name="test" depends="compile">
 		<mkdir dir="${reports.xml.dir}"/>
 		
-		<junit fork="true" forkmode="once">
+		<junit fork="true" forkmode="once" haltonfailure="true" printsummary="yes">
 			<classpath refid="path.test"/>
 			<formatter type="xml" />
 			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
