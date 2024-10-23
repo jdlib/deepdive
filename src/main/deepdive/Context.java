@@ -22,15 +22,12 @@ import deepdive.impl.Value;
 
 
 /**
- * Context is a factory class for context objects
- * which can describe the context of an assertion.
- * It can be passed as context parameter,
- * e.g. in {@link ExpectStatic#expectTrue(boolean, CharSequence)}
- * or {@link Actual#as(CharSequence)}.
- * and will then be included in the error message if an assertion fails.
- * Context is derived from CharSequence and lazily constructs
- * its final String, therefore it is a little bit cheaper to
- * construct the Context object instead of the message string beforehand. 
+ * A Context is a lightweight object used to provide a description string of the context of an assertion.
+ * If the assertion fails the context string will be included in the error message.<p>
+ * DeepDive methods allow to specify the assertion context in form of a CharSequence parameter
+ * (e.g. {@link ExpectStatic#expectTrue(boolean, CharSequence)} or {@link Actual#as(CharSequence)}):<br>
+ * String constants can be passed as context parameter with no construction overhead. For other
+ * case the Context class provides factory methods to create Context objects for various sources.
  */
 public abstract class Context implements CharSequence 
 {
