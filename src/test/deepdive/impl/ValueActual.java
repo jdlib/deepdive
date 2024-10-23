@@ -22,6 +22,9 @@ import deepdive.actual.util.SetActual;
 import deepdive.function.CheckedRunnable;
 
 
+/**
+ * Used by ValueTest to test Value methods.
+ */
 public class ValueActual extends ExpectProtected
 {
 	public ValueActual equal(Object o1, Object o2, boolean expected)

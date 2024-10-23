@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 /**
- * Contains classes to issue expectation, also known as assertions.
+ * Contains classes to write basic expectations, also known as assertions.
+ * Depending on how you like to make assertion methods available in your test classes
+ * you have these possibilities:
+ * <ol>
+ * <li>(statically) import methods from {@link deepdive.ExpectStatic} into the test class
+ * <li>let the test class implement {@link deepdive.ExpectInterface}
+ * <li>derive the test class from {@link deepdive.ExpectPublic}
+ * <li>derive the test class from {@link deepdive.ExpectProtected}
+ * </ol>
  */
 package deepdive;

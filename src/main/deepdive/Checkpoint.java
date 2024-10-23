@@ -22,6 +22,9 @@ import java.util.List;
 import deepdive.impl.ExpectBase;
 
 
+/**
+ * Checkpoint is a ExpectBase which is used to postpone assertion errors when in soft mode.
+ */
 abstract class Checkpoint implements ExpectBase
 {
 	static Checkpoint findSoftCheckpoint(Object candidate)
