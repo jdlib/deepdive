@@ -31,8 +31,8 @@ import deepdive.impl.Value;
  * All assert methods are protected therefore you need to derive your test
  * class from ExpectProtected in order to access them.
  * The main use is Actual which provides a public fluent assertion API
- * for a domain class and internally can implement thoses methods using
- * the assertion methods inherited from ExpectProtected.
+ * for a domain class and internally can implement those methods using
+ * the assertions inherited from ExpectProtected.
  */
 public class ExpectProtected extends Checkpoint
 {
