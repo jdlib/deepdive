@@ -94,9 +94,9 @@ import deepdive.impl.StmtTemplate.Input;
  * To support writing Actual implementation for your own classes {@link ActualGenerator}
  * is a command-line tool to create an initial stubs of a Actual implementation for
  * a specific type.
- * @param T the type of the tested actual value
- * @param BACK the type of the owner object which constructed the Actual
- * @param IMPL the implementation class of the Actual as recursive type bound 
+ * @param <T> the type of the tested actual value
+ * @param <BACK> the type of the owner object which constructed the Actual
+ * @param <IMPL> the implementation class of the Actual as recursive type bound 
  */
 @ParametersAreNonnullByDefault
 public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProtected

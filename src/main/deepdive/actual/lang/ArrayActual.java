@@ -94,12 +94,12 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	
 	/**
 	 * Applies the function to the element at the given index and returns the result.
-	 * @throws E can be thrown by the function.
 	 * @param index the index
 	 * @param function the function
 	 * @param <E> the type of exception thrown by the function
 	 * @param <R> the function return type
 	 * @return the function result
+	 * @throws E can be thrown by the function.
 	 */
 	public <R,E extends Exception> R elem(int index, CheckedBiFunction<ELEM,IMPL,R,E> function) throws E
 	{
@@ -110,7 +110,7 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 	/**
 	 * Asserts that the array consists of the given elements in that exact order.
 	 * If you want to compare elements ignoring order and duplicates use 
-	 * {@link ContainsActual#exactly(Object...) contains().exactly()}
+	 * {@link deepdive.actual.lang.ContainerActual.ContainsActual#exactly(Object...) contains().exactly()}
 	 * @param expected the expected elements
 	 * @return this
 	 */
