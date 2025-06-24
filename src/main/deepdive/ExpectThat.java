@@ -40,15 +40,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.zip.ZipFile;
 import deepdive.actual.Actual;
-import deepdive.actual.io.*;
-import deepdive.actual.lang.*;
-import deepdive.actual.net.*;
-import deepdive.actual.nio.file.*;
-import deepdive.actual.time.*;
-import deepdive.actual.util.*;
-import deepdive.actual.util.regex.*;
-import deepdive.actual.util.stream.StreamActual;
-import deepdive.actual.util.zip.ZipFileActual;
+import deepdive.actual.java.io.FileActual;
+import deepdive.actual.java.io.InputStreamActual;
+import deepdive.actual.java.io.ReaderActual;
+import deepdive.actual.java.lang.*;
+import deepdive.actual.java.net.*;
+import deepdive.actual.java.nio.file.*;
+import deepdive.actual.java.time.*;
+import deepdive.actual.java.util.*;
+import deepdive.actual.java.util.regex.*;
+import deepdive.actual.java.util.stream.StreamActual;
+import deepdive.actual.java.util.zip.ZipFileActual;
 import deepdive.function.CheckedRunnable;
 
 

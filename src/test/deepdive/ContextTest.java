@@ -18,7 +18,7 @@ package deepdive;
 
 import static deepdive.ExpectThat.*;
 import org.junit.Test;
-import deepdive.actual.lang.StringActual;
+import deepdive.actual.java.lang.StringActual;
 
 
 public class ContextTest extends AbstractTest

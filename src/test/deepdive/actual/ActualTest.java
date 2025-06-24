@@ -20,7 +20,7 @@ import static deepdive.ExpectThat.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.junit.Test;
-import deepdive.actual.lang.StringActual;
+import deepdive.actual.java.lang.StringActual;
 
 
 /**

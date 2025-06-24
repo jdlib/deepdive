@@ -18,9 +18,9 @@ package deepdive;
 
 import org.opentest4j.AssertionFailedError;
 import org.opentest4j.ValueWrapper;
-import deepdive.actual.lang.StringActual;
-import deepdive.actual.lang.StringArrayActual;
-import deepdive.actual.lang.ThrowableActual;
+import deepdive.actual.java.lang.StringActual;
+import deepdive.actual.java.lang.StringArrayActual;
+import deepdive.actual.java.lang.ThrowableActual;
 import deepdive.function.CheckedRunnable;
 
 

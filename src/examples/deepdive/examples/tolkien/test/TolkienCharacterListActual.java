@@ -18,7 +18,7 @@ package deepdive.examples.tolkien.test;
 
 import java.util.List;
 import deepdive.Context;
-import deepdive.actual.util.ListActual;
+import deepdive.actual.java.util.ListActual;
 import deepdive.examples.tolkien.TolkienCharacter;
 
 

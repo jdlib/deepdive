@@ -120,7 +120,7 @@
 		<attribute name="deltaComment" default=""/>
 		<sequential>
 			<local name="classfile"/>
-			<property name="classfile" value="${src.main.package}/actual/lang/@{class}Actual.java"/>
+			<property name="classfile" value="${src.main.package}/actual/java/lang/@{class}Actual.java"/>
 			<local name="additional"/>
 			<loadfile property="additional" srcFile="${src.templates}/@{class}Actual.txt" failonerror="false"/>
 			<property name="additional" value=""/>
@@ -151,7 +151,7 @@
 			<local name="actualclass"/>
 			<property name="actualclass" value="@{actualprefix}ArrayActual"/>
 			<local name="classfile"/>
-			<property name="classfile" value="${src.main.package}/actual/lang/${actualclass}.java"/>
+			<property name="classfile" value="${src.main.package}/actual/java/lang/${actualclass}.java"/>
 			<echo>generating ${classfile}</echo>
 	    	<copy file="${src.templates}/PrimitiveArrayActual.txt" tofile="${classfile}" overwrite="true"/>
 	    	<replace file="${classfile}">

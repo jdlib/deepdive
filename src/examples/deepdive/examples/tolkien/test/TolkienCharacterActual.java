@@ -17,8 +17,8 @@ package deepdive.examples.tolkien.test;
 
 
 import deepdive.actual.Actual;
-import deepdive.actual.lang.IntegerActual;
-import deepdive.actual.lang.StringActual;
+import deepdive.actual.java.lang.IntegerActual;
+import deepdive.actual.java.lang.StringActual;
 import deepdive.examples.tolkien.Alignment;
 import deepdive.examples.tolkien.TolkienCharacter;
 import deepdive.examples.tolkien.Type;

@@ -16,9 +16,9 @@
 package deepdive.actual;
 
 
-import deepdive.actual.lang.ComparableActual;
-import deepdive.actual.lang.IntegerActual;
-import deepdive.actual.lang.StringActual;
+import deepdive.actual.java.lang.ComparableActual;
+import deepdive.actual.java.lang.IntegerActual;
+import deepdive.actual.java.lang.StringActual;
 
 
 /**

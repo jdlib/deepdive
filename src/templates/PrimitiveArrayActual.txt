@@ -15,7 +15,7 @@
  */
 // Generated from PrimitiveArrayActual.txt, see build.xml/target[name="generate"]. 
 // Do not modify directly.
-package deepdive.actual.lang;
+package deepdive.actual.java.lang;
 
 
 import java.util.ArrayList;

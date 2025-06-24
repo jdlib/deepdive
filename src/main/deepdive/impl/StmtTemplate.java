@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import deepdive.ExpectStatic;
 import deepdive.Failure;
-import deepdive.actual.lang.ComparableActual;
+import deepdive.actual.java.lang.ComparableActual;
 
 
 /**

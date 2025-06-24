@@ -17,8 +17,8 @@ package deepdive.impl;
 
 
 import deepdive.ExpectProtected;
-import deepdive.actual.lang.ThrowableActual;
-import deepdive.actual.util.SetActual;
+import deepdive.actual.java.lang.ThrowableActual;
+import deepdive.actual.java.util.SetActual;
 import deepdive.function.CheckedRunnable;
 
 

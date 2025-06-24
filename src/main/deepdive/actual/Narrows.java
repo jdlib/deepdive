@@ -19,21 +19,21 @@ package deepdive.actual;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import deepdive.actual.lang.ArrayActual;
-import deepdive.actual.lang.ByteArrayActual;
-import deepdive.actual.lang.CharacterActual;
-import deepdive.actual.lang.DoubleActual;
-import deepdive.actual.lang.IntArrayActual;
-import deepdive.actual.lang.IntegerActual;
-import deepdive.actual.lang.LongActual;
-import deepdive.actual.lang.LongArrayActual;
-import deepdive.actual.lang.NumberActual;
-import deepdive.actual.lang.StringActual;
-import deepdive.actual.lang.StringArrayActual;
-import deepdive.actual.util.ListActual;
-import deepdive.actual.util.MapActual;
-import deepdive.actual.util.SetActual;
-import deepdive.actual.util.StringListActual;
+import deepdive.actual.java.lang.ArrayActual;
+import deepdive.actual.java.lang.ByteArrayActual;
+import deepdive.actual.java.lang.CharacterActual;
+import deepdive.actual.java.lang.DoubleActual;
+import deepdive.actual.java.lang.IntArrayActual;
+import deepdive.actual.java.lang.IntegerActual;
+import deepdive.actual.java.lang.LongActual;
+import deepdive.actual.java.lang.LongArrayActual;
+import deepdive.actual.java.lang.NumberActual;
+import deepdive.actual.java.lang.StringActual;
+import deepdive.actual.java.lang.StringArrayActual;
+import deepdive.actual.java.util.ListActual;
+import deepdive.actual.java.util.MapActual;
+import deepdive.actual.java.util.SetActual;
+import deepdive.actual.java.util.StringListActual;
 
 
 /**
