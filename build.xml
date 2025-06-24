@@ -180,7 +180,7 @@
 	<!-- depends="generate" -->
  	<target name="compile.main" description="compiles src/main" >
     	<mkdir dir="${build.bin.main}"/>
-		<deepdive.javac srcdir="${src.main}" destdir="${build.bin.main}" classpathref="path.main"/>
+		<deepdive.javac srcdir="${src.main}" destdir="${build.bin.main}" classpathref="path.main" source="11" target="11"/>
 	</target>
 
 		
