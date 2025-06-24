@@ -7,10 +7,11 @@
 	<property file="${basedir}/build.properties"/>
 	<property name="lib"                   value="${basedir}/lib"/>
 	<property name="src"                   value="${basedir}/src"/>
-	<property name="src.main"              value="${src}/main/java"/>
-	<property name="src.main.package"      value="${src.main}/deepdive"/>
+	<property name="src.main.java"         value="${src}/main/java"/>
+	<property name="src.main.java.package" value="${src.main.java}/deepdive"/>
 	<property name="src.templates"         value="${src}/templates"/>
-	<property name="src.test"              value="${src}/test/java"/>
+	<property name="src.test.java"         value="${src}/test/java"/>
+	<property name="src.test.resources"    value="${src}/test/resources"/>
 	<property name="build"                 value="${basedir}/tmp"/>
 	<property name="build.bin"             value="${build}/bin"/>
 	<property name="build.bin.main"        value="${build.bin}/main"/>
@@ -87,7 +88,7 @@
 		<attribute name="not"/> 	
 		<sequential>
 			<local name="classfile"/>
-			<property name="classfile" value="${src.main.package}/@{className}.java"/>
+			<property name="classfile" value="${src.main.java.package}/@{className}.java"/>
 			<echo>generating ${classfile}</echo>
 	    	<copy file="${src.templates}/@{className}.txt" tofile="${classfile}" overwrite="true"/>
 	    	<replace file="${classfile}">
@@ -111,7 +112,7 @@
 		<attribute name="deltaComment" default=""/>
 		<sequential>
 			<local name="classfile"/>
-			<property name="classfile" value="${src.main.package}/actual/java/lang/@{class}Actual.java"/>
+			<property name="classfile" value="${src.main.java.package}/actual/java/lang/@{class}Actual.java"/>
 			<local name="additional"/>
 			<loadfile property="additional" srcFile="${src.templates}/@{class}Actual.txt" failonerror="false"/>
 			<property name="additional" value=""/>
@@ -142,7 +143,7 @@
 			<local name="actualclass"/>
 			<property name="actualclass" value="@{actualprefix}ArrayActual"/>
 			<local name="classfile"/>
-			<property name="classfile" value="${src.main.package}/actual/java/lang/${actualclass}.java"/>
+			<property name="classfile" value="${src.main.java.package}/actual/java/lang/${actualclass}.java"/>
 			<echo>generating ${classfile}</echo>
 	    	<copy file="${src.templates}/PrimitiveArrayActual.txt" tofile="${classfile}" overwrite="true"/>
 	    	<replace file="${classfile}">
@@ -171,18 +172,15 @@
 	<!-- depends="generate" -->
  	<target name="compile.main" description="compiles src/main" >
     	<mkdir dir="${build.bin.main}"/>
-		<deepdive.javac srcdir="${src.main}" destdir="${build.bin.main}" classpathref="path.main" source="11" target="11"/>
+		<deepdive.javac srcdir="${src.main.java}" destdir="${build.bin.main}" classpathref="path.main" source="11" target="11"/>
 	</target>
 
 		
  	<target name="compile.test" description="compiles src/test" depends="compile.main">
     	<mkdir dir="${build.bin.test}"/>
-		<deepdive.javac srcdir="${src.test}" destdir="${build.bin.test}" classpathref="path.test"/>
- 		<copy todir="${build.bin.test}">
- 			<fileset dir="${src.test}">
- 				<include name="**/*.gen"/>
- 				<include name="**/test.zip"/>
- 			</fileset>
+		<deepdive.javac srcdir="${src.test.java}" destdir="${build.bin.test}" classpathref="path.test"/>
+ 		<copy todir="${build.bin.test}" >
+ 			<fileset dir="${src.test.resources}"/>
  		</copy>
 	</target>
 
@@ -196,7 +194,7 @@
 	    	doctitle="DeepDive Javadoc" 
 	    	packagenames="deepdive.*" 
 	    	source="11" 
-	    	sourcepath="${src.main}"
+	    	sourcepath="${src.main.java}"
 	    	splitindex="true" 
 	    	use="true"/>
 	</target>
@@ -217,7 +215,7 @@
 			</manifest>
 		</jar>
 		<jar destfile="${build}/deepdive-${version}-sources.jar">
-			<fileset dir="${src.main}"/>
+			<fileset dir="${src.main.java}"/>
 			<manifest>
 				<attribute name="Created-At" value="${TODAY}"/>	
 				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
@@ -245,7 +243,7 @@
 			<formatter type="xml" />
 			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
 			<batchtest todir="${reports.xml.dir}" unless="testcase">
-				<fileset dir="${src.test}">
+				<fileset dir="${src.test.java}">
 					<include name="**/*Test.java" />
 				</fileset>
 			</batchtest>
