@@ -9,14 +9,12 @@
 	<property name="src"                   value="${basedir}/src"/>
 	<property name="src.main"              value="${src}/main/java"/>
 	<property name="src.main.package"      value="${src.main}/deepdive"/>
-	<property name="src.examples"          value="${src}/examples/java"/>
 	<property name="src.templates"         value="${src}/templates"/>
 	<property name="src.test"              value="${src}/test/java"/>
 	<property name="build"                 value="${basedir}/tmp"/>
 	<property name="build.bin"             value="${build}/bin"/>
 	<property name="build.bin.main"        value="${build.bin}/main"/>
 	<property name="build.bin.test"        value="${build.bin}/test"/>
-	<property name="build.bin.examples"    value="${build.bin}/examples"/>
 	<property name="build.javadoc"         value="${build}/javadoc"/>
 	<property name="reports.dir"           value="${build}/reports"/>
 	<property name="reports.xml.dir"       value="${reports.dir}/junit-xml"/>
@@ -39,14 +37,8 @@
 	</path>
 	
 	
-	<path id="path.examples">
-		<path refid="path.run"/>
-		<pathelement location="${build.bin.examples}"/>
-	</path>
-
-	
 	<path id="path.test">
-		<path refid="path.examples"/>
+		<path refid="path.run"/>
 		<pathelement location="${build.bin.test}"/>
 		<fileset dir="${lib}">
 			<include name="*.jar" />
@@ -167,7 +159,7 @@
 
 	
 	<target name="compile" description="compiles all java classes" 
- 		depends="compile.main, compile.test, compile.examples">
+ 		depends="compile.main, compile.test">
 	</target>
 	
 	
@@ -180,12 +172,6 @@
  	<target name="compile.main" description="compiles src/main" >
     	<mkdir dir="${build.bin.main}"/>
 		<deepdive.javac srcdir="${src.main}" destdir="${build.bin.main}" classpathref="path.main" source="11" target="11"/>
-	</target>
-
-		
- 	<target name="compile.examples" description="compiles src/examples" depends="compile.main">
-    	<mkdir dir="${build.bin.examples}"/>
-		<deepdive.javac srcdir="${src.examples}" destdir="${build.bin.examples}" classpathref="path.test"/>
 	</target>
 
 		
@@ -261,9 +247,6 @@
 			<batchtest todir="${reports.xml.dir}" unless="testcase">
 				<fileset dir="${src.test}">
 					<include name="**/*Test.java" />
-				</fileset>
-				<fileset dir="${src.examples}">
-					<include name="**/*Test*.java" />
 				</fileset>
 			</batchtest>
 		</junit>
