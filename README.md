@@ -43,7 +43,7 @@ Deep Dive can be used under the terms of the Gnu Public License v3 or
 the Apache 2.0 license, see [License.md](License.md) for details.
 
 ## Dependencies
-Deep Dive requires Java 8+ and has no external dependencies.
+Deep Dive requires Java 11+ and has no external dependencies.
 It works great with test engines like [JUnit](https://junit.org/junit5/) or [TestNG](https://testng.org/doc/), 
 just transition over from JUnit or TestNG assertions to the ones offered by Deep Dive.  
 
