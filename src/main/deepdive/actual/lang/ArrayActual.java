@@ -136,7 +136,10 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 
 	
 	/**
-	 * {@inheritDoc}
+	 * Asserts that the index of the given element within the array equals the expected value. 
+	 * @param elem an element
+	 * @param expected the expected index value
+	 * @return this
 	 */
 	public IMPL indexOf(ELEM elem, int expected)
 	{
@@ -147,7 +150,9 @@ public class ArrayActual<ELEM,BACK,IMPL extends ArrayActual<ELEM,BACK,IMPL>>
 
 	
 	/**
-	 * {@inheritDoc}
+	 * Asserts that the given index is valid index into the array.
+	 * @param index an index
+	 * @return this
 	 */
 	public IMPL indexValid(int index)
 	{

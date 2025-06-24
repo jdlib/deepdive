@@ -118,7 +118,10 @@ public class ListActual<ELEM,T extends List<ELEM>,BACK,IMPL extends ListActual<E
 
 	
 	/**
-	 * {@inheritDoc}
+	 * Asserts that the index of the given element within the list equals the expected value. 
+	 * @param elem an element
+	 * @param expected the expected index value
+	 * @return this
 	 */
 	public IMPL indexOf(ELEM elem, int expected)
 	{
