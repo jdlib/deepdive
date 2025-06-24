@@ -210,8 +210,7 @@
 	    	destdir="${build.javadoc}" 
 	    	doctitle="DeepDive Javadoc" 
 	    	packagenames="deepdive.*" 
-	    	source="1.8" 
-	    	stylesheetfile="${src}/res/stylesheet.css"
+	    	source="11" 
 	    	sourcepath="${src.main}"
 	    	splitindex="true" 
 	    	use="true"/>
