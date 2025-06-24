@@ -1,11 +1,11 @@
-# Deep Dive Assertions
+# DeepDive Assertions
 
-Deep Dive is an assertion library for Java.
+DeepDive is an assertion library for Java.
 It offers a fluent API which allows you to *dive deep*, 
 i.e. going back and forth between different assertion objects.
 
 ## TL;DR
-Tests written with Deep Dive look like this:
+Tests written with DeepDive look like this:
 
 ```java		
 import java.io.File;
@@ -39,21 +39,21 @@ expectThat(dir)                    // starting with a deepdive.actual.io.FileAct
 ```
 		
 ## License
-Deep Dive can be used under the terms of the Gnu Public License v3 or 
+DeepDive can be used under the terms of the Gnu Public License v3 or 
 the Apache 2.0 license, see [License.md](License.md) for details.
 
 ## Dependencies
-Deep Dive requires Java 11+ and has no external dependencies.
+DeepDive requires Java 11+ and has no external dependencies.
 It works great with test engines like [JUnit](https://junit.org/junit5/) or [TestNG](https://testng.org/doc/), 
-just transition over from JUnit or TestNG assertions to the ones offered by Deep Dive.  
+just transition over from JUnit or TestNG assertions to the ones offered by DeepDive.  
 
 ## How to use
-Download the [latest release](https://github.com/jdlib/deepdive/releases/latest) and include the Deep Dive 
-jar into your classpath. The [user guide](UserGuide.md) explains the details on how to use Deep Dive.
+Download the [latest release](https://github.com/jdlib/deepdive/releases/latest) and include the DeepDive 
+jar into your classpath. The [user guide](UserGuide.md) explains the details on how to use DeepDive.
 
 ## Why to use
 Like other Java assertions libraries (e.g. [FEST Assert](https://github.com/alexruiz/fest-assert-2.x), 
-[AssertJ](https://assertj.github.io/doc/) and [Google Truth](https://truth.dev)) Deep Dive 
+[AssertJ](https://assertj.github.io/doc/) and [Google Truth](https://truth.dev)) DeepDive 
 provides a fluent API to state assertions.
 But it goes beyond those libraries 
 - by allowing to *dive deep*, i.e. going back and forth between different assertion objects, 
@@ -63,7 +63,7 @@ But it goes beyond those libraries
 For further details please dive into [Motivation.md](Motivation.md).  
  
 ## Limitations
-Deep Dive makes heavy use of type parameters and recursive type bounds.
+DeepDive makes heavy use of type parameters and recursive type bounds.
 The Eclipse Compiler for Java (ECJ) used by Eclipse IDE seems to be 
 [challenged](https://bugs.eclipse.org/bugs/show_bug.cgi?id=574309) by this.
 Therefore you may experience compile errors when diving *too deep* into assertion objects.

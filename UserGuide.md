@@ -1,6 +1,6 @@
-# Deep Dive User Guide
+# DeepDive User Guide
 
-This user guide describes the fluent API of Deep Dive, it's basic assert methods,
+This user guide describes the fluent API of DeepDive, it's basic assert methods,
 fine points about error messages and AssertionErrors and how to create own
 assertion objects.
 
@@ -17,12 +17,12 @@ A unit test computes values and asserts that these actual values meet the expect
 else the test fails (usually by throwing `AssertionErrors`).
 
 `org.junit.Assert` and `òrg.testng.Assert` offer a basic set of static assert methods to test expectations, 
-e.g. to test if an actual value equals the expected value. Deep Dive offers an [own version of basic assert methods](#basic-assertions) 
+e.g. to test if an actual value equals the expected value. DeepDive offers an [own version of basic assert methods](#basic-assertions) 
 to replace JUnit or TestNG assertions.
 
 A fluent assertion API goes beyond static assert methods: Given an actual computed value
 such an API provides a type specific assertion object which allows you to test properties of the actual value.
-Deep Dive offers a [fluent assertion API](#fluent-api) like AssertJ or Google Truth but additionally allows you to
+DeepDive offers a [fluent assertion API](#fluent-api) like AssertJ or Google Truth but additionally allows you to
 dive deep, i.e. going back and forth between different assertion objects. This results in a small library and API
 while at the same time allows to express a lot of assertions.
 
@@ -90,7 +90,7 @@ expectThat("abc")
 
 #### Soft Assertions
 Usually if an assertion method fails it will throw an `AssertionError` therefore immediately terminate the test method.
-Deep Dive allows you to bundle assertion calls and run them all even if some assertions fail.
+DeepDive allows you to bundle assertion calls and run them all even if some assertions fail.
 At the end eventually an `AssertionError` containing information about all failed assertions is thrown.  
 
 ```java
@@ -112,13 +112,13 @@ String actual = ...
 assertEquals("abc", actual); // throws an AssertionError if actual does not equal "abc"
 ```
     
-If you test expectations using the Deep Dive fluent API based on `Actual` classes you don't need any basic assertion methods.
+If you test expectations using the DeepDive fluent API based on `Actual` classes you don't need any basic assertion methods.
 But still basic assertions are usefull from time to time - and the `Actual` classes itself implement their assertions using 
 basic assertion methods.
    
-Deep Dive provides a basic assertions API similar to JUnit and TestNG which comes in three flavors with respect how to 
+DeepDive provides a basic assertions API similar to JUnit and TestNG which comes in three flavors with respect how to 
 include it in your code. To differentiate from JUnit and TestNG and to make
-transition to Deep Dive easier it uses `expect` instead of `assert` as prefix for the assertion methods:
+transition to DeepDive easier it uses `expect` instead of `assert` as prefix for the assertion methods:
 
 #### ExpectStatic
 Use `deepdive.ExpectStatic` as a replacement for the static methods defined in `org.junit.Assert` or `org.testng.Assert`:
@@ -178,7 +178,7 @@ Here is the challenge: Suppose an assertion of a unit test fails - can you find 
 and the failure stacktrace? Or do you need to debug the test to diagnose the error?
 
 Informative error messages are key to good unit tests, last but not least for their psychological impact: Does
-the test code (judged by its failure messages) feel obscure or clear to you? Therefore Deep Dive error messages 
+the test code (judged by its failure messages) feel obscure or clear to you? Therefore DeepDive error messages 
 try to bring as much usefull information as possible into error messages.
 
 #### It adopts the style of Google Truth error messages:
@@ -194,7 +194,7 @@ If arrays, sets, lists or maps are tested on equality to an expected value, the 
 Diving deep into `Actual` objects will provide the full context of the starting actual value down to the failing detail assertion.
 
 #### Specify context in basic assertions
-Many basic assertion methods in Deep Dive have an overloaded form with an additional `context` parameter (in JUnit it is called `message`)
+Many basic assertion methods in DeepDive have an overloaded form with an additional `context` parameter (in JUnit it is called `message`)
 which is included in the error message when the assertion fails.
 The type of that context parameter is `CharSequence`. Of course you can pass a `String` object but additionally
 any CharSequence will do. To avoid heavy construction of error contexts which are not used if the assertion succeeds
@@ -211,7 +211,7 @@ expectEqual("a", s[2], Context.indexed(2));
   
 ## AssertionErrors
   
-Deep Dive recognizes if [opentest4j](https://github.com/ota4j-team/opentest4j) (also part of JUnit5) or [JUnit](https://junit.org/junit5/) 
+DeepDive recognizes if [opentest4j](https://github.com/ota4j-team/opentest4j) (also part of JUnit5) or [JUnit](https://junit.org/junit5/) 
 are in the classpath and if so uses their `AssertionError` implementations since they are recognized and supported by IDEs (e.g. 
 used by Eclipse to show the *CompareActualWithExpected* dialog):   
 * `org.opentest4j.AssertionFailedError` for assertion failures
@@ -223,7 +223,7 @@ If you want to use other `AssertionErrors` you can implement and set an own `dee
 		
 		
 ## Own Actual implementations
-Deep Dive provides `Actual` implementations for core JDK classes, but you might want to develop
+DeepDive provides `Actual` implementations for core JDK classes, but you might want to develop
 `Actual` implementations for classes in your code base, especially for classes with a lot
 of test cases: In this case it really pays off to base tests on `Actuals` since you get 
 clean, readable test code.

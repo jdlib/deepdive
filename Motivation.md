@@ -1,6 +1,6 @@
 # Motivation
 
-This article describes why you want to use a fluent assertion API in general and Deep Dive in particular. 
+This article describes why you want to use a fluent assertion API in general and DeepDive in particular. 
 
 ## Assertions in JUnit and TestNG
 
@@ -44,7 +44,7 @@ writing unit tests since code completion of IDEs makes it a breeze to type.
 And the resulting code is dense, clean and easy to read, therefore improves maintainability
 of the test code.    
 
-## What Deep Dive brings to the party
+## What DeepDive brings to the party
 
 #### 1. Basic Assertions 
 Like `org.junit.Assert` or `org.testng.Assert` it provides a [basic set of assertion methods](UserGuide.md#user-content-basic).
@@ -54,7 +54,7 @@ Like AssertJ it provides a [fluent assertion API](UserGuide.md#user-content-flue
 extended to any class under test.
 
 #### 3. Allows deep dives into assertion objects
-Deep Dive additionally allows you to go back and forth between different assertion objects,
+DeepDive additionally allows you to go back and forth between different assertion objects,
 resulting in a smaller API and at the same time greatly increase expressivness:
 
 ```java
@@ -81,13 +81,13 @@ expectThat(s)         // returns a deepdive.actual.lang.StringActual
 > to test String lengths: The consequence is that the API of the assert class for Strings gets crowded, duplicates
 > functionality of the assert class for Integers without covering all possible assertions on the string length.
 > 
-> Deep Dive's `StringActual` defines `length(int)` for a simple equality assertion and `length()` (returning a `IntegerActual`) for
+> DeepDive's `StringActual` defines `length(int)` for a simple equality assertion and `length()` (returning a `IntegerActual`) for
 > complex assertion on the String length.
 >
 > The result: A trimmed down API which has greater assertion power than AssertJ.
 
 #### 4. Not-Mode: Negate any assertion
-Every Deep Dive assertion can be turned into its negated form by a preceding call to `not()` therefore doubling available 
+Every DeepDive assertion can be turned into its negated form by a preceding call to `not()` therefore doubling available 
 assertions without bloating the API:
     
 ```java
@@ -104,7 +104,7 @@ expectThat(s)  // returns deepdive.actual.lang.StringActual
 > - and another one for the negated form: `StringAssert.doesNotStartWith(CharSequence)`  
 
 #### 5. Coverage of JDK core classes 
-Deep Dive offers Actual implementations for JDK core classes which can be used out of the box. 
+DeepDive offers Actual implementations for JDK core classes which can be used out of the box. 
 
 #### 6. Generate Actual implementations for your domain classes
-Deep Dive makes it easy to [create](UserGuide.md#own-actual-implementations) Actual implementations for your own domain classes. 
+DeepDive makes it easy to [create](UserGuide.md#own-actual-implementations) Actual implementations for your own domain classes. 

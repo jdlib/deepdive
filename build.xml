@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="deepdive" basedir="." default="help">
 
-	<description>Ant build file for Deep Dive</description>
+	<description>Ant build file for DeepDive</description>
 	
 
 	<property file="${basedir}/build.properties"/>
