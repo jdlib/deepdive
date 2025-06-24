@@ -7,12 +7,11 @@
 	<property file="${basedir}/build.properties"/>
 	<property name="lib"                   value="${basedir}/lib"/>
 	<property name="src"                   value="${basedir}/src"/>
-	<property name="src.main"              value="${src}/main"/>
+	<property name="src.main"              value="${src}/main/java"/>
 	<property name="src.main.package"      value="${src.main}/deepdive"/>
-	<property name="src.examples"          value="${src}/examples"/>
+	<property name="src.examples"          value="${src}/examples/java"/>
 	<property name="src.templates"         value="${src}/templates"/>
-	<property name="src.test"              value="${src}/test"/>
-	<property name="src.test"              value="${src}/test"/>
+	<property name="src.test"              value="${src}/test/java"/>
 	<property name="build"                 value="${basedir}/tmp"/>
 	<property name="build.bin"             value="${build}/bin"/>
 	<property name="build.bin.main"        value="${build.bin}/main"/>
