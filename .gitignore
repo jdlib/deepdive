@@ -1,4 +1,8 @@
-/bin/
-/.settings/
-/todo.txt
-/tmp/
+.settings/
+.vscode/
+bin/
+tmp/
+target/
+.project
+.classpath
+todo.txt
