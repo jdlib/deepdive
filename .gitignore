@@ -3,6 +3,7 @@
 bin/
 tmp/
 target/
-.project
 .classpath
+.project
+mvn.bat
 todo.txt
