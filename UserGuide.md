@@ -1,4 +1,4 @@
-# DeepDive User Guide
+To create an own# DeepDive User Guide
 
 This user guide describes the fluent API of DeepDive, it's basic assert methods,
 fine points about error messages and AssertionErrors and how to create own
@@ -13,10 +13,15 @@ assertion objects.
 
 ## Introduction
 
-A unit test computes values and asserts that these actual values meet the expectations,
-else the test fails (usually by throwing `AssertionErrors`).
+A unit test computes a value and asserts that the actual vaTo create an ownlues meets the expectation,
+else the test fails, usually by throwing an `AssertionError`.
 
-`org.junit.Assert` and `òrg.testng.Assert` offer a basic set of static assert methods to test expectations, 
+Test frameworks usually offer support to express assertions:
+- `org.junit.Assert` (JUnit 4), 
+- `org.junit.jupiter.api.Assertions` (JUnit 5),
+- `org.testng.Assert` (TestNG) 
+
+all offer a basic set of static assert methods to test expectations on actual values, 
 e.g. to test if an actual value equals the expected value. DeepDive offers an [own version of basic assert methods](#basic-assertions) 
 to replace JUnit or TestNG assertions.
 
@@ -34,7 +39,7 @@ As starting point import the `expectThat` methods from `deepdive.ExpectThat`
 ```java
 import static deepdive.ExpectThat.*;
 ```
-Now given actual values
+Now given actual values computed by the test:
 
 ```java
 String s = ...
@@ -52,14 +57,14 @@ expectThat(map)
     .size(4);
 ```
 
-These two calls of `expectThat` return a `deepdive.actual.lang.StringActual` and a `deepdive.actual.util.MapActual`
+These two calls of `expectThat` return a `deepdive.actual.java.lang.StringActual` and a `deepdive.actual.java.util.MapActual`
 object which provide type specific assertion methods. Both are derived from `deepdive.actual.Actual`. 
 But given the factory methods in `ExpectThat` you will rarely need to create an `Actual` object by yourself.
 
 
 #### Diving Deep    
  
-Besides methods to test expectations `Actual` classes may provide additional methods which return
+Besides methods to test expectations on a value, `Actual` classes may provide additional methods which return
 other `Actual` objects. This allows you to dive deep into subproperties of the starting actual value. We 
 recommend to use indentation to clarify when switching of `Actual` objects takes place:
 
@@ -89,13 +94,13 @@ expectThat("abc")
 ```
 
 #### Soft Assertions
-Usually if an assertion method fails it will throw an `AssertionError` therefore immediately terminate the test method.
+If an assertion method fails it will by default throw an `AssertionError` which immediately terminates the test method.
 DeepDive allows you to bundle assertion calls and run them all even if some assertions fail.
 At the end eventually an `AssertionError` containing information about all failed assertions is thrown.  
 
 ```java
 String s = ... 
-expectThat(s)                   // returns a deepdive.actual.lang.StringActual
+expectThat(s)                   // returns a deepdive.actual.java.lang.StringActual
     .all(actual -> actual       // actual is the StringActual passed to the lambda
         .startsWith("A")        // may fail but will not throw an error
         .length().greater(5))   // will be executed even if the previous assertion startsWith("A") fails
@@ -103,13 +108,13 @@ expectThat(s)                   // returns a deepdive.actual.lang.StringActual
 ```
 
 ## Basic Assertions
-`org.junit.Assert` or `org.testng.Assert` provide a basic set of static assert methods to test expectations:
+`org.junit.Assert`, `org.junit.jupiter.api.Assertions` and `org.testng.Assert` provide a basic set of static assert methods to test expectations:
 
 ```java		
 import static org.junit.Assert.assertEquals;
     
 String actual = ...
-assertEquals("abc", actual); // throws an AssertionError if actual does not equal "abc"
+assertEquals("abc", actual); // throws an AssertionError if actual does not equal the expected value "abc"
 ```
     
 If you test expectations using the DeepDive fluent API based on `Actual` classes you don't need any basic assertion methods.
@@ -131,7 +136,7 @@ expectEqual("abc", actual);
 ```
 
 #### ExpectInterface
-Implement `deepdive.ExpectInterface` to inherit basic assertion methods (e.g. in a test base class).
+Implement `deepdive.ExpectInterface` to inherit basic assertion methods (e.g. in a Test base class).
 This is convenient if you don't want to write the import statement for `ExpectStatic` in each class
 which uses basic assertions:
 
@@ -143,7 +148,8 @@ public abstract class TestBase implements ExpectInterface {
 }
 
 public class CalculatorTest extends TestBase {
-    @Test public void test() {
+    @Test 
+    public void test() {
         String actual = ...
         expectEqual("abc", actual); // inherited from ExpectInterface
     }
@@ -161,7 +167,6 @@ import deepdive.ExpectProtected;
 
 public class Actual<T,BACK,IMPL> extends ExpectProtected {
     ...
-     
     /** Asserts that the actual value is equal to the expected value.*/
     public IMPL equal(Object expected)
     {
@@ -171,23 +176,24 @@ public class Actual<T,BACK,IMPL> extends ExpectProtected {
 }
 ```
 
-<a name="msg"></a>
+
 ## Error messages
 
-Here is the challenge: Suppose an assertion of a unit test fails - can you find and fix the error using only the error message
+Suppose an assertion of a unit test fails - can you find and fix the error using only the error message
 and the failure stacktrace? Or do you need to debug the test to diagnose the error?
 
 Informative error messages are key to good unit tests, last but not least for their psychological impact: Does
 the test code (judged by its failure messages) feel obscure or clear to you? Therefore DeepDive error messages 
 try to bring as much usefull information as possible into error messages.
 
-#### It adopts the style of Google Truth error messages:
+#### Informative formatting
+Following the example of Google Truth error messages:
 - messages can span multiple lines
 - values are reported as `<title>: <value>`
 - subsequent value lines are nicely aligned.
 
 #### Details why an equality assertion fails are included:
-If arrays, sets, lists or maps are tested on equality to an expected value, the difference between actual
+If arrays, sets, lists or maps are tested if they equal an expected value, the difference between actual
   and expected value is described in great detail.
 
 #### Rich context when diving deep:
@@ -217,9 +223,10 @@ used by Eclipse to show the *CompareActualWithExpected* dialog):
 * `org.opentest4j.AssertionFailedError` for assertion failures
 * `org.opentest4j.MultipleFailuresError` for multiple assertion failures in soft mode
 * `org.junit.ComparisonFailure` if `org.opentest4j.AssertionFailedError` is not available
-* else `java.lang.AssertionError`.
-   
-If you want to use other `AssertionErrors` you can implement and set an own `deepdive.impl.ErrorFactory` to achieve that. 
+
+Else DeepDive will just throw an `java.lang.AssertionError`.
+
+If you want to use other `Error` classes you can implement and set an own `deepdive.impl.ErrorFactory` to achieve that. 
 		
 		
 ## Own Actual implementations
@@ -228,7 +235,7 @@ DeepDive provides `Actual` implementations for core JDK classes, but you might w
 of test cases: In this case it really pays off to base tests on `Actuals` since you get 
 clean, readable test code.
 
-To create an own `Actual` implementation for an own class you can use `deepdive.tool.ActualGenerator` as a starting point. Just 
+To create an `Actual` implementation for an own class you can use `deepdive.tool.ActualGenerator` as a starting point. Just 
 - include your own code and the deepdive jar into the classpath,
 - call `ActualGenerator`, 
 - pass as argument the fully qualified name of your class,
@@ -250,7 +257,7 @@ The `Actual` base class has three type parameters:
 
 #### Examples of derived Actual implementations:
 
-`public class NumberActual<T extends Number,BACK,IMPL extends NumberActual<T,BACK,IMPL>>   extends Actual<T,BACK,IMPL>`
+`public class NumberActual<T extends Number,BACK,IMPL extends NumberActual<T,BACK,IMPL>> extends Actual<T,BACK,IMPL>`
 - we restrict `T` to be a `Number`
 - we restrict `IMPL` to extend `NumberActual<T,BACK,IMPL>`
 
@@ -260,7 +267,7 @@ The `Actual` base class has three type parameters:
 
 `public class ListActual<ELEM,T extends List<ELEM>,BACK,IMPL extends ListActual<ELEM,T,BACK,IMPL>> extends CollectionActual<ELEM,T,BACK,IMPL>`
 - `ListActual` tests `java.util.List` objects. 
-- we add an additional type parameter `ELEM` for the type of the list elements
+- we add an additional type parameter `ELEM` for the type of the List elements
 - somebody might be interested in testing Lists of a certain class therefore we declare `T` to extends `List<ELEM>`
 - we allow for derived implementations of `ListActual` and therefore declare a `IMPL` type parameter.
 
@@ -268,6 +275,6 @@ The `Actual` base class has three type parameters:
 - an extremely reduced example for an `Actual` implementation:
 - we don't have to deal with derived values of class `ShoppingCart`, so there is no type parameter `T`
 - we don't have to deal with derived implementations from `ShoppingCartActual`, so there is no type parameter `IMPL`
-- (we might even drop type parameter `BACK` if `ShoppingCartActual` is never constructed with a `BACK` object, and use `Void` as parent parameter type). 
+- (we might even drop type parameter `BACK` if `ShoppingCartActual` is never constructed with a `BACK` object, and uses `Void` as parent parameter type). 
 	
 
