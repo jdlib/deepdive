@@ -10,6 +10,7 @@ assertion objects.
 - [Error messages](#error-messages)
 - [AssertionErrors](#assertionerrors)
 - [Own Actual implementations](#own-actual-implementations)
+- [Examples](#examples)
 
 ## Introduction
 
@@ -252,7 +253,7 @@ The `Actual` base class has three type parameters:
 | Type Param | Description |
 | :--------- | :---------- |
 | `<T>`      | the type of the tested actual value |
-| `<BACK>`   | the type of the owner object which constructed the Actual |
+| `<BACK>`   | the type of the owner object which constructed the Actual, usually `Void` for `Actual` roots |
 | `<IMPL>`   | the implementation class of the Actual as recursive type bound |
 
 #### Examples of derived Actual implementations:
@@ -278,3 +279,20 @@ The `Actual` base class has three type parameters:
 - (we might even drop type parameter `BACK` if `ShoppingCartActual` is never constructed with a `BACK` object, and uses `Void` as parent parameter type). 
 	
 
+## Examples
+
+The [test directory](https://github.com/jdlib/deepdive/tree/master/src/test/java/deepdive/examples) contains two examples to showcase DeepDive usage:
+
+## Example 1: Chess
+
+The [chess package](https://github.com/jdlib/deepdive/tree/master/src/test/java/deepdive/examples/chess) contains classes which model Chess entities.
+The subpackages `test1`, `test2`, `test3` demonstrate three different test strategies:
+
+- `test1` only uses static assertion methods provided by `deepdive.ExpectStatic`. 
+- `test2` improves on `test1` by introducing helper assertion methods which make it easier to read than `test1`.
+- `test3` uses `Actual` implementations for some chess classes and provides an easy to read test using the fluent assertions.
+
+## Example 2: Tolkien
+
+The [tolkien package](https://github.com/jdlib/deepdive/tree/master/src/test/java/deepdive/examples/tolkien) 
+introduces some domain classes and deepdive tests in the `test` subpackage.
