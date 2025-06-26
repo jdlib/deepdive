@@ -28,7 +28,6 @@ public class URLActualTest
 {
 	@Test public void test() throws Exception
 	{
-		@SuppressWarnings("deprecation")
 		URL url = new URL("http://example.org:8001/some/path?q1=hello&q2=world&q3#frag");
 		expectThat(url)
 			.protocol("http")
@@ -44,5 +43,4 @@ public class URLActualTest
 				.back()
 			.ref("frag");
 	}
-
 }
