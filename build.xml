@@ -1,61 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="deepdive" basedir="." default="help">
 
-	<description>Ant build file for DeepDive</description>
+	<description>Ant build file to generate DeepDive sources</description>
 	
 
 	<property file="${basedir}/build.properties"/>
-	<property name="lib"                   value="${basedir}/lib"/>
-	<property name="src"                   value="${basedir}/src"/>
-	<property name="src.main.java"         value="${src}/main/java"/>
-	<property name="src.main.java.package" value="${src.main.java}/deepdive"/>
-	<property name="src.templates"         value="${src}/templates"/>
-	<property name="src.test.java"         value="${src}/test/java"/>
-	<property name="src.test.resources"    value="${src}/test/resources"/>
-	<property name="build"                 value="${basedir}/tmp"/>
-	<property name="build.bin"             value="${build}/bin"/>
-	<property name="build.bin.main"        value="${build.bin}/main"/>
-	<property name="build.bin.test"        value="${build.bin}/test"/>
-	<property name="build.javadoc"         value="${build}/javadoc"/>
-	<property name="reports.dir"           value="${build}/reports"/>
-	<property name="reports.xml.dir"       value="${reports.dir}/junit-xml"/>
-	<property name="reports.html.dir"      value="${reports.dir}/junit-html"/>
+	<property name="src.templates"         value="${basedir}/src/templates"/>
+	<property name="src.main.java.package" value="${basedir}/src/main/java/deepdive"/>
 	
 	
-	<!-- paths -->
-	
-	
-	<path id="path.run">
-		<pathelement location="${build.bin.main}"/>
-	</path>
-	
-	
-	<path id="path.main">
-		<path refid="path.run"/>
-		<fileset dir="${lib}">
-			<include name="jsr305*.jar" />
-		</fileset>
-	</path>
-	
-	
-	<path id="path.test">
-		<path refid="path.run"/>
-		<pathelement location="${build.bin.test}"/>
-		<fileset dir="${lib}">
-			<include name="*.jar" />
-		</fileset>
-	</path>
-	
-	
-	<!-- targets -->
-		
 	<target name="help" description="help">
-    	<echo>Ant targets: clear | generate | compile | javadoc | test | jar | dist</echo>
-    </target>
-	
-	
-	<target name="clear" description="clears the build directory">
-    	<delete dir="${build}"/>	
+    	<echo>Ant targets: generate</echo>
     </target>
 	
 	
@@ -116,7 +71,7 @@
 			<local name="additional"/>
 			<loadfile property="additional" srcFile="${src.templates}/@{class}Actual.txt" failonerror="false"/>
 			<property name="additional" value=""/>
-			<echo>generating ${classfile}</echo>
+			<echo level="info">generating ${classfile}</echo>
 	    	<copy file="${src.templates}/NumberActual.txt" tofile="${classfile}" overwrite="true"/>
 	    	<replace file="${classfile}">
 	    		<replacefilter token="@class@" value="@{class}"/>
@@ -157,113 +112,5 @@
 	    	</replace>	
 		</sequential>	
 	</macrodef>
-
-	
-	<target name="compile" description="compiles all java classes" 
- 		depends="compile.main, compile.test">
-	</target>
-	
-	
-	<presetdef name="deepdive.javac">
-	   <javac debug="true" includeantruntime="false" encoding="UTF-8" excludes="**/package-info.java"/>
-	</presetdef>
-		
-		
-	<!-- depends="generate" -->
- 	<target name="compile.main" description="compiles src/main" >
-    	<mkdir dir="${build.bin.main}"/>
-		<deepdive.javac srcdir="${src.main.java}" destdir="${build.bin.main}" classpathref="path.main" source="11" target="11"/>
-	</target>
-
-		
- 	<target name="compile.test" description="compiles src/test" depends="compile.main">
-    	<mkdir dir="${build.bin.test}"/>
-		<deepdive.javac srcdir="${src.test.java}" destdir="${build.bin.test}" classpathref="path.test"/>
- 		<copy todir="${build.bin.test}" >
- 			<fileset dir="${src.test.resources}"/>
- 		</copy>
-	</target>
-
-	
-	<target name="javadoc" description="build javadoc" depends="compile">
-		<mkdir dir="${build.javadoc}"/>
-	    <javadoc 
-	    	access="protected"
-			classpathref="path.main"
-	    	destdir="${build.javadoc}" 
-	    	doctitle="DeepDive Javadoc" 
-	    	packagenames="deepdive.*" 
-	    	source="11" 
-	    	sourcepath="${src.main.java}"
-	    	splitindex="true" 
-	    	use="true"/>
-	</target>
-
-
-	<target name="jar" description="builds the deepdive jar file" depends="javadoc">
-		<tstamp>
-			<format property="TODAY" pattern="yyyy-MM-dd"/>
-		</tstamp>
-		<jar destfile="${build}/deepdive-${version}.jar">
-			<fileset dir="${build.bin.main}"/>
-			<manifest>
-				<attribute name="Created-At" value="${TODAY}"/>	
-				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
-				<attribute name="DeepDive-Version" value="${version}"/>
-				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
-				<attribute name="Main-Class" value="deepdive.tool.ActualGenerator"/>
-			</manifest>
-		</jar>
-		<jar destfile="${build}/deepdive-${version}-sources.jar">
-			<fileset dir="${src.main.java}"/>
-			<manifest>
-				<attribute name="Created-At" value="${TODAY}"/>	
-				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
-				<attribute name="DeepDive-Version" value="${version}"/>
-				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
-			</manifest>
-		</jar>
-		<jar destfile="${build}/deepdive-${version}-javadoc.jar">
-			<fileset dir="${build.javadoc}"/>
-			<manifest>
-				<attribute name="Created-At" value="${TODAY}"/>	
-				<attribute name="Created-By" value="Java ${ant.java.version}"/>	
-				<attribute name="DeepDive-Version" value="${version}"/>
-				<attribute name="DeepDive-Website" value="https://github.com/jdlib/deepdive"/>
-			</manifest>
-		</jar>
-	</target>
-	
-	
-	<target name="test" depends="compile">
-		<mkdir dir="${reports.xml.dir}"/>
-		
-		<junit fork="true" forkmode="once" haltonfailure="true" printsummary="yes">
-			<classpath refid="path.test"/>
-			<formatter type="xml" />
-			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
-			<batchtest todir="${reports.xml.dir}" unless="testcase">
-				<fileset dir="${src.test.java}">
-					<include name="**/*Test.java" />
-				</fileset>
-			</batchtest>
-		</junit>
-		
-		<junitreport todir="${reports.xml.dir}">
-			<fileset dir="${reports.xml.dir}">
-				<include name="TEST-*.xml" />
-			</fileset>
-			<report format="frames" todir="${reports.html.dir}" />
-		</junitreport>
-
-	</target>
-
-	
- 	<target name="dist" description="creates distribution zip" depends="generate,jar,test">
- 		<property name="deepdive.zip" value="deepdive-${version}.zip"/>
-		<zip destfile="${build}/${deepdive.zip}">
-			<fileset dir="${build}" includes="*.jar"/>
-		</zip>
-	</target>
 
 </project>
