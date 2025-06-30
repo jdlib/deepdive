@@ -47,21 +47,22 @@ DeepDive requires Java 11+ and has no external dependencies.
 It works great with test engines like [JUnit](https://junit.org/junit5/) or [TestNG](https://testng.org/doc/), 
 just transition over from JUnit or TestNG assertions to the ones offered by DeepDive.  
 
-## How to use
-Download the [latest release](https://github.com/jdlib/deepdive/releases/latest) and include the DeepDive 
-jar into your classpath. The [user guide](UserGuide.md) explains the details on how to use DeepDive.
-
 ## Add to your build
 
-To add a Maven dependency on DeepDive, use the following:
+To add a Maven dependency on DeepDive, use the following dependency declaration:
 
 	<dependency>
 		<groupId>io.github.jdlib</groupId>
 		<artifactId>deepdive</artifactId>
 		<version>1.2.0</version>
+		<scope>test</scope>
 	</dependency>
+
+or directly download the [latest release](https://github.com/jdlib/deepdive/releases/latest).
+
+## How to use
+The [user guide](UserGuide.md) explains how to use DeepDive.
 	
-or download the [latest release](https://github.com/jdlib/deepdive/releases/latest).
 
 ## Why to use
 Like other Java assertions libraries (e.g. [FEST Assert](https://github.com/alexruiz/fest-assert-2.x), 
