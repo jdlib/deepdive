@@ -34,7 +34,7 @@ public class Difference
 	 */
 	public static void set(Difference value)
 	{
-		current_ = Check.notNull(value, "value");
+		current_ = DDCheck.notNull(value, "value");
 	}
 
 	

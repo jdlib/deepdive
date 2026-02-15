@@ -86,7 +86,7 @@ public enum Not
 		
 		public void set(Not not)
 		{
-			not_ = Check.notNull(not, "not");
+			not_ = DDCheck.notNull(not, "not");
 		}
 		
 		

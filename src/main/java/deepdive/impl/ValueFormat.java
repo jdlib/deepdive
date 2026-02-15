@@ -51,7 +51,7 @@ public class ValueFormat
 	 */
 	public static void setCurrent(ValueFormat value)
 	{
-		current_ = Check.notNull(value, "value");
+		current_ = DDCheck.notNull(value, "value");
 	}
 
 	

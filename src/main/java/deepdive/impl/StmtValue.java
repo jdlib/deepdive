@@ -32,7 +32,7 @@ public interface StmtValue
 	
 	public default StmtValue extracting(Function<Object,Object> fn)
 	{
-		Function<Object,Object> fRaw = Check.notNull(fn, "fn");
+		Function<Object,Object> fRaw = DDCheck.notNull(fn, "fn");
 		return (e,a) -> {
 			Object temp = get(e,a);
 			return temp != null ? fRaw.apply(temp) : null;
@@ -58,8 +58,8 @@ class NamedStmtValue implements StmtValue
 {
 	public NamedStmtValue(String name, StmtValue impl)
 	{
-		name_ 	= Check.notNull(name, "name");
-		impl_	= Check.notNull(impl, "impl");
+		name_ 	= DDCheck.notNull(name, "name");
+		impl_	= DDCheck.notNull(impl, "impl");
 	}
 	
 	

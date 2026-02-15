@@ -55,7 +55,7 @@ public abstract class ErrorFactory
 	 */
 	public static void set(ErrorFactory value)
 	{
-		current_ = Check.notNull(value, "ErrorFactory");
+		current_ = DDCheck.notNull(value, "ErrorFactory");
 	}
 	
 	

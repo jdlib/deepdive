@@ -46,7 +46,7 @@ public class ErrorFormat
 	 */
 	public static void set(ErrorFormat value)
 	{
-		current_ = Check.notNull(value, "value");
+		current_ = DDCheck.notNull(value, "value");
 	}
 	
 

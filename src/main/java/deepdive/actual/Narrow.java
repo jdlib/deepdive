@@ -17,7 +17,7 @@ package deepdive.actual;
 
 
 import java.util.function.BiFunction;
-import deepdive.impl.Check;
+import deepdive.impl.DDCheck;
 
 
 /**
@@ -29,8 +29,8 @@ public class Narrow<N,BACK,R>
 {
 	public Narrow(Class<N> type, BiFunction<? super N,? super BACK,R> fn)
 	{
-		this.type 	= Check.notNull(type, "type");
-		this.fn 	= Check.notNull(fn, "fn");
+		this.type 	= DDCheck.notNull(type, "type");
+		this.fn 	= DDCheck.notNull(fn, "fn");
 	}
 	
 	

@@ -33,7 +33,7 @@ import deepdive.actual.java.util.StringIteratorActual;
 import deepdive.actual.java.util.StringListActual;
 import deepdive.actual.java.util.stream.StreamActual;
 import deepdive.function.CheckedSupplier;
-import deepdive.impl.Check;
+import deepdive.impl.DDCheck;
 import deepdive.impl.Value;
 
 
@@ -87,23 +87,23 @@ public abstract class CharContentBuilder<BACK,E extends Exception>
 	
 	public static <BACK> CharContentBuilder<BACK,RuntimeException> of(BACK back, boolean close, Reader reader)
 	{
-		Check.notNull(reader, "reader");
+		DDCheck.notNull(reader, "reader");
 		return of(back, close, () -> reader);
 	}
 	
 	
 	public static <BACK> CharContentBuilder<BACK,RuntimeException> of(BACK back, boolean close, InputStream in, Charset charset)
 	{
-		Check.notNull(in, "in");
-		Check.notNull(charset, "charset");
+		DDCheck.notNull(in, "in");
+		DDCheck.notNull(charset, "charset");
 		return of(back, close, () -> new InputStreamReader(in, charset));
 	}
 	
 	
 	public static <BACK> CharContentBuilder<BACK,IOException> of(BACK back, File file, Charset charset)
 	{
-		Check.notNull(file, "file");
-		Check.notNull(charset, "charset");
+		DDCheck.notNull(file, "file");
+		DDCheck.notNull(charset, "charset");
 		return of(back, true, () -> new InputStreamReader(new FileInputStream(file), charset));
 	}
 
@@ -140,7 +140,7 @@ public abstract class CharContentBuilder<BACK,E extends Exception>
 	 */
 	public static String read(Reader reader, long max) throws IOException
 	{
-		Check.notNull(reader, "reader");
+		DDCheck.notNull(reader, "reader");
 		StringBuilder sb = new StringBuilder();
 		
 		long toRead = max <= 0 ? Long.MAX_VALUE : max;
@@ -170,7 +170,7 @@ class CharContentBuilderImpl<BACK,E extends Exception> extends CharContentBuilde
 	{
 		back_ 				= back;
 		close_				= close;
-		readerSupplier_   	= Check.notNull(readerSupplier, "readerSupplier");
+		readerSupplier_   	= DDCheck.notNull(readerSupplier, "readerSupplier");
 		max_				= max;
 	}
 

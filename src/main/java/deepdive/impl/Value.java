@@ -274,7 +274,7 @@ public class Value
 	@SafeVarargs
 	public static <T> Iterator<T> arrayIterator(T... elems)
 	{
-		return new ArrayIt<>(Check.notNull(elems, "elems"));
+		return new ArrayIt<>(DDCheck.notNull(elems, "elems"));
 	}
 	
 	

@@ -27,7 +27,7 @@ class GenericArrayList extends AbstractList<Object>
 {
 	public GenericArrayList(Object array)
 	{
-		array_  = Check.notNull(array, "array");
+		array_  = DDCheck.notNull(array, "array");
 		size_   = Array.getLength(array);
 	}
 	

@@ -4,7 +4,7 @@ package deepdive.impl;
 /**
  * Provides helper methods for argument checking.
  */
-public class Check
+public class DDCheck
 {
 	/**
 	 * Tests that the value is not null.

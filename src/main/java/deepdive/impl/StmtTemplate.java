@@ -265,7 +265,7 @@ public abstract class StmtTemplate
 		{
 			this.expected = expected;
 			this.actual	  = actual;
-			this.not	  = Check.notNull(not, "not");
+			this.not	  = DDCheck.notNull(not, "not");
 			this.what     = what;
 		}
 		
@@ -310,7 +310,7 @@ public abstract class StmtTemplate
 	{
 		public MultiTemplate(StmtTemplate[] templates)
 		{
-			templates_ = Check.notNull(templates, "templates");
+			templates_ = DDCheck.notNull(templates, "templates");
 		}
 		
 		
@@ -342,7 +342,7 @@ public abstract class StmtTemplate
 		 */
 		public SingleTemplate(StmtValue value)
 		{
-			value_ = Check.notNull(value, "value");
+			value_ = DDCheck.notNull(value, "value");
 		}
 
 	
@@ -394,7 +394,7 @@ public abstract class StmtTemplate
 		public WildcardTemplate(String text, StmtValue value)
 		{
 			super(value);
-			text_ = Check.notNull(text, "text");
+			text_ = DDCheck.notNull(text, "text");
 		}
 		
 		
@@ -430,7 +430,7 @@ public abstract class StmtTemplate
 	{
 		public ProxyTemplate(StmtTemplate inner)
 		{
-			inner_ = Check.notNull(inner, "inner");
+			inner_ = DDCheck.notNull(inner, "inner");
 		}
 
 		
@@ -443,7 +443,7 @@ public abstract class StmtTemplate
 		public WhenNotTemplate(StmtTemplate inner, Not not)
 		{
 			super(inner);
-			not_ = Check.notNull(not, "not");
+			not_ = DDCheck.notNull(not, "not");
 		}
 
 		
@@ -469,7 +469,7 @@ public abstract class StmtTemplate
 		public WhenTestTemplate(StmtTemplate inner, Predicate<Input> test)
 		{
 			super(inner);
-			test_ = Check.notNull(test, "test");
+			test_ = DDCheck.notNull(test, "test");
 		}
 
 		

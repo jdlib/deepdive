@@ -27,7 +27,7 @@ import java.nio.charset.Charset;
 import javax.annotation.CheckReturnValue;
 import deepdive.actual.java.lang.ByteArrayActual;
 import deepdive.function.CheckedSupplier;
-import deepdive.impl.Check;
+import deepdive.impl.DDCheck;
 
 
 /**
@@ -37,14 +37,14 @@ public class ByteContentBuilder<BACK,E extends Exception>
 {
 	public static <BACK> ByteContentBuilder<BACK,RuntimeException> of(BACK back, boolean close, InputStream in)
 	{
-		Check.notNull(in, "in");
+		DDCheck.notNull(in, "in");
 		return new ByteContentBuilder<>(back, close, () -> in);
 	}
 	
 	
 	public static <BACK> ByteContentBuilder<BACK,IOException> of(BACK back, File file)
 	{
-		Check.notNull(file, "file");
+		DDCheck.notNull(file, "file");
 		return new ByteContentBuilder<>(back, true, () -> new FileInputStream(file));
 	}
 	
@@ -52,7 +52,7 @@ public class ByteContentBuilder<BACK,E extends Exception>
 	public ByteContentBuilder(BACK back, boolean close, CheckedSupplier<InputStream,E> inSupplier)
 	{
 		back_ 		= back;
-		inSupplier_ = Check.notNull(inSupplier, "inSupplier");
+		inSupplier_ = DDCheck.notNull(inSupplier, "inSupplier");
 		close_		= close;
 	}
 	
@@ -80,7 +80,7 @@ public class ByteContentBuilder<BACK,E extends Exception>
 	@CheckReturnValue
 	public CharContentBuilder<BACK,E> chars(Charset charset)
 	{
-		Check.notNull(charset, "charset");
+		DDCheck.notNull(charset, "charset");
 		CheckedSupplier<InputStream,E> in 	= inSupplier_;
 		CheckedSupplier<Reader,E> reader 	= () -> new InputStreamReader(in.get(), charset);
 		return new CharContentBuilderImpl<>(back_, close_, reader, max_);
@@ -104,7 +104,7 @@ public class ByteContentBuilder<BACK,E extends Exception>
 		InputStream in = null;
 		try
 		{
-			in = Check.notNull(inSupplier_.get(), "in");
+			in = DDCheck.notNull(inSupplier_.get(), "in");
 			return read(in, max);
 		}
 		finally
