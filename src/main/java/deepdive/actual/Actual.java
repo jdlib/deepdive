@@ -48,7 +48,7 @@ import deepdive.impl.StmtTemplate.Input;
  * To test a specific type, an Actual implementations for that type
  * will a) store the value and b) offer methods to make assertions about that value:
  * <pre><code>import deepdive.actual.lang.StringActual;
- * 
+ *
  * String s = ...
  * StringActual&lt;?,?&gt; a = new StringActual(s, null);
  * a.startsWith("a").endsWith("bc").length(3);
@@ -59,7 +59,7 @@ import deepdive.impl.StmtTemplate.Input;
  * allows for easy instantation of these implementations:
  * <pre><code>
  * import static deepdive.ExpectThat.*;
- * 
+ *
  * String s = ...
  * expectThat(s).startsWith("a").endsWith("bc").length(3);
  * </code></pre>
@@ -75,11 +75,11 @@ import deepdive.impl.StmtTemplate.Input;
  * but also offers a {@link StringActual#length()} for more generalized testing of the String length
  * <pre><code>
  * import static deepdive.ExpectThat.*;
- * 
+ *
  * String s = ...
  * expectThat(s)
  *     .length()        // returning deepdive.actual.lang.IntegerActual()
- *         .greater(1) 
+ *         .greater(1)
  *         .less(5)
  *         .back()      // going back to the StringActual
  *     .startsWith("a")
@@ -96,7 +96,7 @@ import deepdive.impl.StmtTemplate.Input;
  * a specific type.
  * @param <T> the type of the tested actual value
  * @param <BACK> the type of the owner object which constructed the Actual
- * @param <IMPL> the implementation class of the Actual as recursive type bound 
+ * @param <IMPL> the implementation class of the Actual as recursive type bound
  */
 @ParametersAreNonnullByDefault
 public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProtected
@@ -111,8 +111,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		value_	= value;
 		back_ 	= back;
 	}
-	
-	
+
+
 	/**
 	 * Returns this Actual casted to IMPL.
 	 * @return this
@@ -123,8 +123,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		notMustBeOff();
 		return (IMPL)this;
 	}
-	
-	
+
+
 	/**
 	 * Returns the non-null owner passed to the Actual constructor.
 	 * If the owner is null an IllegalArgumentError is thrown.
@@ -137,7 +137,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return rejectNull(back_, "back");
 	}
 
-	
+
 	/**
 	 * Returns the owner object passed to the Actual constructor.
 	 * @return the owner object or null.
@@ -147,12 +147,12 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return back_;
 	}
 
-	
+
 	//----------------------
 	// actual value
 	//----------------------
-	
-	
+
+
 	/**
 	 * Returns the non-null actual value.
 	 * If it is null an error is thrown.
@@ -162,8 +162,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return rejectNull(value_, "actual value");
 	}
-	
-	
+
+
 	/**
 	 * Returns the actual value.
 	 * @return the value or null
@@ -188,7 +188,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return (S)value_;
 	}
 
-	
+
 	/**
 	 * Sets the actual value.
 	 * @param newValue the new value
@@ -199,8 +199,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		value_ = newValue;
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Calls the function with the actual value (or null) and {@link #setValue(Object) sets} the value
 	 * to the function result.
@@ -215,11 +215,11 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return setValue(rejectNull(fn, "fn").apply(valueOrNull()));
 	}
 
-	
+
 	//----------------------
 	// operations
 	//----------------------
-	
+
 
 	/**
 	 * Passes this Actual object to the given consumer.
@@ -228,7 +228,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	 *     .startsWith("a")
 	 *     .call(this::doMoreTests)
 	 *     .endsWith("bc");</code></pre>
-	 * @param consumer a consumer   
+	 * @param consumer a consumer
 	 * @return this
 	 * @throws E can be thrown by the consumer
 	 * @param <E> the type of exception thrown by the consumer
@@ -239,13 +239,13 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		rejectNull(consumer, "consumer").accept(self);
 		return self;
 	}
-	
-	
+
+
 	//----------------------
 	// assertions
 	//----------------------
-	
-	
+
+
 	/**
 	 * Returns a ClassActual for the class of the actual value.
 	 * @return the new actual
@@ -255,10 +255,10 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return new ClassActual<>(value().getClass(), self()).as("class");
 	}
 
-	
+
 	/**
-	 * Returns a Contained builder to specify a set of object 
-	 * in order to test if this actual value is contained in that set. 
+	 * Returns a Contained builder to specify a set of object
+	 * in order to test if this actual value is contained in that set.
 	 * If you call {@link #not()} before {@link #contained()} then
 	 * the containment test is effectively negated.
 	 * @return a Contained builder
@@ -268,8 +268,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return new Contained();
 	}
-	
-	
+
+
 	/**
 	 * A builder class to specify a set of objects and
 	 * to test if this actual value is contained in that set.
@@ -283,19 +283,19 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		protected Contained()
 		{
 		}
-		
-		
+
+
 		/**
 		 * Asserts that the actual value equals one of the given values.
 		 * @param expected the expected values
 		 * @return the Actual self
 		 */
-		public IMPL in(Object... expected) 
+		public IMPL in(Object... expected)
 		{
 			return in(expected, Arrays.asList(expected));
 		}
-		
-		
+
+
 		/**
 		 * Asserts that the actual value equals one of the values returned by the iterable.
 		 * @param iterable an iterable
@@ -305,8 +305,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		{
 			return in(iterable, iterable);
 		}
-		
-		
+
+
 		private IMPL in(Object expected, Iterable<?> iterable)
 		{
 			T actual = value();
@@ -325,8 +325,8 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 			return expectTo(found, "be one of", expected);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the actual value equals the expected value.
 	 * @param expected the expected value
@@ -338,7 +338,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return self();
 	}
 
-	
+
 	/**
 	 * Asserts that the given consumer will raise an error when receiving the actual value.
 	 * @param consumer a consumer
@@ -347,7 +347,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	@NotMustBeOff public ThrowableActual<Throwable,IMPL,?> fails(CheckedConsumer<? super T,?> consumer)
 	{
 		notMustBeOff();
-		Throwable t = expectThrows(null, () -> consumer.accept(value())); 
+		Throwable t = expectThrows(null, () -> consumer.accept(value()));
 		return new ThrowableActual<>(t, self());
 	}
 
@@ -361,11 +361,11 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	@NotMustBeOff public ThrowableActual<Throwable,IMPL,?> fails(CheckedBiConsumer<? super T,IMPL,?> consumer)
 	{
 		notMustBeOff();
-		Throwable t = expectThrows(null, () -> consumer.accept(value(), self())); 
+		Throwable t = expectThrows(null, () -> consumer.accept(value(), self()));
 		return new ThrowableActual<>(t, self());
 	}
 
-	
+
 	/**
 	 * Asserts that the actual value has the expected class.
 	 * @param expected the expected value
@@ -377,7 +377,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return self();
 	}
 
-	
+
 	/**
 	 * Asserts that the hash code of the actual value equals the expected value.
 	 * @param expected the expected value
@@ -388,7 +388,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		expectEqual(expected, value().hashCode(), "hashCode");
 		return self();
 	}
-	
+
 
 	/**
 	 * Asserts that the actual value is an instance of the expected class
@@ -400,7 +400,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		expectInstance(expected, valueOrNull());
 		return self();
 	}
-	
+
 
 	/**
 	 * Asserts that the actual value is null.
@@ -411,13 +411,13 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		expectNull(valueOrNull());
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Toggles not mode.
 	 * If not-mode is switched on then the next assertion result
 	 * is negated before deciding if the assertion fails.
-	 * Overrides the inherited method in order to change access to public. 
+	 * Overrides the inherited method in order to change access to public.
 	 * @return this
 	 */
 	@SuppressWarnings("unchecked")
@@ -425,26 +425,26 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return (IMPL)super.not();
 	}
-	
-	
+
+
 	/**
 	 * Checks that the current active Not is OFF, else throws an assertion error.
-	 * Methods which can't be negated via {@link #not()} should enforce this 
+	 * Methods which can't be negated via {@link #not()} should enforce this
 	 * with a call to this check method or {@link #self()}.
-	 * They also should mark themselves with the annotation {@link NotMustBeOff} 
+	 * They also should mark themselves with the annotation {@link NotMustBeOff}
 	 */
 	protected void notMustBeOff()
 	{
 		if (getNotHolder().get().isOn())
 			failNotOn();
 	}
-	
-	
+
+
 	private void failNotOn()
 	{
-		failure().notOn().throwError(); 
+		failure().notOn().throwError();
 	}
-	
+
 
 	protected <U> U rejectNull(@Nullable U value, String what)
 	{
@@ -453,10 +453,10 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return value;
 	}
 
-	
+
 	/**
 	 * Extracts a property from the value using the given function and returns an Actual for the result.
-	 * To set the proper context for following assertions call {@link Actual#as(CharSequence)} with a 
+	 * To set the proper context for following assertions call {@link Actual#as(CharSequence)} with a
 	 * property context description.<p>
 	 * Example: <code>assertThat("abc").prop(Object::hashCode).as("hashCode").not().equal(0).back()</code>
 	 * @param prop a function which extracts a property from the actual value
@@ -472,7 +472,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return new Actual<>(prop.apply(value()), self());
 	}
 
-	
+
 	/**
 	 * Asserts that the actual value is the same as the expected value.
 	 * @param expected the expected value
@@ -484,7 +484,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return self();
 	}
 
-	
+
 	/**
 	 * Asserts that the actual value turned into a String via its {@link Object#toString()} method
 	 * equals the expected value.
@@ -497,7 +497,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the value return by calling {@link Object#toString()} on the actual value.
 	 * @return the new actual
@@ -506,35 +506,35 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return new StringActual<>(value().toString(), self()).as("toString");
 	}
-	
-	
+
+
     //----------------------
 	// soft assertions
 	//----------------------
 
-	
+
 	/**
-	 * Calls the given consumer which is expected to invoke assertion methods on 
+	 * Calls the given consumer which is expected to invoke assertion methods on
 	 * this Actual. All assertion errors are collected and thrown at the end of the call.
-	 * @param tester a consumer   
-	 * @return this 
+	 * @param tester a consumer
+	 * @return this
 	 */
-    public IMPL all(CheckedConsumer<IMPL,?> tester) 
+    public IMPL all(CheckedConsumer<IMPL,?> tester)
     {
     	if (tester != null)
     	{
-    		CheckedConsumer<ExpectInterface,?> t = a -> tester.accept(self());  
+    		CheckedConsumer<ExpectInterface,?> t = a -> tester.accept(self());
     		expectAll(t);
     	}
     	return self();
 	}
 
-    
+
      //----------------------
 	// eval
 	//----------------------
 
-	
+
     /**
      * {@link #eval(boolean) Evaluates} the condition using the current {@link #not() not}.
      * If it evaluates to false an error is raised using the template, the {@link Input#what what} string
@@ -545,32 +545,32 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
      * @param expected the expected value
      * @return this
      */
-    protected IMPL expectTrue(boolean condition, StmtTemplate template, String what, Object expected) 
+    protected IMPL expectTrue(boolean condition, StmtTemplate template, String what, Object expected)
     {
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), condition);
 		if (!result.ok)
 			failure().addStmts(template, expected, value(), result.not, what).throwError();
 		return self();
     }
-    
-    
-    protected IMPL expectTo(boolean ok, String what, Object expected) 
+
+
+    protected IMPL expectTo(boolean ok, String what, Object expected)
     {
     	return expectTrue(ok, StmtTemplate.ASSERT_EXPECTED_TO, what, expected);
     }
-    
-    
+
+
     protected ExpectResult eval(boolean ok)
     {
     	return ExpectResult.eval(getNotAndClear(), ok);
     }
 
-    
+
     //----------------------
 	// narrow
 	//----------------------
-    
-    
+
+
     /**
      * Calls {@link #narrow(Class, BiFunction)} using the type and function
      * of the given Narrow object.<p>
@@ -582,7 +582,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
      * a.narrow(Narrows.string()) // narrow call returns a StringActual
      * 	.startsWith(...)          // invoke methods in StringActual
      * </code></pre>
-     * @param narrow a Narrow 
+     * @param narrow a Narrow
      * @return the narrowed actual
      * @param <R> the return type of the narrow operation
      * @param <N> the narrowed type
@@ -594,21 +594,21 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		rejectNull(narrow, "narrow");
     	return narrow(narrow.type, narrow.fn);
     }
- 
-    
+
+
 	/**
 	 * Narrows the value type of this Actual and returns another object based
-	 * on the narrowed value and the back object: 
+	 * on the narrowed value and the back object:
 	 * <ol>
 	 * <li>Asserts that the value is an instance of the given type
 	 * <li>Passes the narrowed value and the back object to the function and returns the result
 	 * </ol>
-	 * Use case: Pass the type and a constructor handle of another more specific Actual implementation 
-	 * to construct and return a specific Actual for the current value and back object. 
+	 * Use case: Pass the type and a constructor handle of another more specific Actual implementation
+	 * to construct and return a specific Actual for the current value and back object.
 	 * Example:
 	 * <pre><code>Actual&lt;?,?,?&gt; a = ...
 	 * a.narrow(MyType.class, MyTypeActual::new).myTypeMethod(...)
-	 * </code></pre> 
+	 * </code></pre>
 	 * @param type a class
 	 * @param fn a narrow function
 	 * @return the function result
@@ -625,11 +625,11 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		return rejectNull(fn, "fn").apply(narrowed, backOrNull());
 	}
 
-	
+
 	//----------------------
 	// internals
 	//----------------------
-	
+
 
 	/**
 	 * Called by {@link ActualMixin#internals(ActualMixin)}.
@@ -641,13 +641,13 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 			internals_ = new Internals<>(this, getNotHolder());
 		return internals_;
 	}
-	
+
 
 	/**
 	 * Internals allows to access certain Actual methods which
 	 * - since they are protected - are only available to derived classes.
 	 * Protected access serves the primary purpose that clients which
-	 * use the Actual - when invoking content assist techniques -  
+	 * use the Actual - when invoking content assist techniques -
 	 * only see the public API without any implementation specific methods.
 	 * The use case for opening up internals are {@link ActualMixin}s
 	 * which provide partial Actual implementation without deriving from
@@ -659,15 +659,15 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		{
 			super(actual, null, notHolder);
 		}
-		
-		
+
+
 		@SuppressWarnings("unchecked")
 		private IMPL actual()
 		{
 			return (IMPL)backOrNull();
 		};
-		
-		
+
+
 		@SuppressWarnings("unchecked")
 		public IMPL self()
 		{
@@ -675,56 +675,57 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 			// in order to do the correct not off check.
 			return (IMPL)actual().self();
 		}
-		
-		
+
+
 	    public ExpectResult eval(boolean ok)
 	    {
 	    	return actual().eval(ok);
 	    }
 
-		
+
 		@Override public ExpectInterface getExpect(CharSequence context)
 		{
 			return actual().getExpect(context);
 		}
-		
-		
+
+
 	    @SuppressWarnings("unchecked")
-		public IMPL expectTrue(boolean ok, StmtTemplate template, String what, Object expected) 
+		public IMPL expectTrue(boolean ok, StmtTemplate template, String what, Object expected)
 	    {
 	    	return (IMPL)actual().expectTrue(ok, template, what, expected);
 	    }
-	    
-	    
+
+
 	    @SuppressWarnings("unchecked")
-		public IMPL expectTo(boolean ok, String what, Object expected) 
+		public IMPL expectTo(boolean ok, String what, Object expected)
 	    {
 	    	return (IMPL)actual().expectTo(ok, what, expected);
 	    }
-	    
-	    
-	    @Override public String toString()
+
+
+	    @SuppressWarnings("deprecation")
+		@Override public String toString()
 	    {
 	    	return actual().toString() + ".internals";
 	    }
 	}
-	
-		
+
+
 	//----------------------
 	// name
 	//----------------------
 
-	
+
 	/**
 	 * Sets the name of this Actual.
-	 * If an assertion error is raised by this Actual then the error message 
+	 * If an assertion error is raised by this Actual then the error message
 	 * will contain that name + the actual value to provide context information
 	 * of the error situation.
 	 * By default the name of Actual consists of the value's simple class name.
 	 * But if you are diving into a sub property of a starting Actual then
 	 * naming the sub Actual according to that property will document the call
 	 * chain and give proper context information if an error arises.
-	 * @param name a context name 
+	 * @param name a context name
 	 * @return this
 	 */
 	public IMPL as(CharSequence name)
@@ -732,13 +733,13 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		name_ = name;
 		return self();
 	}
-	
+
 
 	/**
 	 * Returns the name of this Actual object.
 	 * The name was either explicitly set via {@link #as(CharSequence)} or
 	 * is derived from the actual value or Actual implementation.
-	 * @return the name  
+	 * @return the name
 	 */
 	private String getActualName()
 	{
@@ -750,24 +751,24 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 			return getClass().getSimpleName().replace("Actual", "");
 	}
 
-	
+
 	//----------------------
 	// Owned
 	//----------------------
 
-	
+
 	@Override public String getContext()
 	{
 		String name = getActualName();
 		if (name.length() > 0)
 		{
 			T value  = valueOrNull();
-			String v = Value.format(value); 
+			String v = Value.format(value);
 			name += "=<" + v + '>';
 		}
 		return name;
 	}
-	
+
 
 	/**
 	 * Returns the {@link #as(CharSequence) name} of this Actual.
@@ -779,11 +780,11 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return getContext();
 	}
-	
-	
+
+
 	/**
 	 * Returns if two Actual objects are equals.
-	 * @deprecated this methods is deprecated in order to warn you in case you wanted to call {@link #equal(Object)} 
+	 * @deprecated this methods is deprecated in order to warn you in case you wanted to call {@link #equal(Object)}
 	 * to test if the actual value equals an expected value.
 	 */
 	@Deprecated
@@ -791,13 +792,13 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	{
 		return super.equals(other);
 	}
-	
+
 
 	/**
 	 * The actual value.
 	 */
 	private T value_;
-	
+
 	/**
 	 * The owner object.
 	 */
@@ -807,7 +808,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	 * The name of the actual object, used in assertion messages.
 	 */
 	private CharSequence name_;
-	
+
 	/**
 	 * A lazily constructed Internals instance returned by {@link #internals()}.
 	 */
