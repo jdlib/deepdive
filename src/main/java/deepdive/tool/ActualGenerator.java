@@ -87,10 +87,10 @@ public class ActualGenerator
 
 	/**
 	 * Instructs the generator to use the provided type as T argument for the actual
-	 * and not a type parameter for a derived type:<p>
+	 * and not a type parameter for a derived type:
 	 * <ul>
-	 * <li>MyTypeActual&lt;BACK> extends Actual&lt;MyType,...> vs
-	 * <li>MyTypeActual&lt;T extends MyType,BACK> extends Actual&lt;MyT,...>
+	 * <li>MyTypeActual&lt;BACK&gt; extends Actual&lt;MyType,...&gt; vs
+	 * <li>MyTypeActual&lt;T extends MyType,BACK&gt; extends Actual&lt;MyT,...&gt;
 	 * </ul>
 	 * The default is false, except if the type is final.
 	 * @param flag the flag
