@@ -29,24 +29,27 @@ public class ActualGeneratorTest extends AbstractTest
 {
 	@Test public void test() throws Exception
 	{
-		test(Pojo1.class);
-		test(Pojo2.class);
+		test(new ActualGenerator(Pojo1.class), "Pojo1");
+		test(new ActualGenerator(Pojo1.class).useTypeDirectly(true), "Pojo1Direct");
+		test(new ActualGenerator(Pojo2.class), "Pojo2");
 	}
-	
-	
-	private void test(Class<?> pojoClass) throws Exception
+
+
+	private void test(ActualGenerator generator, String name) throws Exception
 	{
 		StringWriter s = new StringWriter();
-		new ActualGenerator(pojoClass).print(s);
-		
-		expectEqual(readActualFile(pojoClass), s.toString(), pojoClass.getSimpleName());
+		generator.print(s);
+		String actual = s.toString();
+		String expected = readExcepted(name);
+
+		expectEqual(expected, actual, name);
 	}
-	
-	
-	private String readActualFile(Class<?> pojoClass) throws Exception
+
+
+	private String readExcepted(String name) throws Exception
 	{
-		String file = pojoClass.getSimpleName() + "Actual.gen";
-		try (InputStream in = expectNotNull(pojoClass.getResourceAsStream(file), file))
+		String file = name + "Actual.gen";
+		try (InputStream in = expectNotNull(getClass().getResourceAsStream(file), file))
 		{
 			return CharContentBuilder.read(new InputStreamReader(in, StandardCharsets.UTF_8), 0);
 		}

@@ -44,11 +44,12 @@ public class ActualGenerator
 {
 	public ActualGenerator(Class<?> type)
 	{
-		type_ 		= type;
-		simpleName_ = type.getSimpleName();
-		package_ 	= getPackage(type);
-		actualName_	= simpleName_ + "Actual";
-		
+		type_ 				= type;
+		simpleName_ 		= type.getSimpleName();
+		package_ 			= getPackage(type);
+		actualName_			= simpleName_ + "Actual";
+		useTypeDirectly_	= Modifier.isFinal(type_.getModifiers());
+
 		addImport(Actual.class);
 		for (Method m : type.getDeclaredMethods())
 		{
@@ -56,7 +57,7 @@ public class ActualGenerator
 			{
 				entries_.add(new Entry(m));
 				addImport(m.getReturnType());
-				Parameter[] params = m.getParameters(); 
+				Parameter[] params = m.getParameters();
 				for (Parameter param : params)
 					addImport(param.getType());
 				if (params.length >= (m.getReturnType() == Boolean.TYPE ? 2 : 1))
@@ -73,28 +74,55 @@ public class ActualGenerator
 		}
 		entries_.sort(null);
 	}
-	
-	
+
+
+	/**
+	 * @return the type passed to the constructor.
+	 */
+	Class<?> getType()
+	{
+		return type_;
+	}
+
+
+	/**
+	 * Instructs the generator to use the provided type as T argument for the actual
+	 * and not a type parameter for a derived type:<p>
+	 * <ul>
+	 * <li>MyTypeActual&lt;BACK> extends Actual&lt;MyType,...> vs
+	 * <li>MyTypeActual&lt;T extends MyType,BACK> extends Actual&lt;MyT,...>
+	 * </ul>
+	 * The default is false, except if the type is final.
+	 * @param flag the flag
+	 * @return this
+	 */
+	public ActualGenerator useTypeDirectly(boolean flag)
+	{
+		useTypeDirectly_ = flag;
+		return this;
+	}
+
+
 	private boolean includeMember(Member member)
 	{
 		if (member.getDeclaringClass() != type_)
 			return false;
-				
+
 		int m = member.getModifiers();
 		return Modifier.isPublic(m) && !Modifier.isStatic(m);
 	}
-	
-	
+
+
 	private boolean includeMethod(Method method)
 	{
 		Class<?> returnType = method.getReturnType();
-		return !isOverrriden(method) && 
+		return !isOverrriden(method) &&
 			!method.getName().startsWith("set") &&
 			(returnType != Void.TYPE) &&
-			!returnType.isAssignableFrom(type_);	
+			!returnType.isAssignableFrom(type_);
 	}
-	
-	
+
+
 	private void addImport(Class<?> type)
 	{
 		if (!type.isPrimitive())
@@ -104,20 +132,20 @@ public class ActualGenerator
 				imports_.add(type.getName());
 		}
 	}
-	
-	
+
+
 	public void print(OutputStream out) throws IOException
 	{
 		print(new OutputStreamWriter(out, StandardCharsets.UTF_8));
 	}
-	
-	
+
+
 	public void print(Writer out) throws IOException
 	{
 		print(new ActualPrinter(out));
 	}
 
-	
+
 	private void print(ActualPrinter out) throws IOException
 	{
 		out.p("package %s;", package_).ln();
@@ -128,14 +156,13 @@ public class ActualGenerator
 				out.p("import %s;", imp).ln();
 			out.ln(2);
 		}
-		
+
 		// class-decl
 		out.p("public class ").p(actualName_).p("<");
 		String typeParam;
 		String implName;
-		boolean isFinalType = Modifier.isFinal(type_.getModifiers()); 
 		// <T>
-		if (isFinalType)
+		if (useTypeDirectly_)
 			typeParam = simpleName_;
 		else
 		{
@@ -144,8 +171,8 @@ public class ActualGenerator
 		}
 		// <BACK>
 		out.p("BACK");
-		
-		if (isFinalType)
+
+		if (useTypeDirectly_)
 			implName = actualName_ + "<BACK>";
 		else
 		{
@@ -167,8 +194,8 @@ public class ActualGenerator
 		out.endBlock();
 		out.flush();
 	}
-	
-	
+
+
 	private void printEntry(ActualPrinter out, String implName, Entry entry) throws IOException
 	{
 		if (entry.field != null)
@@ -182,15 +209,15 @@ public class ActualGenerator
 			printAssertionMethod(out, implName, entry.name, m.getReturnType(), m.getName(), m.getParameters());
 		}
 	}
-	
-	
+
+
 	private void printAssertionMethod(ActualPrinter out, String implName, String propName, Class<?> propType, String memberName, Parameter[] params) throws IOException
 	{
 		boolean isBoolean = propType == Boolean.TYPE;
 		boolean isDecimal = (propType == Double.TYPE) || (propType == Float.TYPE);
 		boolean hasExpectedValue = !isBoolean;
-		boolean hasParams = (params != null) && (params.length > 0); 
-		
+		boolean hasParams = (params != null) && (params.length > 0);
+
 		out.p("public %s %s(", implName, propName);
 		Sep sep = new Sep(", ");
 		if (hasParams)
@@ -206,7 +233,7 @@ public class ActualGenerator
 		}
 		out.p(')').ln();
 		out.startBlock();
-		
+
 		if (isBoolean)
 		{
 			if (hasParams && params.length == 1)
@@ -230,67 +257,67 @@ public class ActualGenerator
 			out.pcontext(propName, params).p(");").ln();
 			out.p("return self();").ln();
 		}
-		
+
 		out.endBlock();
 		out.flush();
 	}
-	
-	
-	private static boolean isOverrriden(Method method) 
+
+
+	private static boolean isOverrriden(Method method)
 	{
 	    Class<?> declaringClass = method.getDeclaringClass();
-	    if (declaringClass.equals(Object.class)) 
+	    if (declaringClass.equals(Object.class))
 	        return false;
-	    
+
 	    if (declaresSameMethod(declaringClass.getSuperclass(), method))
 	    	return true;
-	    
-        for (Class<?> iface : declaringClass.getInterfaces()) 
+
+        for (Class<?> iface : declaringClass.getInterfaces())
         {
     	    if (declaresSameMethod(iface, method))
     	    	return true;
         }
         return false;
-	}	
-	
-	
+	}
+
+
 	private static boolean declaresSameMethod(Class<?> type, Method method)
 	{
-	    try 
+	    try
 	    {
 	        type.getMethod(method.getName(), method.getParameterTypes());
 	        return true;
-	    } 
+	    }
 	    catch (NoSuchMethodException e)
 	    {
 	    	return false;
 	    }
 	}
 
-	
+
 	private static String getPackage(Class<?> type)
 	{
 		String name = type.getName();
 		int n 		= name.lastIndexOf('.');
 		return n < 0 ? name : name.substring(0, n);
 	}
-	
-	
+
+
 	private static class Entry implements Comparable<Entry>
 	{
-		public Entry(Field field) 
+		public Entry(Field field)
 		{
 			this.field 	= field;
 			this.method = null;
 			this.name 	= field.getName();
 		}
 
-	
+
 		public Entry(Method method)
 		{
 			this.field 	= null;
 			this.method = method;
-			
+
 			String name = method.getName();
 			if (name.startsWith("get") && (name.length() > 3))
 			{
@@ -301,26 +328,28 @@ public class ActualGenerator
 
 			this.name = name;
 		}
-		
-		
+
+
 		@Override public int compareTo(Entry o)
 		{
 			return name.compareTo(o.name);
 		}
-		
-		
+
+
 		public final Field field;
 		public final Method method;
 		public final String name;
 	}
-	
-	
+
+
 	private static void printHelp()
 	{
-		System.out.println("Usage: java " + ActualGenerator.class.getName() + " <class-name>");
+		System.out.println("Usage: java " + ActualGenerator.class.getName() + " <options> <class-name>");
+		System.out.println("Options:");
+		System.out.println("-d    Use the class directly as T argument for the Actual class");
 	}
-	
-	
+
+
 	public static void main(String[] args) throws Exception
 	{
 		if (args.length == 0)
@@ -328,15 +357,16 @@ public class ActualGenerator
 			printHelp();
 			return;
 		}
-		
+
 		new ActualGenerator(Class.forName(args[0])).print(System.out);
 	}
-	
-	
+
+
 	private final Class<?> type_;
 	private final String package_;
 	private final String simpleName_;
 	private final String actualName_;
 	private final List<Entry> entries_ = new ArrayList<>();
 	private final TreeSet<String> imports_ = new TreeSet<>();
+	private boolean useTypeDirectly_;
 }
