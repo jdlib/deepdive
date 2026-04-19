@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Generated from ExpectStatic.txt, see build.xml/target[name="generate"]. 
+// Generated from ExpectStatic.txt, see build.xml/target[name="generate"].
 // Do not modify directly.
 package deepdive;
 
@@ -376,7 +376,7 @@ public class ExpectStatic
 	}
 
 
-	/**	
+	/**
 	 * Asserts that an object is not null.
 	 * @param actual the actual value
 	 * @return the actual value
@@ -402,7 +402,7 @@ public class ExpectStatic
 
 
 	/**
-	 * Asserts that an object is null. 
+	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
 	public static void expectNull(Object actual) 
@@ -416,7 +416,7 @@ public class ExpectStatic
 	 * @param actual the actual value
 	 * @param context optional: describes the context of the assertion
 	 */
-	public static void expectNull(Object actual, CharSequence context) 
+	public static void expectNull(Object actual, CharSequence context)
 	{
 		ExpectCommon.expectNull(true, actual, context, Not.OFF, null);
 	}
@@ -431,7 +431,7 @@ public class ExpectStatic
 	 */
 	public static <T> T expectSame(Object expected, T actual)
 	{
-		return expectSame(expected, actual, null); 
+		return expectSame(expected, actual, null);
 	}
 
 
@@ -480,7 +480,7 @@ public class ExpectStatic
 	 * @param <T> a dummy return type. 
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	public static <T> T fail() 
+	public static <T> T fail()
 	{
 		return fail("fail");
 	}
@@ -516,7 +516,7 @@ public class ExpectStatic
 	/**
 	 * Returns a sub ExpectInterface object which adds the given context string
 	 * to the context description.
-	 * @param context an optional context 
+	 * @param context an optional context
 	 * @return the Expect object
 	 */    
 	public static ExpectInterface getExpect(CharSequence context)

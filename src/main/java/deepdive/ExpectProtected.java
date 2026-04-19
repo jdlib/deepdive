@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Generated from ExpectProtected.txt, see build.xml/target[name="generate"]. 
+// Generated from ExpectProtected.txt, see build.xml/target[name="generate"].
 // Do not modify directly.
 package deepdive;
 
@@ -378,7 +378,7 @@ public class ExpectProtected extends Checkpoint
 	}
 
 
-	/**	
+	/**
 	 * Asserts that an object is not null.
 	 * @param actual the actual value
 	 * @return the actual value
@@ -404,7 +404,7 @@ public class ExpectProtected extends Checkpoint
 
 
 	/**
-	 * Asserts that an object is null. 
+	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
 	protected void expectNull(Object actual) 
@@ -418,7 +418,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param actual the actual value
 	 * @param context optional: describes the context of the assertion
 	 */
-	protected void expectNull(Object actual, CharSequence context) 
+	protected void expectNull(Object actual, CharSequence context)
 	{
 		ExpectCommon.expectNull(true, actual, context, getNotAndClear(), this);
 	}
@@ -433,7 +433,7 @@ public class ExpectProtected extends Checkpoint
 	 */
 	protected <T> T expectSame(Object expected, T actual)
 	{
-		return expectSame(expected, actual, null); 
+		return expectSame(expected, actual, null);
 	}
 
 
@@ -482,7 +482,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param <T> a dummy return type. 
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	protected <T> T fail() 
+	protected <T> T fail()
 	{
 		return fail("fail");
 	}
@@ -518,7 +518,7 @@ public class ExpectProtected extends Checkpoint
 	/**
 	 * Returns a sub ExpectInterface object which adds the given context string
 	 * to the context description.
-	 * @param context an optional context 
+	 * @param context an optional context
 	 * @return the Expect object
 	 */    
 	protected ExpectInterface getExpect(CharSequence context)

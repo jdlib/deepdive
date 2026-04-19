@@ -340,7 +340,7 @@
 	}
 
 
-	/**	
+	/**
 	 * Asserts that an object is not null.
 	 * @param actual the actual value
 	 * @return the actual value
@@ -366,7 +366,7 @@
 
 
 	/**
-	 * Asserts that an object is null. 
+	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
 	@methodDecl@ void expectNull(Object actual) 
@@ -380,7 +380,7 @@
 	 * @param actual the actual value
 	 * @param context optional: describes the context of the assertion
 	 */
-	@methodDecl@ void expectNull(Object actual, CharSequence context) 
+	@methodDecl@ void expectNull(Object actual, CharSequence context)
 	{
 		ExpectCommon.expectNull(true, actual, context, @not@, @object@);
 	}
@@ -395,7 +395,7 @@
 	 */
 	@methodDecl@ <T> T expectSame(Object expected, T actual)
 	{
-		return expectSame(expected, actual, null); 
+		return expectSame(expected, actual, null);
 	}
 
 
@@ -444,7 +444,7 @@
 	 * @param <T> a dummy return type. 
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	@methodDecl@ <T> T fail() 
+	@methodDecl@ <T> T fail()
 	{
 		return fail("fail");
 	}
@@ -480,7 +480,7 @@
 	/**
 	 * Returns a sub ExpectInterface object which adds the given context string
 	 * to the context description.
-	 * @param context an optional context 
+	 * @param context an optional context
 	 * @return the Expect object
 	 */    
 	@methodDecl@ ExpectInterface getExpect(CharSequence context)

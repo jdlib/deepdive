@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Generated from ExpectProtected.txt, see build.xml/target[name="generate"]. 
+// Generated from ExpectProtected.txt, see build.xml/target[name="generate"].
 // Do not modify directly.
 package deepdive;
 
