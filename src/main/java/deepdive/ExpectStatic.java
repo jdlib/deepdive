@@ -477,7 +477,7 @@ public class ExpectStatic
 
 	/**
 	 * Fails a test by throwing an assertion error.
-	 * @param <T> a dummy return type. 
+	 * @param <T> a dummy return type.
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
 	public static <T> T fail()

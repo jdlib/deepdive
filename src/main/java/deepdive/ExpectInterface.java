@@ -29,7 +29,7 @@ import deepdive.impl.Value;
 
 /**
  * ExpectInterface provides assert methods to test expectations on actual values.
- * All methods have default implementations. To use them simply let your 
+ * All methods have default implementations. To use them simply let your
  * test class implement ExpectInterface.
  */
 public interface ExpectInterface extends ExpectBase
@@ -477,7 +477,7 @@ public interface ExpectInterface extends ExpectBase
 
 	/**
 	 * Fails a test by throwing an assertion error.
-	 * @param <T> a dummy return type. 
+	 * @param <T> a dummy return type.
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
 	public default <T> T fail()
@@ -534,8 +534,8 @@ public interface ExpectInterface extends ExpectBase
 	{
 		return new ExpectPublic(this, null).not();
 	}
-	
-	
+
+
 	/**
 	 * @return Not.OFF
 	 */

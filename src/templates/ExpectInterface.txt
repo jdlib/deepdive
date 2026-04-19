@@ -29,7 +29,7 @@ import deepdive.impl.Value;
 
 /**
  * ExpectInterface provides assert methods to test expectations on actual values.
- * All methods have default implementations. To use them simply let your 
+ * All methods have default implementations. To use them simply let your
  * test class implement ExpectInterface.
  */
 public interface ExpectInterface extends ExpectBase
@@ -46,8 +46,8 @@ public interface ExpectInterface extends ExpectBase
 	{
 		return new ExpectPublic(this, null).not();
 	}
-	
-	
+
+
 	/**
 	 * @return Not.OFF
 	 */
