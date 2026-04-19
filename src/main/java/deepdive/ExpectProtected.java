@@ -399,7 +399,7 @@ public class ExpectProtected extends Checkpoint
 	 */
 	protected <T> T expectNotNull(T actual, CharSequence context)
 	{
-	    return ExpectCommon.expectNull(false, actual, context, getNotAndClear(), this);
+		return ExpectCommon.expectNull(false, actual, context, getNotAndClear(), this);
 	}
 
 
@@ -407,9 +407,9 @@ public class ExpectProtected extends Checkpoint
 	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
-	protected void expectNull(Object actual) 
+	protected void expectNull(Object actual)
 	{
-	    expectNull(actual, null);
+		expectNull(actual, null);
 	}
 
 
@@ -520,7 +520,7 @@ public class ExpectProtected extends Checkpoint
 	 * to the context description.
 	 * @param context an optional context
 	 * @return the Expect object
-	 */    
+	 */
 	protected ExpectInterface getExpect(CharSequence context)
 	{
 		return new ExpectPublic(this, context);

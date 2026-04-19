@@ -361,7 +361,7 @@
 	 */
 	@methodDecl@ <T> T expectNotNull(T actual, CharSequence context)
 	{
-	    return ExpectCommon.expectNull(false, actual, context, @not@, @object@);
+		return ExpectCommon.expectNull(false, actual, context, @not@, @object@);
 	}
 
 
@@ -369,9 +369,9 @@
 	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
-	@methodDecl@ void expectNull(Object actual) 
+	@methodDecl@ void expectNull(Object actual)
 	{
-	    expectNull(actual, null);
+		expectNull(actual, null);
 	}
 
 
@@ -482,7 +482,7 @@
 	 * to the context description.
 	 * @param context an optional context
 	 * @return the Expect object
-	 */    
+	 */
 	@methodDecl@ ExpectInterface getExpect(CharSequence context)
 	{
 		return new ExpectPublic(@object@, context);

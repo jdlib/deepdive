@@ -397,7 +397,7 @@ public interface ExpectInterface extends ExpectBase
 	 */
 	public default <T> T expectNotNull(T actual, CharSequence context)
 	{
-	    return ExpectCommon.expectNull(false, actual, context, getNotAndClear(), this);
+		return ExpectCommon.expectNull(false, actual, context, getNotAndClear(), this);
 	}
 
 
@@ -405,9 +405,9 @@ public interface ExpectInterface extends ExpectBase
 	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
-	public default void expectNull(Object actual) 
+	public default void expectNull(Object actual)
 	{
-	    expectNull(actual, null);
+		expectNull(actual, null);
 	}
 
 
@@ -518,7 +518,7 @@ public interface ExpectInterface extends ExpectBase
 	 * to the context description.
 	 * @param context an optional context
 	 * @return the Expect object
-	 */    
+	 */
 	public default ExpectInterface getExpect(CharSequence context)
 	{
 		return new ExpectPublic(this, context);

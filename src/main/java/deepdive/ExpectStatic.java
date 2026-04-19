@@ -397,7 +397,7 @@ public class ExpectStatic
 	 */
 	public static <T> T expectNotNull(T actual, CharSequence context)
 	{
-	    return ExpectCommon.expectNull(false, actual, context, Not.OFF, null);
+		return ExpectCommon.expectNull(false, actual, context, Not.OFF, null);
 	}
 
 
@@ -405,9 +405,9 @@ public class ExpectStatic
 	 * Asserts that an object is null.
 	 * @param actual the actual value
 	 */
-	public static void expectNull(Object actual) 
+	public static void expectNull(Object actual)
 	{
-	    expectNull(actual, null);
+		expectNull(actual, null);
 	}
 
 
@@ -518,7 +518,7 @@ public class ExpectStatic
 	 * to the context description.
 	 * @param context an optional context
 	 * @return the Expect object
-	 */    
+	 */
 	public static ExpectInterface getExpect(CharSequence context)
 	{
 		return new ExpectPublic(null, context);
