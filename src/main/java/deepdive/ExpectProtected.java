@@ -526,7 +526,7 @@ public class ExpectProtected extends Checkpoint
 		return new ExpectPublic(this, context);
 	}
 
-	
+
 	/**
 	 * Toogles not mode.
 	 * @return this
@@ -537,8 +537,8 @@ public class ExpectProtected extends Checkpoint
 		notHolder_.toggle();
 		return this;
 	}
-	
-	
+
+
 	protected final Not getNotAndClear()
 	{
 		return notHolder_.getAndClear();

@@ -524,7 +524,7 @@ public interface ExpectInterface extends ExpectBase
 		return new ExpectPublic(this, context);
 	}
 
-	
+
 	/**
 	 * Returns an assert interface with not-mode turned on.
 	 * @return a new ExpectInterface object

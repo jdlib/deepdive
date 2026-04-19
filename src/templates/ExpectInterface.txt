@@ -36,7 +36,7 @@ public interface ExpectInterface extends ExpectBase
 {
 @expectTemplate@
 
-	
+
 	/**
 	 * Returns an assert interface with not-mode turned on.
 	 * @return a new ExpectInterface object
