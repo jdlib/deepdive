@@ -47,7 +47,7 @@ public class ExpectProtected extends Checkpoint
 	 * and thrown at the end of the call.
 	 * @param test a consumer to issue assertions
 	 */
-	protected void expectAll(CheckedConsumer<ExpectInterface,?> test) 
+	protected void expectAll(CheckedConsumer<ExpectInterface,?> test)
 	{
 		ExpectCommon.expectAll(test, this);
 	}
@@ -61,7 +61,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param <T> the type of the actual value
 	 * @return the actual value
 	 */
-	protected <T> T expectEqual(Object expected, T actual) 
+	protected <T> T expectEqual(Object expected, T actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -76,7 +76,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	protected <T> T expectEqual(Object expected, T actual, CharSequence context) 
+	protected <T> T expectEqual(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectEqual(expected, actual, context, getNotAndClear(), this);
 	}
@@ -131,7 +131,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected byte expectEqual(byte expected, byte actual, CharSequence context) 
+	protected byte expectEqual(byte expected, byte actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), expected == actual);
 		if (!result.ok)
@@ -160,7 +160,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected char expectEqual(char expected, char actual, CharSequence context) 
+	protected char expectEqual(char expected, char actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), expected == actual);
 		if (!result.ok)
@@ -189,7 +189,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected short expectEqual(short expected, short actual, CharSequence context) 
+	protected short expectEqual(short expected, short actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), expected == actual);
 		if (!result.ok)
@@ -204,7 +204,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	protected int expectEqual(int expected, int actual) 
+	protected int expectEqual(int expected, int actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -218,7 +218,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected int expectEqual(int expected, int actual, CharSequence context) 
+	protected int expectEqual(int expected, int actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), expected == actual);
 		if (!result.ok)
@@ -233,7 +233,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	protected long expectEqual(long expected, long actual) 
+	protected long expectEqual(long expected, long actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -247,7 +247,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected long expectEqual(long expected, long actual, CharSequence context) 
+	protected long expectEqual(long expected, long actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), expected == actual);
 		if (!result.ok)
@@ -263,7 +263,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	protected double expectEqual(double expected, double actual, double delta) 
+	protected double expectEqual(double expected, double actual, double delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -278,7 +278,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected double expectEqual(double expected, double actual, double delta, CharSequence context) 
+	protected double expectEqual(double expected, double actual, double delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -294,7 +294,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	protected float expectEqual(float expected, float actual, float delta) 
+	protected float expectEqual(float expected, float actual, float delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -309,7 +309,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	protected float expectEqual(float expected, float actual, float delta, CharSequence context) 
+	protected float expectEqual(float expected, float actual, float delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -333,7 +333,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	protected void expectFalse(boolean condition, CharSequence context) 
+	protected void expectFalse(boolean condition, CharSequence context)
 	{
 		expectEqual(false, condition, context);
 	}
@@ -384,7 +384,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	protected <T> T expectNotNull(T actual) 
+	protected <T> T expectNotNull(T actual)
 	{
 		return expectNotNull(actual, null);
 	}
@@ -397,7 +397,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	protected <T> T expectNotNull(T actual, CharSequence context) 
+	protected <T> T expectNotNull(T actual, CharSequence context)
 	{
 	    return ExpectCommon.expectNull(false, actual, context, getNotAndClear(), this);
 	}
@@ -431,7 +431,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	protected <T> T expectSame(Object expected, T actual) 
+	protected <T> T expectSame(Object expected, T actual)
 	{
 		return expectSame(expected, actual, null); 
 	}
@@ -445,7 +445,7 @@ public class ExpectProtected extends Checkpoint
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	protected <T> T expectSame(Object expected, T actual, CharSequence context) 
+	protected <T> T expectSame(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectSame(expected, actual, context, getNotAndClear(), this);
 	}
@@ -455,7 +455,7 @@ public class ExpectProtected extends Checkpoint
 	 * Asserts that a condition is true.
 	 * @param condition the condition
 	 */
-	protected void expectTrue(boolean condition) 
+	protected void expectTrue(boolean condition)
 	{
 		expectTrue(condition, null);
 	}
@@ -466,7 +466,7 @@ public class ExpectProtected extends Checkpoint
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	protected void expectTrue(boolean condition, CharSequence context) 
+	protected void expectTrue(boolean condition, CharSequence context)
 	{
 		expectEqual(true, condition, context);
 	}
@@ -489,22 +489,22 @@ public class ExpectProtected extends Checkpoint
 
 
 	/**
-	 * Fails a test by throwing an assertion error with the given message. 
+	 * Fails a test by throwing an assertion error with the given message.
 	 * @param <T> a dummy return type.
 	 * @param message an error message
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	protected <T> T fail(String message) 
+	protected <T> T fail(String message)
 	{
 		return failure().addStmt(message).throwError();
 	}
 
 
 	/**
-	 * Returns a Failure object which allows you to construct and throw an assertion error. 
+	 * Returns a Failure object which allows you to construct and throw an assertion error.
 	 * @return the failure object
 	 */
-	protected Failure failure() 
+	protected Failure failure()
 	{
 		return new Failure(this);
 	}

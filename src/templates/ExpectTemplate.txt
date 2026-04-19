@@ -9,7 +9,7 @@
 	 * and thrown at the end of the call.
 	 * @param test a consumer to issue assertions
 	 */
-	@methodDecl@ void expectAll(CheckedConsumer<ExpectInterface,?> test) 
+	@methodDecl@ void expectAll(CheckedConsumer<ExpectInterface,?> test)
 	{
 		ExpectCommon.expectAll(test, @object@);
 	}
@@ -23,7 +23,7 @@
 	 * @param <T> the type of the actual value
 	 * @return the actual value
 	 */
-	@methodDecl@ <T> T expectEqual(Object expected, T actual) 
+	@methodDecl@ <T> T expectEqual(Object expected, T actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -38,7 +38,7 @@
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	@methodDecl@ <T> T expectEqual(Object expected, T actual, CharSequence context) 
+	@methodDecl@ <T> T expectEqual(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectEqual(expected, actual, context, @not@, @object@);
 	}
@@ -93,7 +93,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ byte expectEqual(byte expected, byte actual, CharSequence context) 
+	@methodDecl@ byte expectEqual(byte expected, byte actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, expected == actual);
 		if (!result.ok)
@@ -122,7 +122,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ char expectEqual(char expected, char actual, CharSequence context) 
+	@methodDecl@ char expectEqual(char expected, char actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, expected == actual);
 		if (!result.ok)
@@ -151,7 +151,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ short expectEqual(short expected, short actual, CharSequence context) 
+	@methodDecl@ short expectEqual(short expected, short actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, expected == actual);
 		if (!result.ok)
@@ -166,7 +166,7 @@
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	@methodDecl@ int expectEqual(int expected, int actual) 
+	@methodDecl@ int expectEqual(int expected, int actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -180,7 +180,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ int expectEqual(int expected, int actual, CharSequence context) 
+	@methodDecl@ int expectEqual(int expected, int actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, expected == actual);
 		if (!result.ok)
@@ -195,7 +195,7 @@
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	@methodDecl@ long expectEqual(long expected, long actual) 
+	@methodDecl@ long expectEqual(long expected, long actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -209,7 +209,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ long expectEqual(long expected, long actual, CharSequence context) 
+	@methodDecl@ long expectEqual(long expected, long actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, expected == actual);
 		if (!result.ok)
@@ -225,7 +225,7 @@
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	@methodDecl@ double expectEqual(double expected, double actual, double delta) 
+	@methodDecl@ double expectEqual(double expected, double actual, double delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -240,7 +240,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ double expectEqual(double expected, double actual, double delta, CharSequence context) 
+	@methodDecl@ double expectEqual(double expected, double actual, double delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -256,7 +256,7 @@
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	@methodDecl@ float expectEqual(float expected, float actual, float delta) 
+	@methodDecl@ float expectEqual(float expected, float actual, float delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -271,7 +271,7 @@
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	@methodDecl@ float expectEqual(float expected, float actual, float delta, CharSequence context) 
+	@methodDecl@ float expectEqual(float expected, float actual, float delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(@not@, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -295,7 +295,7 @@
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	@methodDecl@ void expectFalse(boolean condition, CharSequence context) 
+	@methodDecl@ void expectFalse(boolean condition, CharSequence context)
 	{
 		expectEqual(false, condition, context);
 	}
@@ -346,7 +346,7 @@
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	@methodDecl@ <T> T expectNotNull(T actual) 
+	@methodDecl@ <T> T expectNotNull(T actual)
 	{
 		return expectNotNull(actual, null);
 	}
@@ -359,7 +359,7 @@
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	@methodDecl@ <T> T expectNotNull(T actual, CharSequence context) 
+	@methodDecl@ <T> T expectNotNull(T actual, CharSequence context)
 	{
 	    return ExpectCommon.expectNull(false, actual, context, @not@, @object@);
 	}
@@ -393,7 +393,7 @@
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	@methodDecl@ <T> T expectSame(Object expected, T actual) 
+	@methodDecl@ <T> T expectSame(Object expected, T actual)
 	{
 		return expectSame(expected, actual, null); 
 	}
@@ -407,7 +407,7 @@
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	@methodDecl@ <T> T expectSame(Object expected, T actual, CharSequence context) 
+	@methodDecl@ <T> T expectSame(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectSame(expected, actual, context, @not@, @object@);
 	}
@@ -417,7 +417,7 @@
 	 * Asserts that a condition is true.
 	 * @param condition the condition
 	 */
-	@methodDecl@ void expectTrue(boolean condition) 
+	@methodDecl@ void expectTrue(boolean condition)
 	{
 		expectTrue(condition, null);
 	}
@@ -428,7 +428,7 @@
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	@methodDecl@ void expectTrue(boolean condition, CharSequence context) 
+	@methodDecl@ void expectTrue(boolean condition, CharSequence context)
 	{
 		expectEqual(true, condition, context);
 	}
@@ -451,22 +451,22 @@
 
 
 	/**
-	 * Fails a test by throwing an assertion error with the given message. 
+	 * Fails a test by throwing an assertion error with the given message.
 	 * @param <T> a dummy return type.
 	 * @param message an error message
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	@methodDecl@ <T> T fail(String message) 
+	@methodDecl@ <T> T fail(String message)
 	{
 		return failure().addStmt(message).throwError();
 	}
 
 
 	/**
-	 * Returns a Failure object which allows you to construct and throw an assertion error. 
+	 * Returns a Failure object which allows you to construct and throw an assertion error.
 	 * @return the failure object
 	 */
-	@methodDecl@ Failure failure() 
+	@methodDecl@ Failure failure()
 	{
 		return new Failure(@object@);
 	}

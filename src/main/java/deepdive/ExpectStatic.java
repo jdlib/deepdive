@@ -45,7 +45,7 @@ public class ExpectStatic
 	 * and thrown at the end of the call.
 	 * @param test a consumer to issue assertions
 	 */
-	public static void expectAll(CheckedConsumer<ExpectInterface,?> test) 
+	public static void expectAll(CheckedConsumer<ExpectInterface,?> test)
 	{
 		ExpectCommon.expectAll(test, null);
 	}
@@ -59,7 +59,7 @@ public class ExpectStatic
 	 * @param <T> the type of the actual value
 	 * @return the actual value
 	 */
-	public static <T> T expectEqual(Object expected, T actual) 
+	public static <T> T expectEqual(Object expected, T actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -74,7 +74,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	public static <T> T expectEqual(Object expected, T actual, CharSequence context) 
+	public static <T> T expectEqual(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectEqual(expected, actual, context, Not.OFF, null);
 	}
@@ -129,7 +129,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static byte expectEqual(byte expected, byte actual, CharSequence context) 
+	public static byte expectEqual(byte expected, byte actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
@@ -158,7 +158,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static char expectEqual(char expected, char actual, CharSequence context) 
+	public static char expectEqual(char expected, char actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
@@ -187,7 +187,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static short expectEqual(short expected, short actual, CharSequence context) 
+	public static short expectEqual(short expected, short actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
@@ -202,7 +202,7 @@ public class ExpectStatic
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	public static int expectEqual(int expected, int actual) 
+	public static int expectEqual(int expected, int actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -216,7 +216,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static int expectEqual(int expected, int actual, CharSequence context) 
+	public static int expectEqual(int expected, int actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
@@ -231,7 +231,7 @@ public class ExpectStatic
 	 * @param actual the actual value
 	 * @return the actual value
 	 */
-	public static long expectEqual(long expected, long actual) 
+	public static long expectEqual(long expected, long actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
@@ -245,7 +245,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static long expectEqual(long expected, long actual, CharSequence context) 
+	public static long expectEqual(long expected, long actual, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
@@ -261,7 +261,7 @@ public class ExpectStatic
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	public static double expectEqual(double expected, double actual, double delta) 
+	public static double expectEqual(double expected, double actual, double delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -276,7 +276,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static double expectEqual(double expected, double actual, double delta, CharSequence context) 
+	public static double expectEqual(double expected, double actual, double delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -292,7 +292,7 @@ public class ExpectStatic
 	 * @param delta the delta
 	 * @return the actual value
 	 */
-	public static float expectEqual(float expected, float actual, float delta) 
+	public static float expectEqual(float expected, float actual, float delta)
 	{
 		return expectEqual(expected, actual, delta, null);
 	}
@@ -307,7 +307,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 */
 	@SuppressWarnings("boxing")
-	public static float expectEqual(float expected, float actual, float delta, CharSequence context) 
+	public static float expectEqual(float expected, float actual, float delta, CharSequence context)
 	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
@@ -331,7 +331,7 @@ public class ExpectStatic
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	public static void expectFalse(boolean condition, CharSequence context) 
+	public static void expectFalse(boolean condition, CharSequence context)
 	{
 		expectEqual(false, condition, context);
 	}
@@ -382,7 +382,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	public static <T> T expectNotNull(T actual) 
+	public static <T> T expectNotNull(T actual)
 	{
 		return expectNotNull(actual, null);
 	}
@@ -395,7 +395,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	public static <T> T expectNotNull(T actual, CharSequence context) 
+	public static <T> T expectNotNull(T actual, CharSequence context)
 	{
 	    return ExpectCommon.expectNull(false, actual, context, Not.OFF, null);
 	}
@@ -429,7 +429,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	public static <T> T expectSame(Object expected, T actual) 
+	public static <T> T expectSame(Object expected, T actual)
 	{
 		return expectSame(expected, actual, null); 
 	}
@@ -443,7 +443,7 @@ public class ExpectStatic
 	 * @return the actual value
 	 * @param <T> the type of the actual value
 	 */
-	public static <T> T expectSame(Object expected, T actual, CharSequence context) 
+	public static <T> T expectSame(Object expected, T actual, CharSequence context)
 	{
 		return ExpectCommon.expectSame(expected, actual, context, Not.OFF, null);
 	}
@@ -453,7 +453,7 @@ public class ExpectStatic
 	 * Asserts that a condition is true.
 	 * @param condition the condition
 	 */
-	public static void expectTrue(boolean condition) 
+	public static void expectTrue(boolean condition)
 	{
 		expectTrue(condition, null);
 	}
@@ -464,7 +464,7 @@ public class ExpectStatic
 	 * @param condition the condition
 	 * @param context optional: describes the context of the assertion
 	 */
-	public static void expectTrue(boolean condition, CharSequence context) 
+	public static void expectTrue(boolean condition, CharSequence context)
 	{
 		expectEqual(true, condition, context);
 	}
@@ -487,22 +487,22 @@ public class ExpectStatic
 
 
 	/**
-	 * Fails a test by throwing an assertion error with the given message. 
+	 * Fails a test by throwing an assertion error with the given message.
 	 * @param <T> a dummy return type.
 	 * @param message an error message
 	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
 	 */
-	public static <T> T fail(String message) 
+	public static <T> T fail(String message)
 	{
 		return failure().addStmt(message).throwError();
 	}
 
 
 	/**
-	 * Returns a Failure object which allows you to construct and throw an assertion error. 
+	 * Returns a Failure object which allows you to construct and throw an assertion error.
 	 * @return the failure object
 	 */
-	public static Failure failure() 
+	public static Failure failure()
 	{
 		return new Failure(null);
 	}
