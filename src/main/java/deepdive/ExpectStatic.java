@@ -35,70 +35,70 @@ import deepdive.impl.Value;
 public class ExpectStatic
 {
 	//--------------------------------------
-    // expect methods, sorted alphabetically
-    //--------------------------------------
+	// expect methods, sorted alphabetically
+	//--------------------------------------
 
-	
+
 	/**
-	 * Calls the given consumer which is expected to invoke assertion methods on 
+	 * Calls the given consumer which is expected to invoke assertion methods on
 	 * the provided ExpectInterface object. All assertion errors are collected
 	 * and thrown at the end of the call.
-	 * @param test a consumer to issue assertions    
+	 * @param test a consumer to issue assertions
 	 */
-    public static void expectAll(CheckedConsumer<ExpectInterface,?> test) 
-    {
-    	ExpectCommon.expectAll(test, null);
+	public static void expectAll(CheckedConsumer<ExpectInterface,?> test) 
+	{
+		ExpectCommon.expectAll(test, null);
 	}
 
 
-    /**
-     * Asserts that two objects are equal.
-     * We use {@link Value#equal(Object, Object)} to test if two objects are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param <T> the type of the actual value
-     * @return the actual value
-     */
-    public static <T> T expectEqual(Object expected, T actual) 
-    {
-    	return expectEqual(expected, actual, null);
-    }
-    
-    
-    /**
-     * Asserts that two objects are equal.
-     * We use {@link Value#equal(Object, Object)} to test if two objects are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     * @param <T> the type of the actual value
-     */
-    public static <T> T expectEqual(Object expected, T actual, CharSequence context) 
-    {
-    	return ExpectCommon.expectEqual(expected, actual, context, Not.OFF, null);
-    }
-    
+	/**
+	 * Asserts that two objects are equal.
+	 * We use {@link Value#equal(Object, Object)} to test if two objects are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param <T> the type of the actual value
+	 * @return the actual value
+	 */
+	public static <T> T expectEqual(Object expected, T actual) 
+	{
+		return expectEqual(expected, actual, null);
+	}
 
-    /**
-     * Asserts that two booleans are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+
+	/**
+	 * Asserts that two objects are equal.
+	 * We use {@link Value#equal(Object, Object)} to test if two objects are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 * @param <T> the type of the actual value
+	 */
+	public static <T> T expectEqual(Object expected, T actual, CharSequence context) 
+	{
+		return ExpectCommon.expectEqual(expected, actual, context, Not.OFF, null);
+	}
+
+
+	/**
+	 * Asserts that two booleans are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static boolean expectEqual(boolean expected, boolean actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
 
-	
+
 	/**
-     * Asserts that two booleans are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+	 * Asserts that two booleans are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
 	public static boolean expectEqual(boolean expected, boolean actual, CharSequence context)
 	{
@@ -108,234 +108,234 @@ public class ExpectStatic
 		return actual;
 	}
 
-	
+
 	/**
-     * Asserts that two bytes are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+	 * Asserts that two bytes are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static byte expectEqual(byte expected, byte actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
-    
-    
-    /**
-     * Asserts that two objects are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+
+
+	/**
+	 * Asserts that two objects are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static byte expectEqual(byte expected, byte actual, CharSequence context) 
-    {
+	public static byte expectEqual(byte expected, byte actual, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
-    }
+	}
 
-	
+
 	/**
-     * Asserts that two chars are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+	 * Asserts that two chars are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static char expectEqual(char expected, char actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
-    
-    
-    /**
-     * Asserts that two chars are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+
+
+	/**
+	 * Asserts that two chars are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static char expectEqual(char expected, char actual, CharSequence context) 
-    {
+	public static char expectEqual(char expected, char actual, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
-    }
+	}
 
-	
+
 	/**
-     * Asserts that two shorts are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+	 * Asserts that two shorts are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static short expectEqual(short expected, short actual)
 	{
 		return expectEqual(expected, actual, null);
 	}
-    
-    
-    /**
-     * Asserts that two shorts are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+
+
+	/**
+	 * Asserts that two shorts are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static short expectEqual(short expected, short actual, CharSequence context) 
-    {
+	public static short expectEqual(short expected, short actual, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
-    }
+	}
 
-	
-    /**
-     * Asserts that two int values are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+
+	/**
+	 * Asserts that two int values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static int expectEqual(int expected, int actual) 
-    {
+	{
 		return expectEqual(expected, actual, null);
-    }
-    
-    
-    /**
-     * Asserts that two int values are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+	}
+
+
+	/**
+	 * Asserts that two int values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static int expectEqual(int expected, int actual, CharSequence context) 
-    {
+	public static int expectEqual(int expected, int actual, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
-    }
+	}
 
 
-    /**
-     * Asserts that two longs are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     */
+	/**
+	 * Asserts that two longs are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
 	public static long expectEqual(long expected, long actual) 
-    {
+	{
 		return expectEqual(expected, actual, null);
-   }
-    
-    
-    /**
-     * Asserts that two long values are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+	}
+
+
+	/**
+	 * Asserts that two long values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static long expectEqual(long expected, long actual, CharSequence context) 
-    {
+	public static long expectEqual(long expected, long actual, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, expected == actual);
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
-    }
+	}
 
 
-    /**
-     * Asserts that two doubles are equal within a positive delta.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param delta the delta
-     * @return the actual value
-     */
-    public static double expectEqual(double expected, double actual, double delta) 
-    {
+	/**
+	 * Asserts that two doubles are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @return the actual value
+	 */
+	public static double expectEqual(double expected, double actual, double delta) 
+	{
 		return expectEqual(expected, actual, delta, null);
-    }
-     
-    
-    /**
-     * Asserts that two double values are equal within a positive delta.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param delta the delta
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+	}
+
+
+	/**
+	 * Asserts that two double values are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static double expectEqual(double expected, double actual, double delta, CharSequence context) 
-    {
+	public static double expectEqual(double expected, double actual, double delta, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, delta, context, result.not, null);
 		return actual;
 	}
-    
 
-    /**
-     * Asserts that two floats are equal within a positive delta.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param delta the delta
-     * @return the actual value
-     */
-    public static float expectEqual(float expected, float actual, float delta) 
-    {
+
+	/**
+	 * Asserts that two floats are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @return the actual value
+	 */
+	public static float expectEqual(float expected, float actual, float delta) 
+	{
 		return expectEqual(expected, actual, delta, null);
-   }
-     
-    
-    /**
-     * Asserts that two float values are equal within a positive delta.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param delta the delta
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     */
+	}
+
+
+	/**
+	 * Asserts that two float values are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
 	@SuppressWarnings("boxing")
-    public static float expectEqual(float expected, float actual, float delta, CharSequence context) 
-    {
+	public static float expectEqual(float expected, float actual, float delta, CharSequence context) 
+	{
 		ExpectResult result = ExpectResult.eval(Not.OFF, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, delta, context, result.not, null);
 		return actual;
 	}
-    
 
-    /**
-     * Asserts that a condition is false.
-     * @param condition the condition
-     */
-    public static void expectFalse(boolean condition)
-    {
-    	expectFalse(condition, null);
-    }
-    
 
-    /**
-     * Asserts that a condition is false.
-     * @param condition the condition
-     * @param context optional: describes the context of the assertion
-     */
-    public static void expectFalse(boolean condition, CharSequence context) 
-    {
-    	expectEqual(false, condition, context);
-    }
-    
+	/**
+	 * Asserts that a condition is false.
+	 * @param condition the condition
+	 */
+	public static void expectFalse(boolean condition)
+	{
+		expectFalse(condition, null);
+	}
+
+
+	/**
+	 * Asserts that a condition is false.
+	 * @param condition the condition
+	 * @param context optional: describes the context of the assertion
+	 */
+	public static void expectFalse(boolean condition, CharSequence context) 
+	{
+		expectEqual(false, condition, context);
+	}
+
 
 	/**
 	 * Runs a runnable which is expected to fail, i.e. to throw an Exception or Error.
@@ -350,7 +350,7 @@ public class ExpectStatic
 		return ExpectCommon.expectThrows(runnable, expectedType, Not.OFF, null);
 	}
 
-	
+
 	/**
 	 * Asserts that the given index is valid, i.e. 0 &lt;= index &lt; size.
 	 * @param index the index
@@ -364,12 +364,12 @@ public class ExpectStatic
 
 
 	/**
-     * Asserts that an object is an instance of the expected class.
-     * @param expectedClass the class
-     * @param actual the actual value
-     * @return the actual value, casted to the given class
-     * @param <T> the expected type
-     */
+	 * Asserts that an object is an instance of the expected class.
+	 * @param expectedClass the class
+	 * @param actual the actual value
+	 * @return the actual value, casted to the given class
+	 * @param <T> the expected type
+	 */
 	public static <T> T expectInstance(Class<T> expectedClass, Object actual)
 	{
 		return ExpectCommon.expectInstance(expectedClass, actual, Not.OFF, null);
@@ -377,146 +377,146 @@ public class ExpectStatic
 
 
 	/**	
-     * Asserts that an object is not null.
-     * @param actual the actual value
-     * @return the actual value
-     * @param <T> the type of the actual value
-     */
-    public static <T> T expectNotNull(T actual) 
-    {
-    	return expectNotNull(actual, null);
-    }
-
-    
-    /**
-     * Asserts that an object is not null.
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     * @param <T> the type of the actual value
-     */
-    public static <T> T expectNotNull(T actual, CharSequence context) 
-    {
-        return ExpectCommon.expectNull(false, actual, context, Not.OFF, null);
-    }
-
-    
-    /**
-     * Asserts that an object is null. 
-     * @param actual the actual value
-     */
-    public static void expectNull(Object actual) 
-    {
-        expectNull(actual, null);
-    }
-   
-
-    /**
-     * Asserts that an object is null.
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     */
-    public static void expectNull(Object actual, CharSequence context) 
-    {
-    	ExpectCommon.expectNull(true, actual, context, Not.OFF, null);
-    }
-    
-    
-    /**
-     * Asserts that two objects refer to the same object.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @return the actual value
-     * @param <T> the type of the actual value
-     */
-    public static <T> T expectSame(Object expected, T actual) 
-    {
-    	return expectSame(expected, actual, null); 
-	}
-    
-
-    /**
-     * Asserts that two objects refer to the same object.
-     * @param expected the expected value
-     * @param actual the actual value
-     * @param context optional: describes the context of the assertion
-     * @return the actual value
-     * @param <T> the type of the actual value
-     */
-    public static <T> T expectSame(Object expected, T actual, CharSequence context) 
-    {
-    	return ExpectCommon.expectSame(expected, actual, context, Not.OFF, null);
+	 * Asserts that an object is not null.
+	 * @param actual the actual value
+	 * @return the actual value
+	 * @param <T> the type of the actual value
+	 */
+	public static <T> T expectNotNull(T actual) 
+	{
+		return expectNotNull(actual, null);
 	}
 
 
-    /**
-     * Asserts that a condition is true.
-     * @param condition the condition
-     */
-    public static void expectTrue(boolean condition) 
-    {
-    	expectTrue(condition, null);
-    }
-    
-    
-    /**
-     * Asserts that a condition is true.
-     * @param condition the condition
-     * @param context optional: describes the context of the assertion
-     */
-    public static void expectTrue(boolean condition, CharSequence context) 
-    {
-    	expectEqual(true, condition, context);
-   }
-    
+	/**
+	 * Asserts that an object is not null.
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 * @param <T> the type of the actual value
+	 */
+	public static <T> T expectNotNull(T actual, CharSequence context) 
+	{
+	    return ExpectCommon.expectNull(false, actual, context, Not.OFF, null);
+	}
+
+
+	/**
+	 * Asserts that an object is null. 
+	 * @param actual the actual value
+	 */
+	public static void expectNull(Object actual) 
+	{
+	    expectNull(actual, null);
+	}
+
+
+	/**
+	 * Asserts that an object is null.
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 */
+	public static void expectNull(Object actual, CharSequence context) 
+	{
+		ExpectCommon.expectNull(true, actual, context, Not.OFF, null);
+	}
+
+
+	/**
+	 * Asserts that two objects refer to the same object.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 * @param <T> the type of the actual value
+	 */
+	public static <T> T expectSame(Object expected, T actual) 
+	{
+		return expectSame(expected, actual, null); 
+	}
+
+
+	/**
+	 * Asserts that two objects refer to the same object.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 * @param <T> the type of the actual value
+	 */
+	public static <T> T expectSame(Object expected, T actual, CharSequence context) 
+	{
+		return ExpectCommon.expectSame(expected, actual, context, Not.OFF, null);
+	}
+
+
+	/**
+	 * Asserts that a condition is true.
+	 * @param condition the condition
+	 */
+	public static void expectTrue(boolean condition) 
+	{
+		expectTrue(condition, null);
+	}
+
+
+	/**
+	 * Asserts that a condition is true.
+	 * @param condition the condition
+	 * @param context optional: describes the context of the assertion
+	 */
+	public static void expectTrue(boolean condition, CharSequence context) 
+	{
+		expectEqual(true, condition, context);
+	}
+
 
 	//-----------------------
-    // fail
-    //-----------------------
-    
-    
-    /**
-     * Fails a test by throwing an assertion error.
-     * @param <T> a dummy return type. 
-     * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
-     */
-    public static <T> T fail() 
-    {
-    	return fail("fail");
-    }
+	// fail
+	//-----------------------
 
 
-    /**
-     * Fails a test by throwing an assertion error with the given message. 
-     * @param <T> a dummy return type.
-     * @param message an error message
-     * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
-     */
-    public static <T> T fail(String message) 
-    {
-    	return failure().addStmt(message).throwError();
-    }
-        
+	/**
+	 * Fails a test by throwing an assertion error.
+	 * @param <T> a dummy return type. 
+	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
+	 */
+	public static <T> T fail() 
+	{
+		return fail("fail");
+	}
 
-    /**
-     * Returns a Failure object which allows you to construct and throw an assertion error. 
+
+	/**
+	 * Fails a test by throwing an assertion error with the given message. 
+	 * @param <T> a dummy return type.
+	 * @param message an error message
+	 * @return either an assertion error is thrown (not returning anything) or in soft assertion mode null is returned.
+	 */
+	public static <T> T fail(String message) 
+	{
+		return failure().addStmt(message).throwError();
+	}
+
+
+	/**
+	 * Returns a Failure object which allows you to construct and throw an assertion error. 
 	 * @return the failure object
-     */
-    public static Failure failure() 
-    {
-    	return new Failure(null);
-    }
+	 */
+	public static Failure failure() 
+	{
+		return new Failure(null);
+	}
 
 
 	//-----------------------
-    // context
-    //-----------------------
-    
+	// context
+	//-----------------------
+
 
 	/**
 	 * Returns a sub ExpectInterface object which adds the given context string
 	 * to the context description.
-     * @param context an optional context 
+	 * @param context an optional context 
 	 * @return the Expect object
 	 */    
 	public static ExpectInterface getExpect(CharSequence context)
