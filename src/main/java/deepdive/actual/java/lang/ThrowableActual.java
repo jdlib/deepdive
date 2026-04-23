@@ -23,12 +23,12 @@ import deepdive.actual.Actual;
  * An Actual implementation for Throwable objects.
  * @param <T> the Throwable type
  * @param <BACK> the type of the owner of the ThrowableActual
- * @param <IMPL> the type of the ThrowableActual implementation 
+ * @param <IMPL> the type of the ThrowableActual implementation
  */
 public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActual<T,BACK,IMPL>> extends Actual<T,BACK,IMPL>
 {
 	/**
-	 * Creates a new ThrowableActual. 
+	 * Creates a new ThrowableActual.
 	 * @param value a Throwable
 	 * @param back the owner
 	 */
@@ -37,20 +37,20 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 		super(value, back);
 	}
 
-	
+
 	/**
 	 * Asserts that the actual can be casted to the given Throwable class.
 	 * @param type a Throwable class
 	 * @return a new ThrowableActual whose type parameter reflects the successful cast.
 	 * 		Its back object is the same as the back object of this actual
-	 * @param <S> the type of the casted Throwable 
+	 * @param <S> the type of the casted Throwable
 	 */
 	public <S extends Throwable> ThrowableActual<S,BACK,?> cast(Class<S> type)
 	{
 		return new ThrowableActual<>(expectInstance(type, value()), backOrNull());
 	}
 
-	
+
 	/**
 	 * Asserts that the message of the Throwable equals the expected message.
 	 * @param expected the expected value
@@ -62,7 +62,7 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the message of the Throwable.
 	 * @return the new actual
@@ -72,7 +72,7 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 		return new StringActual<>(value().getMessage(), self()).as("message");
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the localized message of the Throwable.
 	 * @return the new actual
@@ -82,7 +82,7 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 		return new StringActual<>(value().getLocalizedMessage(), self()).as("localizedMessage");
 	}
 
-	
+
 	/**
 	 * Returns a ThrowableActual for the cause of the Throwable.
 	 * @return the new actual
@@ -94,18 +94,48 @@ public class ThrowableActual<T extends Throwable,BACK,IMPL extends ThrowableActu
 
 
 	/**
+	 * Asserts that the cause of the Throwable is the same as the expected Throwable.
+	 * @param expected the expected value
+	 * @return this
+	 */
+	public IMPL cause(Throwable expected)
+	{
+		expectSame(expected, value().getCause(), "cause");
+		return self();
+	}
+
+
+	/**
 	 * Returns a ThrowableActual for the root cause of the Throwable.
 	 * @return the new actual
 	 */
 	public ThrowableActual<?,IMPL,?> rootCause()
 	{
+		return new ThrowableActual<>(getRootCause(), self()).as("rootCause");
+	}
+
+
+	/**
+	 * Asserts that the root cause of the Throwable is the same as the expected Throwable.
+	 * @param expected the expected value
+	 * @return the new actual
+	 */
+	public IMPL rootCause(Throwable expected)
+	{
+		expectSame(expected, getRootCause(), "rootCause");
+		return self();
+	}
+
+
+	private Throwable getRootCause()
+	{
 		Throwable root = value();
 		while (root.getCause() != null)
 			root = root.getCause();
-		return new ThrowableActual<>(root, self()).as("rootCause");
+		return root;
 	}
-	
-	
+
+
 	/**
 	 * Returns an ArrayActual for the StackTraceElements of the Throwable.
 	 * @return the new actual
