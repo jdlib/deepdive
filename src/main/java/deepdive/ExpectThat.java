@@ -55,55 +55,55 @@ import deepdive.function.CheckedRunnable;
 
 
 /**
- * ExpectThat provides factory methods to construct Actual implementations for various JDK core classes. 
+ * ExpectThat provides factory methods to construct Actual implementations for various JDK core classes.
  */
-public class ExpectThat 
+public class ExpectThat
 {
 	public static final int VERSION = 1;
-	
-	
+
+
 	public static BooleanActual<?,?> expectThat(boolean actual)
 	{
 		return new BooleanActual<>(actual, null);
 	}
 
-	
+
 	public static BooleanActual<?,?> expectThat(Boolean actual)
 	{
 		return new BooleanActual<>(actual, null);
 	}
 
-	
+
 	public static ByteActual<?,?> expectThat(byte actual)
 	{
 		return new ByteActual<>(actual, null);
 	}
 
-	
+
 	public static ByteActual<?,?> expectThat(Byte actual)
 	{
 		return new ByteActual<>(actual, null);
 	}
 
-	
+
 	public static CharacterActual<?,?> expectThat(char actual)
 	{
 		return new CharacterActual<>(actual, null);
 	}
 
-	
+
 	public static CharacterActual<?,?> expectThat(Character actual)
 	{
 		return new CharacterActual<>(actual, null);
 	}
 
-	
+
 	public static  ClassActual<?,?> expectThat(Class<?> actual)
 	{
 		return new ClassActual<>(actual, null);
 	}
 
-	
+
 	public static <ITEM,COL extends Collection<ITEM>> CollectionActual<ITEM,COL,?,?> expectThat(COL actual)
 	{
 		return new CollectionActual<>(actual, null);
@@ -115,18 +115,18 @@ public class ExpectThat
 		return new DoubleActual<>(actual, null);
 	}
 
-	
+
 	public static DoubleActual<?,?> expectThat(Double actual)
 	{
 		return new DoubleActual<>(actual, null);
 	}
 
-	
+
 	public static <E extends Enum<E>> EnumActual<E,?,?> expectThat(E actual)
 	{
 		return new EnumActual<>(actual, null);
 	}
-	
+
 
 	public static <T> FileActual<?,?> expectThat(File actual)
 	{
@@ -139,31 +139,31 @@ public class ExpectThat
 		return new FloatActual<>(actual, null);
 	}
 
-	
+
 	public static FloatActual<?,?> expectThat(Float actual)
 	{
 		return new FloatActual<>(actual, null);
 	}
 
-	
+
 	public static <T extends InputStream> InputStreamActual<T,?,?> expectThat(T actual)
 	{
 		return new InputStreamActual<>(actual, null);
 	}
 
-	
+
 	public static InstantActual<?,?> expectThat(Instant actual)
 	{
 		return new InstantActual<>(actual, null);
 	}
 
-	
+
 	public static IntegerActual<?,?> expectThat(int actual)
 	{
 		return new IntegerActual<>(actual, null);
 	}
 
-	
+
 	public static IntegerActual<?,?> expectThat(Integer actual)
 	{
 		return new IntegerActual<>(actual, null);
@@ -175,13 +175,13 @@ public class ExpectThat
 		return new IteratorActual<>(actual, null);
 	}
 
-	
+
 	public static <ELEM> IterableActual<ELEM,?,?,?> expectThat(Iterable<ELEM> actual)
 	{
 		return new IterableActual<>(actual, null);
 	}
 
-	
+
 	public static <ELEM,LIST extends List<ELEM>> ListActual<ELEM,LIST,?,?> expectThat(LIST actual)
 	{
 		return new ListActual<>(actual, null);
@@ -193,19 +193,19 @@ public class ExpectThat
 		return new LocalDateActual<>(actual, null);
 	}
 
-	
+
 	public static LocalDateTimeActual<?,?> expectThat(LocalDateTime actual)
 	{
 		return new LocalDateTimeActual<>(actual, null);
 	}
 
-	
+
 	public static LocalTimeActual<?,?> expectThat(LocalTime actual)
 	{
 		return new LocalTimeActual<>(actual, null);
 	}
 
-	
+
 	public static LongActual<?,?> expectThat(long actual)
 	{
 		return new LongActual<>(actual, null);
@@ -228,8 +228,8 @@ public class ExpectThat
 	{
 		return new MatcherActual<>(actual, null);
 	}
-	
-	
+
+
 	public static OffsetDateTimeActual<?,?> expectThat(OffsetDateTime actual)
 	{
 		return new OffsetDateTimeActual<>(actual, null);
@@ -246,14 +246,14 @@ public class ExpectThat
 	 * Instead this simply returns an Actual for the nullable value of the Optional.
 	 * @param actual the Optional
 	 * @param <T> the type of the Optional valze
-	 * @return the new Actual 
+	 * @return the new Actual
 	 */
 	public static <T> Actual<T,?,?> expectThat(Optional<T> actual)
 	{
 		return new Actual<>(actual.orElse(null), null);
 	}
 
-	
+
 	public static PathActual<?,?> expectThat(Path actual)
 	{
 		return new PathActual<>(actual, null);
@@ -265,7 +265,7 @@ public class ExpectThat
 		return new PatternActual<>(actual, null);
 	}
 
-	
+
 	public static PeriodActual<?,?> expectThat(Period actual)
 	{
 		return new PeriodActual<>(actual, null);
@@ -277,7 +277,7 @@ public class ExpectThat
 		return new ReaderActual<>(actual, null);
 	}
 
-	
+
 	public static <T> SetActual<T,Set<T>,?,?> expectThat(Set<T> actual)
 	{
 		return new SetActual<>(actual, null);
@@ -306,8 +306,8 @@ public class ExpectThat
 	{
 		return new StringActual<>(actual, null);
 	}
-	
-	
+
+
 	public static <T extends Throwable> ThrowableActual<?,?,?> expectThat(T actual)
 	{
 		return new ThrowableActual<>(actual, null);
@@ -330,77 +330,77 @@ public class ExpectThat
 	{
 		return new ZonedDateTimeActual<>(actual, null);
 	}
-	
-	
+
+
 	public static <T> ArrayActual<T,?,?> expectThat(T[] actual)
 	{
 		return new ArrayActual<>(actual, null);
 	}
 
-	
+
 	public static BooleanArrayActual<?,?> expectThat(boolean[] actual)
 	{
 		return new BooleanArrayActual<>(actual, null);
 	}
 
-	
-	public static ByteArrayActual<?,?> expectThatByte(byte[] actual)
+
+	public static ByteArrayActual<?,?> expectThat(byte[] actual)
 	{
 		return new ByteArrayActual<>(actual, null);
 	}
 
-	
+
 	public static CharArrayActual<?,?> expectThat(char[] actual)
 	{
 		return new CharArrayActual<>(actual, null);
 	}
 
-	
+
 	public static DoubleArrayActual<?,?> expectThat(double[] actual)
 	{
 		return new DoubleArrayActual<>(actual, null);
 	}
 
-	
+
 	public static FloatArrayActual<?,?> expectThat(float[] actual)
 	{
 		return new FloatArrayActual<>(actual, null);
 	}
 
-	
+
 	public static IntArrayActual<?,?> expectThat(int[] actual)
 	{
 		return new IntArrayActual<>(actual, null);
 	}
 
-	
+
 	public static LongArrayActual<?,?> expectThat(long[] actual)
 	{
 		return new LongArrayActual<>(actual, null);
 	}
 
-	
+
 	public static ShortArrayActual<?,?> expectThat(short[] actual)
 	{
 		return new ShortArrayActual<>(actual, null);
 	}
 
-	
+
 	public static StringArrayActual<?,?> expectThat(String... actuals)
 	{
 		return new StringArrayActual<>(actuals, null);
 	}
 
-	
+
 	public static ZipFileActual<?,?> expectThat(ZipFile actual)
 	{
 		return new ZipFileActual<>(actual, null);
 	}
 
-	
+
 	/**
 	 * Returns a Actual for the given object.
-	 * This method is not named assertThat since this would 
+	 * This method is not named assertThat since this would
 	 * always return a value even if there is not Actual implementation
 	 * for the given object.
 	 * @param actual a value
@@ -414,7 +414,7 @@ public class ExpectThat
 
 
 	/**
-	 * Runs a runnable which is expected to throw an exception or error 
+	 * Runs a runnable which is expected to throw an exception or error
 	 * and returns a ThrowableActual for that error.
 	 * @param runnable the runnable
 	 * @return the ThrowableActual

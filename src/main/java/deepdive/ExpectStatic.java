@@ -110,6 +110,32 @@ public class ExpectStatic
 
 
 	/**
+	 * Asserts that two booleans are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	public static Boolean expectEqual(boolean expected, Boolean actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two booleans are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Boolean expectEqual(boolean expected, Boolean actual, CharSequence context)
+	{
+		return expectEqual((Boolean)expected, actual, context);
+	}
+
+
+	/**
 	 * Asserts that two bytes are equal.
 	 * @param expected the expected value
 	 * @param actual the actual value
@@ -122,7 +148,7 @@ public class ExpectStatic
 
 
 	/**
-	 * Asserts that two objects are equal.
+	 * Asserts that two bytes are equal.
 	 * @param expected the expected value
 	 * @param actual the actual value
 	 * @param context optional: describes the context of the assertion
@@ -135,6 +161,32 @@ public class ExpectStatic
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
+	}
+
+
+	/**
+	 * Asserts that two bytes are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	public static Byte expectEqual(byte expected, Byte actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two bytes are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Byte expectEqual(byte expected, Byte actual, CharSequence context)
+	{
+		return expectEqual((Byte)expected, actual, context);
 	}
 
 
@@ -168,6 +220,33 @@ public class ExpectStatic
 
 
 	/**
+	 * Asserts that two chars are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static char expectEqual(char expected, Character actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two chars are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Character expectEqual(char expected, Character actual, CharSequence context)
+	{
+		return expectEqual((Character)expected, actual, context);
+	}
+
+
+	/**
 	 * Asserts that two shorts are equal.
 	 * @param expected the expected value
 	 * @param actual the actual value
@@ -193,6 +272,32 @@ public class ExpectStatic
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
+	}
+
+
+	/**
+	 * Asserts that two shorts are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	public static short expectEqual(short expected, Short actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two shorts are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static short expectEqual(short expected, Short actual, CharSequence context)
+	{
+		return expectEqual((Short)expected, actual, context);
 	}
 
 
@@ -226,6 +331,32 @@ public class ExpectStatic
 
 
 	/**
+	 * Asserts that two int values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	public static Integer expectEqual(int expected, Integer actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two int values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Integer expectEqual(int expected, Integer actual, CharSequence context)
+	{
+		return expectEqual((Integer)expected, actual, context);
+	}
+
+
+	/**
 	 * Asserts that two longs are equal.
 	 * @param expected the expected value
 	 * @param actual the actual value
@@ -251,6 +382,34 @@ public class ExpectStatic
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, null, context, result.not, null);
 		return actual;
+	}
+
+
+
+
+	/**
+	 * Asserts that two longs are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @return the actual value
+	 */
+	public static Long expectEqual(long expected, Long actual)
+	{
+		return expectEqual(expected, actual, null);
+	}
+
+
+	/**
+	 * Asserts that two long values are equal.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Long expectEqual(long expected, Long actual, CharSequence context)
+	{
+		return expectEqual((Long)expected, actual, context);
 	}
 
 
@@ -286,6 +445,38 @@ public class ExpectStatic
 
 
 	/**
+	 * Asserts that two doubles are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @return the actual value
+	 */
+	public static Double expectEqual(double expected, Double actual, double delta)
+	{
+		return expectEqual(expected, actual, delta, null);
+	}
+
+
+	/**
+	 * Asserts that two double values are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Double expectEqual(double expected, Double actual, double delta, CharSequence context)
+	{
+		if (actual == null)
+			expectEqual((Double)expected, actual, context);
+		else
+			expectEqual(expected, actual.doubleValue(), delta, context);
+		return actual;
+	}
+
+
+	/**
 	 * Asserts that two floats are equal within a positive delta.
 	 * @param expected the expected value
 	 * @param actual the actual value
@@ -312,6 +503,38 @@ public class ExpectStatic
 		ExpectResult result = ExpectResult.eval(Not.OFF, Value.withinDelta(expected, actual, delta));
 		if (!result.ok)
 			ExpectCommon.failEqual(expected, actual, delta, context, result.not, null);
+		return actual;
+	}
+
+
+	/**
+	 * Asserts that two floats are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @return the actual value
+	 */
+	public static Float expectEqual(float expected, Float actual, float delta)
+	{
+		return expectEqual(expected, actual, delta, null);
+	}
+
+
+	/**
+	 * Asserts that two float values are equal within a positive delta.
+	 * @param expected the expected value
+	 * @param actual the actual value
+	 * @param delta the delta
+	 * @param context optional: describes the context of the assertion
+	 * @return the actual value
+	 */
+	@SuppressWarnings("boxing")
+	public static Float expectEqual(float expected, Float actual, float delta, CharSequence context)
+	{
+		if (actual == null)
+			expectEqual((Float)expected, actual, context);
+		else
+			expectEqual(expected, actual.floatValue(), delta, context);
 		return actual;
 	}
 
