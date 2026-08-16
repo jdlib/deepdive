@@ -29,16 +29,27 @@ public class ThrowableActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
-		expectError(() -> { throw new IllegalArgumentException("test"); })
+		Exception e0 = new IllegalArgumentException("test0");
+		Exception e1 = new IllegalArgumentException("test1", e0);
+
+		expectError(() -> { throw e0; })
 			.isA(IllegalArgumentException.class)
-			.message("test")
+			.message("test0")
 			.message().contains("es").back()
+			.localizedMessage().equal("test0").back()
 			.cause().isNull().back()
+			.rootCause(e0)
 			.stackTrace()
 				.contains().match(elem -> ThrowableActualTest.class.getName().equals(elem.getClassName()))
 				.back();
-		
-		Throwable t = new SQLException("X", "S100"); 
+
+		expectThat(e1)
+			.cause(e0)
+			.cause().same(e0).back()
+			.rootCause(e0)
+			.rootCause().same(e0).back();
+
+		Throwable t = new SQLException("X", "S100");
 		expectThat(t)
 			.message("X")
 			.cast(SQLException.class)

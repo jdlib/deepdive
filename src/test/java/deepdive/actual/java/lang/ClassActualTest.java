@@ -27,6 +27,7 @@ import deepdive.actual.AbstractActualTest;
  */
 public class ClassActualTest extends AbstractActualTest implements Serializable
 {
+	public static final long DUMMY = 2L;
 	private static final long serialVersionUID = 1L;
 
 
@@ -39,7 +40,19 @@ public class ClassActualTest extends AbstractActualTest implements Serializable
 			.annotations().all()
 				.empty()
 				.back()
+			.canonicalName(ClassActualTest.class.getCanonicalName())
+			.constructorPublic().back()
+			.fieldDeclared("serialVersionUID").back()
+			.fieldPublic("DUMMY").back()
 			.interfaces().elems(Serializable.class).back()
+			.not().isArray()
+			.isInstance(this, true)
+			.not().isAnonymous()
+			.not().isInterface()
+			.not().isPrimitive()
+			.modifiers()
+				.isPublic()
+				.back()
 			.name(ClassActualTest.class.getName())
 			.name()
 				.contains(".actual.")
@@ -58,13 +71,27 @@ public class ClassActualTest extends AbstractActualTest implements Serializable
 				.type(String.class)
 				.back();
 	}
-	
-	
+
+
 	@SuppressWarnings("unused")
 	private static void some(String s) throws UnsupportedOperationException
 	{
 	}
-	
+
+
+	@Test public void testEnclosing() throws Exception
+	{
+		expectThat(InnerClass.class)
+			.enclosingClass().same(ClassActualTest.class).back()
+			.enclosingMethod().isNull().back()
+			.enclosingConstructor().isNull().back();
+	}
+
+
+	private static class InnerClass
+	{
+	}
+
 
 	@SuppressWarnings("unused")
 	private String field_ = "a";

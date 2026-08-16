@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ * Copyright (c) 2026 jdlib, https://github.com/jdlib
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,29 +20,19 @@ import static deepdive.ExpectThat.*;
 import org.junit.Test;
 
 
-/**
- * Tests {@link NumberActual} implementations.
- */
-public class NumberActualTest
+public class FloatActualTest
 {
-	@Test public void testByte()
+	@Test public void test()
 	{
-		expectThat(Byte.MIN_VALUE)
-			.less(Byte.MAX_VALUE)
-			.equal(Byte.MIN_VALUE)
-			.not().equal(null);
-	}
-
-
-	@Test public void testInteger()
-	{
-		expectThat(5)
-			.byteValue((byte)5)
-			.doubleValue(5.0,  0.0)
-			.floatValue(5f, 0.0f)
-			.intValue(5)
-			.longValue(5L)
-			.shortValue((short)5)
-			.mod(2, 1);
+		expectThat(4.5f)
+			.greater(3f)
+			.greaterEq(4.5f)
+			.less(5.0f)
+			.lessEq(4.5f)
+			.not().negative()
+			.positive()
+			.isFinite()
+			.not().isNaN()
+			.not().isInfinite();
 	}
 }

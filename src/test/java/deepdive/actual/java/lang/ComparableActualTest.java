@@ -24,17 +24,19 @@ import deepdive.actual.AbstractActualTest;
 /**
  * Tests {@link ComparableActual}.
  */
-public class ComparableActualTest extends AbstractActualTest 
+public class ComparableActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
 		StringActual<?,?> abc = expectThat("abc")
+			.compareTo("abc", 0)
+			.compareTo("abc").equal(0).back()
 			.greater("a")
 			.not().greater("d")
 			.greaterEq("abc")
 			.less("b")
 			.lessEq("abc");
-		
+
 		failAssert(() -> abc.greater("x")).msgLines(
 			"String=<abc>",
 			"expected to be > than: x",
@@ -43,7 +45,7 @@ public class ComparableActualTest extends AbstractActualTest
 			"String=<abc>",
 			"expected to be >= than: x",
 			"but was               : abc");
-		
+
 		IntegerActual<?,?> i = expectThat(5);
 		failAssert(() -> i.less(4)).msgLines(
 			"Integer=<5>",
@@ -53,5 +55,14 @@ public class ComparableActualTest extends AbstractActualTest
 			"Integer=<5>",
 			"expected to be <= than: 4",
 			"but was               : 5");
+	}
+
+
+	@Test public void testDirect()
+	{
+		ComparableActual.Direct.of("abc")
+			.compareTo("abc", 0)
+			.compareTo("ab",  1)
+			.compareTo("abd", -1);
 	}
 }

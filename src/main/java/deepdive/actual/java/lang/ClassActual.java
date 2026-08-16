@@ -12,7 +12,7 @@ import deepdive.actual.java.lang.reflect.ModifierActual;
 /**
  * An Actual implementation for Class objects.
  * @param <BACK> the type of the owner of the ClassActual
- * @param <IMPL> the type of the concrete ClassActual implementation 
+ * @param <IMPL> the type of the concrete ClassActual implementation
  */
 public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actual<Class<?>,BACK,IMPL>
 	implements AnnotatedElementActual<Class<?>,IMPL>
@@ -34,7 +34,7 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 		return self();
 	}
 
-	
+
 	public ConstructorActual<IMPL,?> constructorPublic(Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException
 	{
 		return new ConstructorActual<>(value().getConstructor(parameterTypes), self());
@@ -45,8 +45,8 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 	{
 		return new ConstructorActual<>(value().getDeclaredConstructor(parameterTypes), self());
 	}
-	
-	
+
+
 	public ClassActual<IMPL,?> declaringClass()
 	{
 		return new ClassActual<>(value().getDeclaringClass(), self());
@@ -65,12 +65,12 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 	}
 
 
-	public MethodActual<IMPL,?> enclodingMethod()
+	public MethodActual<IMPL,?> enclosingMethod()
 	{
 		return new MethodActual<>(value().getEnclosingMethod(), self());
 	}
 
-	
+
 	public FieldActual<IMPL,?> fieldPublic(String name) throws NoSuchFieldException, SecurityException
 	{
 		return new FieldActual<>(value().getField(name), self());
@@ -87,8 +87,8 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 	{
 		return new ClassArrayActual<>(value().getInterfaces(), self()).as("interfaces");
 	}
-	
-	
+
+
 	public IMPL isAnonymous()
 	{
 		expectTrue(value().isAnonymousClass());
@@ -102,20 +102,20 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 		return self();
 	}
 
-	
+
 	public IMPL isAssignableFrom(Class<?> expected)
 	{
-		return expectTo(value().isAssignableFrom(expected), "be assignable from", expected);  
+		return expectTo(value().isAssignableFrom(expected), "be assignable from", expected);
 	}
-	
+
 
 	public IMPL isAssignableTo(Class<?> expected)
 	{
 		rejectNull(expected, "expected");
-		return expectTo(expected.isAssignableFrom(value()), "be assignable to", expected);  
+		return expectTo(expected.isAssignableFrom(value()), "be assignable to", expected);
 	}
 
-	
+
 	public IMPL isInstance(Object object, boolean expected)
 	{
 		expectEqual(expected, value().isInstance(object));
@@ -147,27 +147,27 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 	{
 		return new MethodActual<>(value().getDeclaredMethod(name, parameterTypes), self());
 	}
-	
-	
+
+
 	public ModifierActual<IMPL,?> modifiers()
 	{
 		return new ModifierActual<>(value().getModifiers(), self());
 	}
-	
-	
+
+
 	public IMPL name(String expected)
 	{
 		expectEqual(expected, value().getName());
 		return self();
 	}
-	
-	
+
+
 	public StringActual<IMPL,?> name()
 	{
 		return new StringActual<>(value().getName(), self());
 	}
 
-	
+
 	public IMPL packageName(String expected)
 	{
 		String name = value().getName();
@@ -183,8 +183,8 @@ public class ClassActual<BACK,IMPL extends ClassActual<BACK,IMPL>> extends Actua
 		expectEqual(expected, value().getSimpleName());
 		return self();
 	}
-	
-	
+
+
 	public ClassActual<IMPL,?> superClass()
 	{
 		return new ClassActual<>(value().getSuperclass(), self());

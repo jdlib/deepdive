@@ -25,7 +25,7 @@ import deepdive.actual.AbstractActualTest;
 /**
  * Tests {@link StringActual}.
  */
-public class StringActualTest extends AbstractActualTest 
+public class StringActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
@@ -45,6 +45,7 @@ public class StringActualTest extends AbstractActualTest
 			.format("a%s", "bc")
 			.indexOf('x', -1)
 			.indexOf("c", 2)
+			.indexValid(2)
 			.isLowerCase()
 			.not().isUpperCase()
 			.lastIndexOf('b', 1)
@@ -52,6 +53,7 @@ public class StringActualTest extends AbstractActualTest
 			.length(3)
 			.length().greater(2).back()
 			.like("*c")
+			.like("a?c")
 			.matches("[a-c]+")
 			.not().matches("[a-b]+")
 			.matches(Pattern.compile(".*"))
@@ -70,17 +72,19 @@ public class StringActualTest extends AbstractActualTest
 				.equal("a")
 				.back()
 			.toLowerCase("abc")
-			.toUpperCase("ABC");
-		
+			.toLowerCase().equal("abc").back()
+			.toUpperCase("ABC")
+			.toUpperCase().equal("ABC").back();
+
 		expectThat("")
 			.blank()
 			.empty();
-		
+
 		expectNull(expectThat("a,b,c")
 			.switchTo().split().by(",").toList()
 			.elems("a", "b", "c")
 			.backOrNull());
-		
+
 		failAssert(() -> expectThat("").not().blank()).msgLines(
 			"String=<>",
 			"expected not to be null or empty",
@@ -99,7 +103,7 @@ public class StringActualTest extends AbstractActualTest
 		failAssert(() -> abc.contains("x")).msgLines(
 			"String=<abc>",
 			"expected to contain: x");
-		
+
 		failAssert(() -> abc.endsWith("x")).msgLines(
 			"String=<abc>",
 			"expected to end with: x");
@@ -146,12 +150,12 @@ public class StringActualTest extends AbstractActualTest
 			"String=<abc>.toUpperCase",
 			"expected: ABc",
 			"but was : ABC");
-		
+
 		failAssert(() -> abc.empty()).msgLines(
 			"String=<abc>.length",
 			"expected: 0",
 			"but was : 3");
-		
+
 		failAssert(() -> abc.switchTo().split().by("b").iterator().not().hasNext()).msgLines(
 			"split(abc, b)=<It([a, c], 0)>.hasNext",
 			"expected not: true");

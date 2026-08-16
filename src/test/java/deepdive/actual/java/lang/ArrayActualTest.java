@@ -27,7 +27,7 @@ import deepdive.actual.Narrows;
  */
 public class ArrayActualTest extends AbstractActualTest
 {
-	@Test public void test()
+	@Test public void testStringArray()
 	{
 		ArrayActual<String,?,?> a = expectThat(new String[] { "a", "a", "b", "c" })
 			.not().blank()
@@ -50,6 +50,8 @@ public class ArrayActualTest extends AbstractActualTest
 			.not().elem(2, "c")
 			.elem(0, StringActual::new).equal("a").back()
 			.elem(0).less("b").back()
+			.elem(1).equal("a").back()
+			.elems("a", "a", "b", "c")
 			.not().empty()
 			.equal(new String[] { "a", "a", "b", "c"})
 			.indexOf("b", 2)
@@ -62,26 +64,28 @@ public class ArrayActualTest extends AbstractActualTest
 				.next("a")
 				.hasNext()
 				.back()
+			.length(4)
+			.length().greater(2).back()
 			.stream().count$(4)
 			.narrow(Narrows.stringArray())
 				.elem(0).toUpperCase("A").back();
-		
+
 		a.switchTo().stream().count$(4);
 		a.switchTo().iterator().next("a");
 		a.switchTo().list().size(4);
 		a.switchTo().set().size(3);
-		
+
 		expectThat(new Object[0])
 			.blank()
 			.empty();
-	
+
 		// if we test for array equality (at least in a direct comparison)
 		// we deviate from java (see Value#equals)
 		String[] s1 = new String[] { "a" };
 		String[] s2 = new String[] { "a" };
 		expectFalse(s1.equals(s2));
 		expectThat(s1).equal(s2);
-		
+
 		failAssert(() -> a.contains("x")).msgLines(
 			"String[]=<[a, a, b, c]>",
 			"expected to contain: x");
@@ -121,5 +125,17 @@ public class ArrayActualTest extends AbstractActualTest
 		failAssert(() -> a.contains().not().noneOf("x", "y")).msgLines(
 			"String[]=<[a, a, b, c]>",
 			"expected to contain: [x, y]");
+	}
+
+
+	@Test public void testNonStringArray()
+	{
+		ArrayActual<Integer,?,?> a = expectThat(new Integer[] { 2, 1 })
+			.sort(null)
+			.elem(0).equal(1).back()
+			.elems(1, 2);
+
+		a.switchTo().list().size(2);
+		a.switchTo().iterator().hasNext();
 	}
 }

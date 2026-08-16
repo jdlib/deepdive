@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ * Copyright (c) 2026 jdlib, https://github.com/jdlib
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,54 +22,50 @@ import deepdive.actual.AbstractActualTest;
 
 
 /**
- * Tests {@link IntArrayActual}.
+ * Tests {@link CharArrayActual}.
  */
-public class IntArrayActualTest extends AbstractActualTest
+public class CharArrayActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
-		expectThat(new int[] { 1, 1, 2, 3, 5, 8 })
+		expectThat(new char[] { 'a', '5' })
 			.not().blank()
-			.contains(2)
-			.not().contains(127)
+			.contains('a')
+			.not().contains('b')
 			.contains()
-				.allOf(1, 3, 5)
-				.not().allOf(7, 15)
-				.exactly(1, 2, 3, 5, 8)
-				.not().someOf(7, 19)
-				.noneOf(7)
-				.not().noneOf(1, 2)
+				.allOf('5')
+				.not().allOf('6')
+				.noneOf('2')
+				.not().noneOf('a')
+				.not().exactly('b')
+				.someOf('4', '5')
+				.not().someOf('4', '6')
 				.back()
-			.elem(0, 1)
-			.elem(1).equal(1).back()
-			.elems(1, 1, 2, 3, 5, 8)
+			.elem(0, 'a')
+			.elem(1).equal('5').back()
+			.elems('a', '5')
 			.not().empty()
 			.indexValid(1)
 			.not().indexValid(15)
-			.length().greater(2).back();
+			.length().equal(2).back();
 
-		expectThat(new int[] { 3, 1 })
+		expectThat(new char[] { 'a', '5' })
 			.sort()
-			.elems(1, 3);
+			.elems('5', 'a');
 
-		expectThat(new int[0])
+		expectThat(new char[0])
 			.blank()
 			.empty();
 
-		expectThat((int[])null)
+		expectThat((char[])null)
 			.blank();
 
-		failAssert(() -> expectThat(new int[] { 1, 4, 7 }).elems(4, 6)).msgLines(
-			"int[]=<[1, 4, 7]>",
-			"expected: [4, 6]",
-			"but was : [1, 4, 7]",
+		failAssert(() -> expectThat(new char[] { 'a', '5' }).elems('a', '4')).msgLines(
+			"char[]=<[a, 5]>",
+			"expected: [a, 4]",
+			"but was : [a, 5]",
 			"differences",
-			"- expected [0]  : 4",
-			"- but was  [0]  : 1",
-			"- expected [1]  : 6",
-			"- but was  [1]  : 4",
-			"- expected len  : 2",
-			"- but was  len  : 3",
-			"- unexpected [2]: 7");
+			"- expected [1]: 4",
+			"- but was  [1]: 5");
 	}
 }

@@ -43,6 +43,7 @@ public class MethodActualTest extends AbstractActualTest
 				.paramCount(1)
 				.paramType(0).same(String.class).back()
 				.exceptionTypes()
+					.elem(0).same(UnsupportedOperationException.class).back()
 					.iterator()
 						.next().same(UnsupportedOperationException.class).back()
 						.end$();

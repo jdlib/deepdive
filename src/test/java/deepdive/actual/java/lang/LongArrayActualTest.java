@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ * Copyright (c) 2026 jdlib, https://github.com/jdlib
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,45 +22,49 @@ import deepdive.actual.AbstractActualTest;
 
 
 /**
- * Tests {@link IntArrayActual}.
+ * Tests {@link LongArrayActual}.
  */
-public class IntArrayActualTest extends AbstractActualTest
+public class LongArrayActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
-		expectThat(new int[] { 1, 1, 2, 3, 5, 8 })
+		expectThat(new long[] { 1L, 1L, 2L, 3L, 5L, 8L })
 			.not().blank()
-			.contains(2)
-			.not().contains(127)
+			.contains(2L)
+			.not().contains(127L)
 			.contains()
-				.allOf(1, 3, 5)
-				.not().allOf(7, 15)
-				.exactly(1, 2, 3, 5, 8)
-				.not().someOf(7, 19)
-				.noneOf(7)
-				.not().noneOf(1, 2)
+				.allOf(1L, 3L, 5L)
+				.not().allOf(1L, 17L)
+				.exactly(1L, 2L, 3L, 5L, 8L)
+				.not().someOf(7L, 19L)
+				.noneOf(15L)
+				.not().noneOf(1L)
 				.back()
-			.elem(0, 1)
-			.elem(1).equal(1).back()
-			.elems(1, 1, 2, 3, 5, 8)
+			.elem(0, 1L)
+			.elem(1).equal(1L).back()
+			.elems(1L, 1L, 2L, 3L, 5L, 8L)
 			.not().empty()
 			.indexValid(1)
 			.not().indexValid(15)
-			.length().greater(2).back();
+			.length().equal(6).back();
 
-		expectThat(new int[] { 3, 1 })
+		expectThat(new long[] { 3L, 1L })
 			.sort()
-			.elems(1, 3);
+			.elems(1L, 3L);
 
-		expectThat(new int[0])
+		expectThat(new long[0])
 			.blank()
 			.empty();
 
-		expectThat((int[])null)
+		expectThat((long[])null)
 			.blank();
 
-		failAssert(() -> expectThat(new int[] { 1, 4, 7 }).elems(4, 6)).msgLines(
-			"int[]=<[1, 4, 7]>",
+		failAssert(() -> expectThat(new long[] { 2L }).elem(1, 4L)).msgLines(
+			"long[]=<[2]>",
+			"index 1 invalid, must be 0 <= index < 1");
+
+		failAssert(() -> expectThat(new long[] { 1L, 4L, 7L }).elems(4L, 6L)).msgLines(
+			"long[]=<[1, 4, 7]>",
 			"expected: [4, 6]",
 			"but was : [1, 4, 7]",
 			"differences",
