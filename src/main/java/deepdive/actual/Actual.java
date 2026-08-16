@@ -508,7 +508,7 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	}
 
 
-    //----------------------
+	//----------------------
 	// soft assertions
 	//----------------------
 
@@ -519,81 +519,81 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 	 * @param tester a consumer
 	 * @return this
 	 */
-    public IMPL all(CheckedConsumer<IMPL,?> tester)
-    {
-    	if (tester != null)
-    	{
-    		CheckedConsumer<ExpectInterface,?> t = a -> tester.accept(self());
-    		expectAll(t);
-    	}
-    	return self();
+	public IMPL all(CheckedConsumer<IMPL, ?> tester)
+	{
+		if (tester != null)
+		{
+			CheckedConsumer<ExpectInterface, ?> t = a -> tester.accept(self());
+			expectAll(t);
+		}
+		return self();
 	}
 
 
-     //----------------------
+	//----------------------
 	// eval
 	//----------------------
 
 
-    /**
-     * {@link #eval(boolean) Evaluates} the condition using the current {@link #not() not}.
-     * If it evaluates to false an error is raised using the template, the {@link Input#what what} string
-     * and the expected value.
-     * @param condition a condition which is expected to be true if not is OFF
-     * @param template an error template
-     * @param what the what parameter to the template
-     * @param expected the expected value
-     * @return this
-     */
-    protected IMPL expectTrue(boolean condition, StmtTemplate template, String what, Object expected)
-    {
+	/**
+	 * {@link #eval(boolean) Evaluates} the condition using the current {@link #not() not}. If it evaluates to
+	 * false an error is raised using the template, the {@link Input#what what} string and the expected value.
+	 *
+	 * @param condition a condition which is expected to be true if not is OFF
+	 * @param template an error template
+	 * @param what the what parameter to the template
+	 * @param expected the expected value
+	 * @return this
+	 */
+	protected IMPL expectTrue(boolean condition, StmtTemplate template, String what, Object expected)
+	{
 		ExpectResult result = ExpectResult.eval(getNotAndClear(), condition);
 		if (!result.ok)
 			failure().addStmts(template, expected, value(), result.not, what).throwError();
 		return self();
-    }
+	}
 
 
-    protected IMPL expectTo(boolean ok, String what, Object expected)
-    {
-    	return expectTrue(ok, StmtTemplate.ASSERT_EXPECTED_TO, what, expected);
-    }
+	protected IMPL expectTo(boolean ok, String what, Object expected)
+	{
+		return expectTrue(ok, StmtTemplate.ASSERT_EXPECTED_TO, what, expected);
+	}
 
 
-    protected ExpectResult eval(boolean ok)
-    {
-    	return ExpectResult.eval(getNotAndClear(), ok);
-    }
+	protected ExpectResult eval(boolean ok)
+	{
+		return ExpectResult.eval(getNotAndClear(), ok);
+	}
 
 
-    //----------------------
+	//----------------------
 	// narrow
 	//----------------------
 
 
-    /**
-     * Calls {@link #narrow(Class, BiFunction)} using the type and function
-     * of the given Narrow object.<p>
-     * {@link Narrows} provides factory methods to obtain Narrow objects for
-     * most core Actual implementations.<p>
-     * Example:
-     * <pre><code>
-     * Actual&lt;?,?,?&gt; a = ...
-     * a.narrow(Narrows.string()) // narrow call returns a StringActual
-     * 	.startsWith(...)          // invoke methods in StringActual
-     * </code></pre>
-     * @param narrow a Narrow
-     * @return the narrowed actual
-     * @param <R> the return type of the narrow operation
-     * @param <N> the narrowed type
-     */
-    @NotMustBeOff
-    public <N extends T,R> R narrow(Narrow<N,BACK,R> narrow)
-    {
+	/**
+	 * Calls {@link #narrow(Class, BiFunction)} using the type and function
+	 * of the given Narrow object.<p>
+	 * {@link Narrows} provides factory methods to obtain Narrow objects for
+	 * most core Actual implementations.<p>
+	 * Example:
+	 * <pre><code>
+	 * Actual&lt;?,?,?&gt; a = ...
+	 * a.narrow(Narrows.string()) // narrow call returns a StringActual
+	 * 	.startsWith(...)          // invoke methods in StringActual
+	 * </code></pre>
+	 * @param narrow a Narrow
+	 * @param <R> the return type of the narrow operation
+	 * @param <N> the narrowed type
+	 * @return the narrowed actual
+	 */
+	@NotMustBeOff
+	public <N extends T,R> R narrow(Narrow<N, BACK, R> narrow)
+	{
 		notMustBeOff();
 		rejectNull(narrow, "narrow");
-    	return narrow(narrow.type, narrow.fn);
-    }
+		return narrow(narrow.type, narrow.fn);
+	}
 
 
 	/**
@@ -689,25 +689,25 @@ public class Actual<T,BACK,IMPL extends Actual<T,BACK,IMPL>> extends ExpectProte
 		}
 
 
-	    @SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		public IMPL expectTrue(boolean ok, StmtTemplate template, String what, Object expected)
-	    {
-	    	return (IMPL)actual().expectTrue(ok, template, what, expected);
-	    }
+		{
+			return (IMPL)actual().expectTrue(ok, template, what, expected);
+		}
 
 
-	    @SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		public IMPL expectTo(boolean ok, String what, Object expected)
-	    {
-	    	return (IMPL)actual().expectTo(ok, what, expected);
-	    }
+		{
+			return (IMPL)actual().expectTo(ok, what, expected);
+		}
 
 
-	    @SuppressWarnings("deprecation")
+		@SuppressWarnings("deprecation")
 		@Override public String toString()
-	    {
-	    	return actual().toString() + ".internals";
-	    }
+		{
+			return actual().toString() + ".internals";
+		}
 	}
 
 
