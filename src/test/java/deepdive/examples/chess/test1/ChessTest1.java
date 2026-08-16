@@ -27,8 +27,8 @@ import deepdive.examples.chess.ChessPiece;
 
 
 /**
- * Traditional unit test: 
- * Only uses basic assertions provided by the tessting framework (in this case {@link ExpectStatic}
+ * Traditional unit test:
+ * Only uses basic assertions provided by the testing framework (in this case {@link ExpectStatic}
  * or equivalent {@link org.junit.Assert}) to issue assertions.
  * Drawback: Tests get verbose, writing tests is not really fun.
  */
@@ -38,15 +38,15 @@ public class ChessTest1 extends ExpectStatic
 	{
 		ChessBoard board = new ChessBoard().start();
 		ChessPiece piece;
-		
+
 		expectTrue(board.whiteMoves());
-		
+
 		// test invalid moves
 		ChessMoveException e = expectThrows(ChessMoveException.class, () -> board.move(E4, E2));
 		expectEqual("no piece at E4", e.getMessage());
 		expectSame(E4, e.getSource());
 		expectSame(E2, e.getTarget());
-		
+
 		e = expectThrows(ChessMoveException.class, () -> board.move(D7, D5));
 		expectEqual("BLACK_PAWN at D7 may not move now", e.getMessage());
 		expectSame(D7, e.getSource());
@@ -65,14 +65,14 @@ public class ChessTest1 extends ExpectStatic
 		piece = board.get(E4);
 		expectSame(PAWN, piece.figure);
 		expectSame(WHITE, piece.color);
-		
+
 		// move black D7-D5
 		board.move(D7, D5);
 		expectNull(board.get(D7));
 		piece = board.get(D5);
 		expectSame(PAWN, piece.figure);
 		expectSame(BLACK, piece.color);
-		
+
 		// move white E4 - D5
 		expectEqual(8, board.count().black().figure(PAWN).get());
 		board.move(E4, D5);
