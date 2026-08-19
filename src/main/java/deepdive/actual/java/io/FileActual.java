@@ -42,7 +42,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	{
 		super(value, back);
 	}
-	
+
 
 	/**
 	 * Asserts that one can execute the file.
@@ -53,7 +53,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().canExecute(), "canExecute");
 		return self();
 	}
-	
+
 
 	/**
 	 * Asserts that one can read the file.
@@ -64,8 +64,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().canRead(), "canRead");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that one can write to the file.
 	 * @return this
@@ -75,8 +75,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().canWrite(), "canWrite");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the File exists.
 	 * @return this
@@ -86,11 +86,11 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().exists(), "exists");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the file has the given extension
-	 * The file extension is the part of the file name after the last '.' or 
+	 * The file extension is the part of the file name after the last '.' or
 	 * or null if the name does not contain a '.'
 	 * @param expected the expected value
 	 * @return this
@@ -101,10 +101,10 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the file extension.
-	 * The file extension is the part of the file name after the last '.' or 
+	 * The file extension is the part of the file name after the last '.' or
 	 * or null if the name does not contain a '.'
 	 * @return the new actual
 	 */
@@ -112,11 +112,11 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	{
 		return new StringActual<>(getExtension(value()), self()).as("extension");
 	}
-	
-	
+
+
 	/**
 	 * Returns a Builder to select another file based on the actual file,
-	 * and returns a new FileActual for that file. 
+	 * and returns a new FileActual for that file.
 	 * @return the builder
 	 */
 	@CheckReturnValue
@@ -125,7 +125,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return new Nav<>(false);
 	}
 
-	
+
 	/**
 	 * Asserts that the File is absolute.
 	 * @return this
@@ -135,8 +135,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().isAbsolute(), "isAbsolute");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the File is a directory.
 	 * @return this
@@ -146,8 +146,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().isDirectory(), "isDirectory");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the File is a file.
 	 * @return this
@@ -157,8 +157,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().isFile(), "isFile");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Asserts that the file is hidden.
 	 * @return this
@@ -168,8 +168,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		expectTrue(value().isHidden(), "isHidden");
 		return self();
 	}
-	
-	
+
+
 	/**
 	 * Returns a LongActual for the last modified value.
 	 * @return the new actual
@@ -179,7 +179,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return new LongActual<>(value().lastModified(), self()).as("lastModified");
 	}
 
-	
+
 	/**
 	 * Asserts that the file length equals the expected value.
 	 * @param expected the expected value
@@ -191,7 +191,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a LongActual for the file length.
 	 * @return the new actual
@@ -201,7 +201,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return new LongActual<>(value().length(), self()).as("length");
 	}
 
-	
+
 	/**
 	 * Returns a StringArrayActual for the file names listed by this file.
 	 * @return the new actual
@@ -211,7 +211,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return list(null);
 	}
 
-	
+
 	/**
 	 * Returns a StringArrayActual for the file names listed by this file.
 	 * @param filter optional: a filter for the listed files
@@ -219,11 +219,11 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	 */
 	public StringArrayActual<IMPL,?> list(FilenameFilter filter)
 	{
-		String[] names = filter != null ? value().list(filter) : value().list(); 
+		String[] names = filter != null ? value().list(filter) : value().list();
 		return new StringArrayActual<>(names, self()).as("list");
 	}
 
-	
+
 	/**
 	 * Returns a FileArrayActual for the files listed by this file.
 	 * @return the new actual
@@ -233,7 +233,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return listFiles(null);
 	}
 
-	
+
 	/**
 	 * Returns a FileArrayActual for the files listed by this file.
 	 * @param filter optional: a filter for the listed files
@@ -241,11 +241,11 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	 */
 	public FileArrayActual<IMPL> listFiles(FilenameFilter filter)
 	{
-		File[] files = filter != null ? value().listFiles(filter) : value().listFiles(); 
+		File[] files = filter != null ? value().listFiles(filter) : value().listFiles();
 		return new FileArrayActual<>(files, self()).as("listFiles");
 	}
 
-	
+
 	/**
 	 * Asserts that the file name equals the expected value.
 	 * @param expected the expected value
@@ -257,7 +257,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the file name.
 	 * @return the new actual
@@ -266,8 +266,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	{
 		return new StringActual<>(value().getName(), self()).as("name");
 	}
-	
-	
+
+
 	/**
 	 * Returns a StringActual for the parent path.
 	 * @return the new actual
@@ -277,7 +277,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return new StringActual<>(value().getParent(), self()).as("parent");
 	}
 
-	
+
 	/**
 	 * Asserts that the file path equals the expected value.
 	 * @param expected the expected value
@@ -289,7 +289,7 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		return self();
 	}
 
-	
+
 	/**
 	 * Returns a StringActual for the file path.
 	 * @return the new actual
@@ -298,8 +298,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	{
 		return new StringActual<>(value().getPath(), self()).as("path");
 	}
-	
-	
+
+
 	/**
 	 * Returns a ByteContentBuilder builder to access the content of the file.
 	 * @return the builder
@@ -311,8 +311,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		notMustBeOff();
 		return ByteContentBuilder.of(self(), value());
 	}
-	
-	
+
+
 	/**
 	 * Returns a Builder to select another file based on the actual file,
 	 * {@link #setValue(Object) replaces} that file with the selected file
@@ -325,8 +325,8 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	{
 		return new Nav<>(true);
 	}
-	
-	
+
+
 	/**
 	 * Returns a LongActual for the files total space..
 	 * @return the new actual
@@ -337,27 +337,27 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 	}
 
 
-    /**
-     * A Builder class to navigate to another file.
-     */
-    public class Nav<RESULT>
+	/**
+	 * A Builder class to navigate to another file.
+	 */
+	public class Nav<RESULT>
 	{
-    	@NotMustBeOff
+		@NotMustBeOff
 		protected Nav(boolean set)
 		{
-    		notMustBeOff();
+			notMustBeOff();
 			set_ = set;
 		}
-		
-		
+
+
 		@SuppressWarnings("unchecked")
 		private RESULT create(File file, CharSequence context)
 		{
-			IMPL impl = self(); 
+			IMPL impl = self();
 			return set_ ? (RESULT)impl.setValue(file) : (RESULT)new FileActual<>(file, impl).as(context);
 		}
 
-		
+
 		/**
 		 * Navigates to the child file.
 		 * @param name the name of the child file
@@ -365,17 +365,17 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		 */
 		public RESULT childFile(String name)
 		{
-			return create(new File(value(), name), "childFile"); 
+			return create(new File(value(), name), "childFile");
 		}
-		
-		
+
+
 		/**
 		 * Navigates to the absolute file.
 		 * @return the FileActual returned by the Nav builder
 		 */
 		public RESULT absoluteFile()
 		{
-			return create(value().getAbsoluteFile(), "absoluteFile"); 
+			return create(value().getAbsoluteFile(), "absoluteFile");
 		}
 
 
@@ -386,20 +386,20 @@ public class FileActual<BACK,IMPL extends FileActual<BACK,IMPL>> extends Actual<
 		 */
 		public RESULT canonicalFile() throws IOException
 		{
-			return create(value().getCanonicalFile(), "canonicalFile"); 
+			return create(value().getCanonicalFile(), "canonicalFile");
 		}
 
-	
+
 		/**
 		 * Navigates to the parent file.
 		 * @return the FileActual returned by the Nav builder
 		 */
 		public RESULT parentFile()
 		{
-			return create(value().getParentFile(), "parentFile"); 
+			return create(value().getParentFile(), "parentFile");
 		}
-		
-		
+
+
 		private final boolean set_;
 	}
 

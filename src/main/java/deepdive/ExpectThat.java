@@ -29,7 +29,9 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +88,12 @@ public class ExpectThat
 	}
 
 
+	public static <T extends Calendar> CalendarActual<T,?,?> expectThat(T actual)
+	{
+		return new CalendarActual<>(actual, null);
+	}
+
+
 	public static CharacterActual<?,?> expectThat(char actual)
 	{
 		return new CharacterActual<>(actual, null);
@@ -107,6 +115,12 @@ public class ExpectThat
 	public static <ITEM,COL extends Collection<ITEM>> CollectionActual<ITEM,COL,?,?> expectThat(COL actual)
 	{
 		return new CollectionActual<>(actual, null);
+	}
+
+
+	public static <T extends Date> DateActual<T,?,?> expectThat(T actual)
+	{
+		return new DateActual<>(actual, null);
 	}
 
 

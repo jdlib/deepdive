@@ -34,20 +34,49 @@ public class FieldActualTest extends AbstractActualTest
 				.attr("name", "alpha")
 				.attr("description", "d")
 				.back()
+			.annotationDeclared(SuppressWarnings.class)
+				.isNull()
+				.back()
+			.annotations().declared()
+				.elem(0)
+					.isA(TestResource.class)
+					.back()
+				.back()
+			.annotations().declaredByType(TestResource.class)
+				.length(1)
+				.back()
+			.annotations().allByType(TestResource.class)
+				.length(1)
+				.back()
+			.declaringClass(FieldActualTest.class)
+			.declaringClass()
+				.same(FieldActualTest.class)
+				.back()
 			.modifiers()
 				.isFinal()
 				.isPrivate( )
 				.not().isStatic()
 				.back()
 			.name("field")
+			.name()
+				.startsWith("f")
+				.back()
 			.type(String.class)
 			.not().type(Number.class)
 			.type()
 				.contained().in(String.class, Number.class)
 				.back();
+
+		expectThat(getClass()).fieldDeclared("name")
+			.modifiers()
+				.isTransient()
+				.isVolatile()
+				.not().isStrict();
 	}
-	
-	
+
+
 	@TestResource(description="d", name="alpha")
 	private final String field = "abc";
+	@SuppressWarnings("unused")
+	private transient volatile String name;
 }

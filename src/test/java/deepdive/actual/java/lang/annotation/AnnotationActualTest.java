@@ -32,10 +32,21 @@ public class AnnotationActualTest extends AbstractActualTest
 		expectThat(getClass())
 			.annotation(TestResource.class)
 				.attr("name", TestResource::name, "Test")
+				.attr("name")
+					.equal("Test")
+					.back()
 				.attr("shareable", TestResource::shareable)
 					.isA(Boolean.class)
 					.equal(Boolean.FALSE)
 					.back()
 				.not().attr("shareable", Boolean.TRUE);
+	}
+
+
+	@Test public void testFailure()
+	{
+		AnnotationActual<?,?,?> a = expectThat(getClass()).annotation(TestResource.class);
+		failAssert(() -> a.attr("not-here")).msgLines()
+			.elem(1, "can't find method: not-here");
 	}
 }

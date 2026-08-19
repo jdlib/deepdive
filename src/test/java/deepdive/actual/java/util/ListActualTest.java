@@ -42,7 +42,11 @@ public class ListActualTest extends AbstractActualTest
 				.noneOf("x", "y")
 				.someOf("a", "b")
 				.back()
+			.elem(2, "def")
 			.elems("a", "bc", "def")
+			.indexOf("bc", 1)
+			.indexValid(1)
+			.lastIndexOf("a", 0)
 			.not().elems("x")
 			.not().empty()
 			.map(String::length)
@@ -52,7 +56,7 @@ public class ListActualTest extends AbstractActualTest
 			.size()
 				.less(4)
 				.back();
-		
+
 		expectThat(list)
 			.narrow(Narrows.stringList())
 			.elem(0)
@@ -61,8 +65,8 @@ public class ListActualTest extends AbstractActualTest
 
 		expectThat(list)
 			.count(s -> s.length() == 2)
-			.equal(1);	
-		
+			.equal(1);
+
 		list = Arrays.asList("a", "b", "c");
 		expectThat(list)
 			//.elem(0).narrow(Narrows.string()).startsWith("a").back()
@@ -70,36 +74,36 @@ public class ListActualTest extends AbstractActualTest
 				.map(s -> s.toUpperCase())
 				.filter(s -> s.startsWith("A"))
 				.elems$("A");
-		
+
 		new StringListActual<>(list, null)
 			.elem(0).startsWith("a").back();
-		
+
 		Actual<Object,?,?> a = expectThatObject(Arrays.asList("a", "b"));
 		expectSame(Actual.class, a.getClass());
 		a.narrow(list())
 			.size(2);
 	}
-	
-	
+
+
 	@Test public void testErrorMessages()
 	{
 		List<String> list = Arrays.asList("a", "b");
 		failAssert(() -> expectThat(list).elems("b")).msgLines(
 			"ArrayList=<[a, b]>.elems",
-			"expected: [b]", 
-			"but was : [a, b]", 
+			"expected: [b]",
+			"but was : [a, b]",
 			"differences",
 			"- expected [0]  : b",
 			"- but was  [0]  : a",
 			"- expected size : 1",
 			"- but was  size : 2",
 			"- unexpected [1]: b");
-		
+
 		failAssert(() -> expectThat(list).empty()).msgLines(
 			"ArrayList=<[a, b]>.size",
 			"expected: 0",
 			"but was : 2");
-		
+
 		failAssert(() -> expectThat(list).not().elems("a", "b")).msgLines(
 			"ArrayList=<[a, b]>.elems",
 			"expected not: [a, b]");
@@ -112,7 +116,7 @@ public class ListActualTest extends AbstractActualTest
 			"- expected size: 3",
 			"- but was  size: 2",
 			"- missing [2]  : c");
-		
+
 		failAssert(() -> expectThat(list).elems("a")).msgLines(
 			"ArrayList=<[a, b]>.elems",
 			"expected: [a]",
@@ -122,8 +126,8 @@ public class ListActualTest extends AbstractActualTest
 			"- but was  size : 2",
 			"- unexpected [1]: b");
 	}
-	
-	
+
+
 	@SuppressWarnings("boxing")
 	@Test public void testElemAccess()
 	{

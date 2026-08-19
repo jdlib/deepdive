@@ -30,7 +30,7 @@ public class ActualTest extends AbstractActualTest
 {
 	@Test public void testAll()
 	{
-		failSoftAssert(() -> 
+		failSoftAssert(() ->
 			expectThat("abc")
 				.all(s -> s.startsWith("x").contains("b").endsWith("y").length()
 					.all(l -> l.greater(4))
@@ -44,8 +44,8 @@ public class ActualTest extends AbstractActualTest
 		 	"expected to be > than: 4",
 		 	"but was              : 3");
 	}
-	
-	
+
+
 	@Test public void testContained()
 	{
 		StringActual<?,?> a = expectThat("b")
@@ -53,7 +53,7 @@ public class ActualTest extends AbstractActualTest
 			.not().contained().in("x", "y")
 			.contained().in(Arrays.asList("a", "b", "c"))
 			.not().contained().in(Arrays.asList("x", "y"));
-		
+
 		failAssert(() -> a.contained().in("x", "y")).msgLines(
 			"String=<b>",
 			"expected to be one of: [x, y]");
@@ -62,8 +62,8 @@ public class ActualTest extends AbstractActualTest
 			"String=<b>",
 			"expected not to be one of: [a, b]");
 	}
-	
-	
+
+
 	@Test public void testNot()
 	{
 		new Actual<>(this, null)
@@ -74,17 +74,20 @@ public class ActualTest extends AbstractActualTest
 			.not().isNull()
 			.not().equal("a")
 			.not().same("a");
-			
+
 		new Actual<>(null, null)
 			.isNull()
 			.equal(null)
 			.same(null);
 	}
-	
-	
+
+
 	@Test public void testMisc() throws Exception
 	{
 		expectThatObject(this)
+			.clasz().same(ActualTest.class).back()
+			.hasClass(ActualTest.class)
+			.hashCode(this.hashCode())
 			.prop(Object::getClass).as("class").same(getClass()).back()
 // ECJ		.prop(Object::hashCode).as("hashCode").narrow(Narrows.integer()).not().equal(0).back()
 			.toString(toString())
@@ -101,15 +104,15 @@ public class ActualTest extends AbstractActualTest
 			.setValue(String::toUpperCase)
 			.equal("B");
 	}
-	
-	
+
+
 	@Test public void testValueCast() throws Exception
 	{
 		Serializable s = expectThat("a").valueCast(Serializable.class);
-		expectSame("a", s); 
+		expectSame("a", s);
 	}
 
-	
+
 	@Test public void testNarrow() throws Exception
 	{
 		Actual<String,?,?> a = expectThatObject("abc");
@@ -117,7 +120,7 @@ public class ActualTest extends AbstractActualTest
 			.toUpperCase("ABC")
 			.backOrNull();
 		expectNull(back);
-		
+
 		expectThat(Arrays.asList("a"))
 			.elem(0)
 				.narrow(Narrows.string())

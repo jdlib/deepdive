@@ -52,6 +52,8 @@ public class ClassActualTest extends AbstractActualTest implements Serializable
 			.not().isPrimitive()
 			.modifiers()
 				.isPublic()
+				.not().isInterface()
+				.not().isAbstract()
 				.back()
 			.name(ClassActualTest.class.getName())
 			.name()

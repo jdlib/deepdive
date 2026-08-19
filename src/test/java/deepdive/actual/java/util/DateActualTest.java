@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 jdlib, https://github.com/jdlib
+ * Copyright (c) 2026 jdlib, https://github.com/jdlib
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package deepdive.actual.java.time;
+package deepdive.actual.java.util;
 
 
 import static deepdive.ExpectThat.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 import org.junit.Test;
-import deepdive.actual.AbstractActualTest;
 
 
-/**
- * Tests {@link LocalDateTimeActual}.
- */
-public class LocalDateTimeActualTest extends AbstractActualTest
+public class DateActualTest
 {
+	@SuppressWarnings("deprecation")
 	@Test public void test()
 	{
-		LocalDateTime dt = LocalDateTime.of(2020, 12, 31, 16, 17, 18);
-		expectThat(dt)
-			.compareTo(dt).equal(0).back()
-			.equal(dt)
-			.date(2020, 12, 31)
-			.date().equal(2020, 12, 31).back()
-			.time().equal(16, 17, 18).back()
-			.time(16, 17, 18)
-			.isAfter(dt.minusDays(1))
-			.isBefore(dt.plusDays(1));
+		Date d = new Date(2026, 07, 16, 12, 13, 14);
+		expectThat(d)
+			.after(new Date(2026, 7, 15))
+			.before(new Date(2026, 7, 17))
+			.compareTo(d, 0)
+			.dayOfMonth(16)
+			.dayOfWeek(1)
+			.hours(12)
+			.minutes(13)
+			.month(7)
+			.seconds(14)
+			.toInstant().back()
+			.time(d.getTime())
+			.timezoneOffset(d.getTimezoneOffset())
+			.toGMTString(d.toGMTString())
+			.toLocaleString(d.toLocaleString())
+			.year(2026);
 	}
 }

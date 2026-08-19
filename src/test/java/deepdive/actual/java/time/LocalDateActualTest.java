@@ -20,6 +20,7 @@ import static deepdive.ExpectThat.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.chrono.IsoEra;
 import java.time.temporal.ChronoField;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
@@ -33,9 +34,12 @@ public class LocalDateActualTest extends AbstractActualTest
 	@Test public void test()
 	{
 		expectThat(LocalDate.of(2020, 12, 31))
+			.compareTo(LocalDate.of(2021, 12, 31)).less(0).back()
 			.dayOfMonth(31)
+			.dayOfMonth().equal(31).back()
 			.dayOfWeek(DayOfWeek.THURSDAY)
 			.dayOfYear(366)
+			.era(IsoEra.CE)
 			.get(ChronoField.DAY_OF_YEAR, 366)
 			.get(ChronoField.DAY_OF_MONTH)
 				.greater(30)
@@ -46,10 +50,12 @@ public class LocalDateActualTest extends AbstractActualTest
 			.not().isSupported(ChronoField.HOUR_OF_DAY)
 			.month(12)
 			.month(Month.DECEMBER)
+			.month().equal(12).back()
 			.equal(2020, 12, 31)
 			.leapYear()
 			.lengthOfMonth(31)
 			.lengthOfYear(366)
-			.year(2020);
+			.year(2020)
+			.year().equal(2020).back();
 	}
 }

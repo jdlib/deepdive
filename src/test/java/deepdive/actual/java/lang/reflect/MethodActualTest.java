@@ -30,9 +30,16 @@ public class MethodActualTest extends AbstractActualTest
 	{
 		expectThat(getClass())
 			.methodPublic("test")
+				.modifiers()
+					.isPublic()
+					.not().isNative()
+					.back()
 				.name("test")
 				.paramCount(0)
 				.returnType(Void.TYPE)
+				.returnType()
+					.same(Void.TYPE)
+					.back()
 				.back()
 			.methodDeclared("some", String.class)
 				.modifiers()
@@ -42,16 +49,32 @@ public class MethodActualTest extends AbstractActualTest
 				.returnType(Integer.class)
 				.paramCount(1)
 				.paramType(0).same(String.class).back()
+				.paramTypes()
+					.elems(String.class)
+					.back()
 				.exceptionTypes()
 					.elem(0).same(UnsupportedOperationException.class).back()
 					.iterator()
 						.next().same(UnsupportedOperationException.class).back()
-						.end$();
+						.end$()
+						.back()
+					.back()
+			.methodDeclared("other")
+				.modifiers()
+					.isSynchronized()
+					.isProtected();
 	}
 
 
 	@SuppressWarnings("unused")
 	private static Integer some(String s) throws UnsupportedOperationException
+	{
+		return null;
+	}
+
+
+	@SuppressWarnings("unused")
+	protected synchronized static Integer other() throws UnsupportedOperationException
 	{
 		return null;
 	}

@@ -31,7 +31,11 @@ public class OffsetDateTimeActualTest extends AbstractActualTest
 {
 	@Test public void test()
 	{
-		expectThat(OffsetDateTime.of(2020, 12, 31, 10, 39, 42, 567, ZoneOffset.UTC))
+		OffsetDateTime odt = OffsetDateTime.of(2020, 12, 31, 10, 39, 42, 567, ZoneOffset.UTC);
+		expectThat(odt)
+			.compareTo(odt).equal(0).back()
+			.isAfter(odt.minusDays(1))
+			.isBefore(odt.plusDays(1))
 			.offset(ZoneOffset.UTC)
 			.date().year(2020).back()
 			.date(2020, 12, 31)

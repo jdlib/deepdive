@@ -34,10 +34,16 @@ public class PathActualTest extends AbstractActualTest
 
 		expectThat(path)
 			.endsWith(path)
+			.nameCount(path.getNameCount())
+			.uri()
+				.scheme("file")
+				.back()
+			// switch to absolute path
 			.set().absolutePath()
 			.isAbsolute()
 			.get().fileName()
 				.not().isAbsolute()
-				.back();
+				.back()
+			;
 	}
 }

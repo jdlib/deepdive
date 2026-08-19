@@ -26,7 +26,7 @@ import deepdive.actual.Actual;
  * An Actual implementation for {@link Annotation} objects.
  * @param <T> the annotation type
  * @param <BACK> the type of the owner of the AnnotationActual
- * @param <IMPL> the type of the AnnotationActual implementation 
+ * @param <IMPL> the type of the AnnotationActual implementation
  */
 public class AnnotationActual<T extends Annotation,BACK,IMPL extends AnnotationActual<T,BACK,IMPL>> extends Actual<T,BACK,IMPL>
 {
@@ -39,10 +39,10 @@ public class AnnotationActual<T extends Annotation,BACK,IMPL extends AnnotationA
 	{
 		super(value, back);
 	}
-	
-	
+
+
 	/**
-	 * Asserts that an annoation attribute has the expected value
+	 * Asserts that an annotation attribute has the expected value
 	 * @param name the attribute name
 	 * @param expected the expected value
 	 * @return this
@@ -64,7 +64,7 @@ public class AnnotationActual<T extends Annotation,BACK,IMPL extends AnnotationA
 		return new Actual<>(invoke(name), self()).as(name);
 	}
 
-	
+
 	/**
 	 * Asserts that an annoation attribute has the expected value.
 	 * @param name the name of the attribute used to define the assertion context)
@@ -91,14 +91,14 @@ public class AnnotationActual<T extends Annotation,BACK,IMPL extends AnnotationA
 	{
 		return new Actual<>(fn.apply(value()), self()).as(name);
 	}
-	
-	
+
+
 	protected Method method(String methodName)
 	{
 		try
 		{
 			return value().getClass().getMethod(methodName);
-		} 
+		}
 		catch (Exception e)
 		{
 			return failure().addStmt("can't find method", methodName).cause(e).throwError();
@@ -112,7 +112,7 @@ public class AnnotationActual<T extends Annotation,BACK,IMPL extends AnnotationA
 		{
 			Method method = method(methodName);
 			return method.invoke(value());
-		} 
+		}
 		catch (Exception e)
 		{
 			return failure().addStmt("can't invoke method", methodName).cause(e).throwError();

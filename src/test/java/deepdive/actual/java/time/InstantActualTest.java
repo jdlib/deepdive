@@ -20,7 +20,7 @@ import static deepdive.ExpectThat.*;
 import java.time.Instant;
 import org.junit.Test;
 import deepdive.actual.AbstractActualTest;
- 
+
 
 /**
  * Tests {@link InstantActual}.
@@ -30,8 +30,11 @@ public class InstantActualTest extends AbstractActualTest
 	@Test public void test()
 	{
 		expectThat(Instant.ofEpochSecond(15))
+			.compareTo(Instant.ofEpochSecond(14)).greater(0).back()
 			.epochSeconds(15)
+			.epochSeconds().equal(15).back()
 			.isAfter(Instant.ofEpochSecond(10))
-			.not().isBefore(Instant.ofEpochSecond(5));
+			.not().isBefore(Instant.ofEpochSecond(5))
+			.nano().equal(0).back();
 	}
 }

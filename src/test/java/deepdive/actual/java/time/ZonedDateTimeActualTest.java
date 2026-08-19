@@ -32,12 +32,16 @@ public class ZonedDateTimeActualTest extends AbstractActualTest
 	@Test public void test()
 	{
 		ZoneId zoneId = ZoneId.systemDefault();
-		
-		expectThat(ZonedDateTime.of(2020, 12, 31, 10, 39, 42, 567, zoneId))
+		ZonedDateTime zdt = ZonedDateTime.of(2020, 12, 31, 10, 39, 42, 567, zoneId);
+
+		expectThat(zdt)
+			.compareTo(zdt).equal(0).back()
 			.date().equal(2020, 12, 31).back()
+			.dateTime().equal(zdt.toLocalDateTime()).back()
 			.time().equal(10, 39, 42).nano(567).back()
 			.get(ChronoField.DAY_OF_YEAR, 366)
 			.isSupported(ChronoField.HOUR_OF_DAY)
+			.offset(zdt.getOffset())
 			.zone(zoneId);
 	}
 }

@@ -32,6 +32,7 @@ public class LocalTimeActualTest extends AbstractActualTest
 	@Test public void test()
 	{
 		expectThat(LocalTime.of(12, 13, 14))
+			.compareTo(LocalTime.of(9, 0, 0)).greater(0).back()
 			.equal(12, 13, 14)
 			.get(ChronoField.MINUTE_OF_DAY, 733)
 			.hour(12)

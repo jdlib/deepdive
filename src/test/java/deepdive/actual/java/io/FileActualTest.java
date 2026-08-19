@@ -33,12 +33,12 @@ public class FileActualTest extends AbstractActualTest
 	{
 		createFile("test", ".txt", "abc", this::test);
 	}
-	
-	
+
+
 	private void test(File file) throws Exception
 	{
 		FilenameFilter filter = (d,n) -> n.equals(file.getName());
-		
+
 		expectThat(file)
 			.equal(file)
 			.get().absoluteFile()
@@ -46,6 +46,7 @@ public class FileActualTest extends AbstractActualTest
 				.isAbsolute()
 				.back()
 			.canExecute()
+			.exists()
 			.get().canonicalFile()
 				.equal(file.getCanonicalFile())
 				.back()
@@ -70,6 +71,7 @@ public class FileActualTest extends AbstractActualTest
 				.startsWith("test")
 				.endsWith(".txt")
 				.back()
+			.parent().equal(file.getParent()).back()
 			.path(file.getPath())
 			.path()
 				.equal(file.getPath())
@@ -83,6 +85,13 @@ public class FileActualTest extends AbstractActualTest
 			.totalSpace()
 				.equal(file.getTotalSpace())
 				.back()
+			.list()
+				.isNull()
+				.back()
+			.listFiles()
+				.isNull()
+				.back()
+			// switch to parent
 			.set().parentFile()
 			.isDirectory()
 			.not().isFile()
@@ -90,7 +99,12 @@ public class FileActualTest extends AbstractActualTest
 				.elems(file.getName())
 				.back()
 			.listFiles(filter)
+				.elem(0, file)
 				.elems(file)
+				.back()
+			.get()
+				.childFile(file.getName())
+				.equal(file)
 				.back();
 	}
 }
